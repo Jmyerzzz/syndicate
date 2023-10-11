@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id             String @id @map("_id")
+  user_id        String @unique
+  active_expires BigInt
+  idle_expires   BigInt
+  user           User   @relation(fields: [user_id], references: [id])
+}
+
+model Key {
+  id              String  @id @map("_id")
+  hashed_password String?
+  user_id         String  @unique
+  user            User    @relation(fields: [user_id], references: [id])
+}
+
+model User {
+  id              String    @id @map("_id")
+  name            String
+  username        String
+  role            Role      @default(AGENT)
+  risk_percentage Int?
+  Session         Session[]
+  Key             Key[]
+  Account         Account[]
+}
+
+model Account {
+  id            String         @id @map("_id")
+  user          User           @relation(fields: [user_id], references: [id])
+  user_id       String         @unique
+  website       String
+  username      String
+  password      String
+  ip_location   String
+  credit_line   Int
+  max_win        Int
+  weeklyFigures WeeklyFigure[]
+}
+
+model WeeklyFigure {
+  id         String   @id @map("_id")
+  Account    Account? @relation(fields: [account_id], references: [id])
+  account_id String?
+  amount     Float
+  date       DateTime
+}
+
+enum Role {
+  AGENT
+  ADMIN
+}
