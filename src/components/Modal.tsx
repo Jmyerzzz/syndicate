@@ -4,6 +4,9 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 
 
 const Modal = (props: { isOpen: boolean, onClose: () => void, title: string, children: ReactElement }) => {
+  const isOpen = props.isOpen;
+  const onClose = props.onClose
+
   useEffect(() => {
     const handleOutsideClick = (e: any) => {
       if (props.isOpen && e.target.classList.contains('modal-overlay')) {
@@ -20,7 +23,7 @@ const Modal = (props: { isOpen: boolean, onClose: () => void, title: string, chi
     return () => {
       window.removeEventListener('click', handleOutsideClick);
     };
-  }, [props.isOpen, props.onClose]);
+  }, [isOpen, onClose]);
 
   return (
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${props.isOpen ? '' : 'hidden'}`}>

@@ -40,9 +40,9 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                 <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
                 <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
                 <td className="px-6 py-4 whitespace-no-wrap">{account.ip_location}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{account.credit_line}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{account.max_win}</td>
-                <td className="px-6 py-4 whitespace-no-wrap">{weeklyFigure}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
+                <td className="px-6 py-4 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
+                <td className="px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-semibold border-l-2 border-gray-200">${weeklyFigure.toLocaleString()}</td>
               </tr>
             )
             return elements
@@ -58,7 +58,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   }
 
   return (
-    <div className="flex flex-col justify-items-center items-center h-screen">
+    <div className="flex flex-col justify-items-center items-center">
       <div>
         <div className="flex flex-row justify-between content-center px-2">
           <div className="px-3 text-2xl uppercase">Accounts</div>
@@ -66,6 +66,14 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
         </div>
         <table className="mt-4 table-auto min-w-[1140px]">
           <thead className="text-gray-100">
+            <tr>
+              <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-600 text-md font-bold uppercase tracking-wider text-center">
+                Accounts
+              </th>
+              <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-left text-md font-bold uppercase tracking-wider">
+                Weekly Figure
+              </th>
+            </tr>
             <tr>
               <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
                 Website
@@ -84,9 +92,6 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               </th>
               <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
                 Max Win
-              </th>
-              <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
-                Weekly Figure
               </th>
             </tr>
           </thead>

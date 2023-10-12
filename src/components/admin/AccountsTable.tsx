@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import UpdateWeeklyFigure from "./UpdateWeeklyFigure";
+import SummarySection from "./SummarySection";
 
 interface Account {
   id: string;
@@ -30,9 +31,29 @@ interface UserAccounts {
   accounts: Account[];
 }
 
+const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
+  const grouped: { [userId: string]: Account[] } = {};
+
+  accounts.forEach((account) => {
+    const username = account.user.username;
+
+    if (!grouped[username]) {
+      grouped[username] = [];
+    }
+
+    grouped[username].push(account);
+  });
+
+  const userAccountsArray: UserAccounts[] = Object.keys(grouped).map((username) => ({
+    username,
+    accounts: grouped[username],
+  }));
+
+  return userAccountsArray;
+}
 
 const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSelectedStartOfWeek: any}) => {
-  const [accountList, setAccountList] = useState<any[]>([]);
+  const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [refreshKey, setRefreshKey] = useState<number>(0);
 
@@ -44,38 +65,16 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
       })
       .then((response) => response.json())
       .then((data) => {
-        setAccountList(data);
+        setGroupedAccounts(groupAccountsByUser(data))
         setIsLoading(false)
       })
   },[props.selectedStartOfWeek, refreshKey])
-
-  const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
-    const grouped: { [userId: string]: Account[] } = {};
-  
-    accounts.forEach((account) => {
-      const username = account.user.username;
-  
-      if (!grouped[username]) {
-        grouped[username] = [];
-      }
-  
-      grouped[username].push(account);
-    });
-  
-    const userAccountsArray: UserAccounts[] = Object.keys(grouped).map((username) => ({
-      username,
-      accounts: grouped[username],
-    }));
-  
-    return userAccountsArray;
-  }
 
   const TableRows = () => {
     return (
       <>
         {
-          groupAccountsByUser(accountList).map((user, index) => {
-            console.log(JSON.stringify(groupAccountsByUser(accountList)))
+          groupedAccounts.map((user, index) => {
             const elements: React.ReactElement[] = [];
             elements.push(<tr key={"separator"}><td colSpan={7} className="px-6 bg-gray-400 text-gray-100">{user.username}</td></tr>)
             user.accounts.map((account, index) => {
@@ -87,11 +86,11 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.username}</td>
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.password}</td>
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.ip_location}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.credit_line}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.max_win}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">
+                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">${account.credit_line.toLocaleString()}</td>
+                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">${account.max_win.toLocaleString()}</td>
+                  <td className="px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200">
                     <div className="flex flex-row justify-between items-center">
-                      {weeklyFigureAmount}
+                      ${weeklyFigureAmount.toLocaleString()}
                       <UpdateWeeklyFigure baseUrl={props.baseUrl} account={account} weeklyFigureId={weeklyFigureId} currentAmount={weeklyFigureAmount} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
                     </div>
                   </td>
@@ -106,9 +105,18 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
   }
 
   return (
-    <div className="flex flex-col justify-items-center items-center h-screen">
+    <div className="flex flex-col justify-items-center items-center">
+      <SummarySection />
       <table className="mt-4 table-auto min-w-[1140px]">
         <thead className="text-gray-100">
+          <tr>
+            <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-600 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500">
+              Accounts
+            </th>
+            <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-left text-md font-bold uppercase tracking-wider">
+              Weekly Figure
+            </th>
+          </tr>
           <tr>
             <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
               Website
@@ -127,9 +135,6 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             </th>
             <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
               Max Win
-            </th>
-            <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
-              Weekly Figure
             </th>
           </tr>
         </thead>

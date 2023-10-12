@@ -118,7 +118,7 @@ const UserForm = (props: {title: string, action: string}) => {
           {props.title === "Sign Up" ? (
             <Link href="/login">Have an account? Sign in</Link>
           ) : (
-            <Link href="/signup">Don't have an account? Sign up</Link>
+            <Link href="/signup">Don&apos;t have an account? Sign up</Link>
           )}
         </div>
       </div>

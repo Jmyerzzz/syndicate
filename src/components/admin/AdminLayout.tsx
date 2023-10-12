@@ -11,10 +11,10 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
 
   return (
     <div>
-      <div className="flex flex-col content-center px-2 mb-5 text-gray-100">
+      <div className="flex flex-col content-center px-2 text-gray-100">
         <div className="flex flex-row justify-center mb-3">
           <button className={`mr-2 px-3 text-2xl uppercase ${adminTab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setAdminTab("accounts")}>
-            Accounts
+            Weekly Figures
           </button>
           <button className={`px-3 text-2xl uppercase ${adminTab === "agents" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setAdminTab("agents")}>
             Agents
