@@ -32,7 +32,7 @@ async function main(date: Date) {
 
 export const POST = async (request: NextRequest) => {
   const data = await request.json();
-  const date = data.date;
+  const date = data;
   try {
     const accounts = await main(date)
     return new Response(JSON.stringify(accounts), {

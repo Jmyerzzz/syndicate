@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { User } from "@prisma/client";
 
-const AddAccount = (props: {user?: User}) => {
+const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -35,13 +35,17 @@ const AddAccount = (props: {user?: User}) => {
   const handleAddAccount = (e: any) => {
     e.preventDefault();
 
-    fetch("/api/accounts/add", {
+    fetch(props.baseUrl + "/api/accounts/add", {
       method: "POST",
       body: JSON.stringify({
         accountData: formData,
         user: props.user
       })
     })
+
+    setTimeout(() => {
+      props.setRefreshKey((oldKey: number) => oldKey +1)
+    }, 1000)
 
     // Clear the form
     setFormData({

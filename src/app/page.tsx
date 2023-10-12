@@ -7,13 +7,15 @@ export const metadata: Metadata = {
   title: 'Syndicate',
   description: 'Syndicate Accounting',
 }
- 
+
+const BASE_URL = process.env.URL || "";
+
 const Page = async () => {
   const session = await getPageSession();
   if (!session) redirect("/login");
 
   return (
-    <Homepage user={session.user} />
+    <Homepage baseUrl={BASE_URL} user={session.user} />
   )
 }
 

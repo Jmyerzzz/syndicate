@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import WeekSelector from "../WeekSelector"
 import AccountsTable from "./AccountsTable"
 import AgentsTable from "./AgentsTable"
+import { startOfWeek } from "date-fns";
+import { User } from "@prisma/client";
 
-const AdminLayout = (props: {accountList: any[], agentList: any[], setSelectedStartOfWeek: any,}) => {
+const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
+  const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
   const [adminTab, setAdminTab] = useState<string>("accounts");
 
   return (
@@ -20,11 +23,11 @@ const AdminLayout = (props: {accountList: any[], agentList: any[], setSelectedSt
             Transactions
           </button>
         </div>
-        {adminTab === "accounts" && <WeekSelector setSelectedStartOfWeek={props.setSelectedStartOfWeek} />}
+        {adminTab === "accounts" && <WeekSelector setSelectedStartOfWeek={setSelectedStartOfWeek} />}
       </div>
-      {adminTab === "accounts" && <AccountsTable accountList={props.accountList} setSelectedStartOfWeek={props.setSelectedStartOfWeek} />}
-      {adminTab === "agents" && <AgentsTable agentList={props.agentList} />}
-      {adminTab === "transactions" && <AccountsTable accountList={props.accountList} setSelectedStartOfWeek={props.setSelectedStartOfWeek} />}
+      {adminTab === "accounts" && <AccountsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />}
+      {adminTab === "agents" && <AgentsTable baseUrl={props.baseUrl} />}
+      {/* {adminTab === "transactions" && <TransactionsTable  />} */}
     </div>
   )
 }
