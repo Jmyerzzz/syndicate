@@ -7,7 +7,7 @@ const AgentsTable = (props: {baseUrl: string}) => {
 
   useMemo(() => {
     setIsLoading(true)
-    fetch(props.baseUrl + "/api/agents", {
+    fetch(props.baseUrl + "/api/agents/all", {
         method: "GET"
       })
       .then((response) => response.json())

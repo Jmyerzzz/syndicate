@@ -1,5 +1,5 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { auth } from "../../../../auth/lucia";
+import { auth } from "../../../../../auth/lucia";
 import * as context from "next/headers";
 import { NextResponse } from "next/server";
 

@@ -10,8 +10,8 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
   const [adminTab, setAdminTab] = useState<string>("accounts");
 
   return (
-    <div>
-      <div className="flex flex-col content-center px-2 text-gray-100">
+    <div className="px-40">
+      <div className="flex flex-col content-center text-gray-100">
         <div className="flex flex-row justify-center mb-3">
           <button className={`mr-2 px-3 text-2xl uppercase ${adminTab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setAdminTab("accounts")}>
             Weekly Figures
