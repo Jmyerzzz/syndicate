@@ -9,7 +9,11 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
-  return await prisma.user.findMany()
+  return await prisma.user.findMany({
+    where: {
+      role: "AGENT"
+    }
+  })
 }
 
 export const GET = async (request: NextRequest) => {
