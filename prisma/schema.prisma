@@ -10,8 +10,8 @@ datasource db {
 model Session {
   id             String @id @map("_id")
   user_id        String @unique
-  active_expires Int
-  idle_expires   Int
+  active_expires BigInt
+  idle_expires   BigInt
   user           User   @relation(fields: [user_id], references: [id])
 }
 
