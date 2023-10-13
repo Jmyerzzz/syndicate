@@ -12,18 +12,14 @@ async function main(date: Date, username: string) {
         username: username
       }
     },
-    select: {
-      id: true,
-      user: true,
-      website: true,
-      username: true,
-      password: true,
-      ip_location: true,
-      credit_line: true,
-      max_win: true,
+    include: {
+      user:true,
       weeklyFigures: {
         where: {
           date: date,
+        },
+        include: {
+          adjustments: true,
         },
       },
     },

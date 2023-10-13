@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import SummarySection from "./SummarySection";
-import UpdateAdjustments from "./UpdateAdjustments";
+import AddWeeklyFigure from "./AddWeeklyFigure";
 
 interface Account {
   id: string;
@@ -90,10 +90,15 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
         {
           groupedAccounts.map((user, index) => {
             const elements: React.ReactElement[] = [];
-            elements.push(<tr key={index}><td colSpan={8} className="px-6 bg-gray-400 text-gray-100">{user.username}</td></tr>)
+            let weeklyFigureAmount: number, weeklyFigureId: string, weeklyFigureTotal = 0, adjustmentsTotal = 0;
+            elements.push(<tr key={"user" + index}><td colSpan={8} className="px-6 bg-gray-400 text-gray-100 text-lg">{user.username}</td></tr>)
             user.accounts.map((account, index) => {
-              const weeklyFigureAmount = account.weeklyFigures.length > 0 ? account.weeklyFigures[0].amount : 0;
-              const weeklyFigureId = account.weeklyFigures.length > 0 ? account.weeklyFigures[0].id : "";
+              weeklyFigureAmount = 0
+              if (account.weeklyFigures.length > 0) {
+                weeklyFigureAmount = account.weeklyFigures[0].amount;
+                weeklyFigureId = account.weeklyFigures[0].id;
+                weeklyFigureTotal += account.weeklyFigures[0].amount;
+              }
               let adjustmentsSum = 0;
               if (account.weeklyFigures[0] && account.weeklyFigures[0].adjustments.length > 0) {
                 account.weeklyFigures[0].adjustments.map((adjustment) => {
@@ -103,6 +108,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                     adjustmentsSum -= adjustment.amount;
                   }
                 })
+                adjustmentsTotal += adjustmentsSum
               }
               elements.push(
                 <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""}`}>
@@ -113,19 +119,30 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">${account.credit_line.toLocaleString()}</td>
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">${account.max_win.toLocaleString()}</td>
                   <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200`}>
-                    {USDollar.format(weeklyFigureAmount)}
+                    <div className="flex flex-row justify-between items-center">
+                      {USDollar.format(weeklyFigureAmount)}
+                      <AddWeeklyFigure baseUrl={props.baseUrl} account={account} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                    </div>
                   </td>
                   <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200`}>
-                    <div className="flex flex-row justify-between items-center">
-                      <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-500"}`}>
-                        {USDollar.format(adjustmentsSum)}
-                      </div>
-                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigureId={weeklyFigureId} currentAmount={weeklyFigureAmount} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                    <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-500"}`}>
+                      {USDollar.format(adjustmentsSum)}
                     </div>
                   </td>
                 </tr>
               )
             })
+            elements.push(
+              <tr key={"totals" + index}>
+                <td colSpan={6} className="px-6 py-2 bg-white text-right">Totals:</td>
+                <td className="px-6 py-2 whitespace-no-wrap text-gray-500">
+                  {USDollar.format(weeklyFigureTotal)}
+                </td>
+                <td className="px-6 py-2 whitespace-no-wrap text-gray-500">
+                  {USDollar.format(adjustmentsTotal)}
+                </td>
+              </tr>
+            )
           return elements;
           })
         }
@@ -145,7 +162,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
               Weekly Figure
             </th>
-            <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
+            <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
               Adjustments
             </th>
           </tr>
