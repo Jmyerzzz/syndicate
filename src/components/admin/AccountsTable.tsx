@@ -108,7 +108,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
           groupedAccounts.map((user, index) => {
             const elements: React.ReactElement[] = [];
             let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
-            elements.push(<tr key={"user" + index}><td colSpan={8} className="px-6 bg-gray-500 text-gray-100 text-lg">{user.username}</td></tr>)
+            elements.push(<tr key={"user" + index}><td colSpan={9} className="px-6 bg-gray-500 text-gray-100 text-lg">{user.username}</td></tr>)
             user.accounts.map((account, index) => {
               weeklyFigureAmount = 0
               if (account.weeklyFigures.length > 0) {
@@ -151,6 +151,9 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                       </button>
                     </div>
                   </td>
+                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
+                    {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
+                  </td>
                 </tr>
               )
             })
@@ -162,6 +165,9 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                 </td>
                 <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                   {USDollar.format(adjustmentsTotal)}
+                </td>
+                <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                  {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
                 </td>
               </tr>
             )
@@ -188,6 +194,9 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             </th>
             <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
               Adjustments
+            </th>
+            <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
+              Balance
             </th>
           </tr>
           <tr>

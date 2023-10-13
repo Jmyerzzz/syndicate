@@ -134,6 +134,9 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} currentAmount={weeklyFigureAmount} selectedStartOfWeek={selectedStartOfWeek} setRefreshKey={setRefreshKey} />
                     </div>
                   </td>
+                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
+                    {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
+                  </td>
                 </tr>
               )
             })
@@ -146,13 +149,16 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                 <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                   {USDollar.format(adjustmentsTotal)}
                 </td>
+                <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                  {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
+                </td>
               </tr>
             )
           return elements;
           })
         }
           <tr>
-            <td colSpan={8} className="bg-gray-400 hover:bg-gray-500 text-gray-100">
+            <td colSpan={9} className="bg-gray-400 hover:bg-gray-500 text-gray-100">
               <AddAccount baseUrl={props.baseUrl} user={props.currentUser} setRefreshKey={setRefreshKey} />
             </td>
           </tr>
@@ -178,6 +184,9 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               </th>
               <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
                 Adjustments
+              </th>
+              <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
+                Balance
               </th>
             </tr>
             <tr>
