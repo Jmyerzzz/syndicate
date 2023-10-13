@@ -132,7 +132,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-500"}`}>
                         {USDollar.format(adjustmentsSum)}
                       </div>
-                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigureId={weeklyFigureId} currentAmount={weeklyFigureAmount} selectedStartOfWeek={selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} currentAmount={weeklyFigureAmount} selectedStartOfWeek={selectedStartOfWeek} setRefreshKey={setRefreshKey} />
                     </div>
                   </td>
                 </tr>
@@ -162,7 +162,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   }
 
   return (
-    <div className="flex justify-center px-40">
+    <div className="flex justify-center px-20">
       <div className="flex flex-col items-center min-w-full">
         <div className="flex flex-row justify-between content-center w-full">
           <div className="px-3 text-2xl uppercase text-blue-400 border-b border-solid border-blue-400">Weekly Figures</div>

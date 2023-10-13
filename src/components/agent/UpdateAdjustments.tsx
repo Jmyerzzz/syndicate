@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../Modal";
 
-const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigureId: string, currentAmount: number, selectedStartOfWeek: Date, setRefreshKey: any}) => {
+const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure: any, currentAmount: number, selectedStartOfWeek: Date, setRefreshKey: any}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -31,7 +31,7 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigureI
     fetch(props.baseUrl + "/api/adjustment", {
       method: "POST",
       body: JSON.stringify({
-        weeklyFigureId: props.weeklyFigureId,
+        weeklyFigure: props.weeklyFigure,
         adjustmentData: formData,
         date: props.selectedStartOfWeek
       })
@@ -50,12 +50,20 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigureI
     closeModal();
   };
 
-  const markStiffed = (weeklyFigureId: string, stiffed: boolean) => {
-    fetch("/api/figure/stiffed", {
+  const zeroOut = (weeklyFigure: any) => {
+    let adjustmentSum = 0;
+    weeklyFigure.adjustments.map((adjustment: any) => {
+      adjustmentSum += adjustment.amount;
+    })
+    fetch(props.baseUrl + "/api/adjustment", {
       method: "POST",
       body: JSON.stringify({
-        weeklyFigureId: weeklyFigureId,
-        stiffed: stiffed
+        weeklyFigure: weeklyFigure,
+        adjustmentData: {
+          amount: weeklyFigure.amount - adjustmentSum,
+          operation: weeklyFigure.amount > 0 ? "credit" : "debit",
+        },
+        date: props.selectedStartOfWeek
       })
     })
 
@@ -130,8 +138,8 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigureI
               >
                 Update
               </button>
-              <button type="button" onClick={() => markStiffed(props.weeklyFigureId, true)} className="px-4 py-2 bg-red-500 text-gray-100 rounded hover:bg-red-600">
-                Stiffed
+              <button type="button" onClick={() => zeroOut(props.weeklyFigure)} className="px-4 py-2 bg-red-500 text-gray-100 rounded hover:bg-red-600">
+                Zero Out
               </button>
             </div>
           </form>

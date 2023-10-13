@@ -86,6 +86,20 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
       })
   },[props.selectedStartOfWeek, refreshKey])
 
+  const markStiffed = (weeklyFigureId: string, stiffed: boolean) => {
+    fetch("/api/figure/stiff", {
+      method: "POST",
+      body: JSON.stringify({
+        weeklyFigureId: weeklyFigureId,
+        stiffed: stiffed
+      })
+    })
+
+    setTimeout(() => {
+      setRefreshKey((oldKey: number) => oldKey +1)
+    }, 1000)
+  }
+
   const TableRows = () => {
     let weeklyTotal = 0, totalCollected = 0
     return (
@@ -115,6 +129,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                 adjustmentsTotal += adjustmentsSum
               }
               totalCollected += adjustmentsTotal;
+              const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
               elements.push(
                 <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""}`}>
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.website}</td>
@@ -123,15 +138,18 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.ip_location}</td>
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">${account.credit_line.toLocaleString()}</td>
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">${account.max_win.toLocaleString()}</td>
-                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200`}>
+                  <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200`}>
                     <div className="flex flex-row justify-between items-center">
                       {USDollar.format(weeklyFigureAmount)}
                       <AddWeeklyFigure baseUrl={props.baseUrl} account={account} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
                     </div>
                   </td>
-                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200`}>
-                    <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-500"}`}>
+                  <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200`}>
+                    <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-500"}`}>
                       {USDollar.format(adjustmentsSum)}
+                      <button type="button" onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="ml-4 px-1 w-5/12 bg-gray-500 text-gray-100 rounded hover:bg-gray-600">
+                        {stiffed ? "Unstiff" : "Stiff"}
+                      </button>
                     </div>
                   </td>
                 </tr>
