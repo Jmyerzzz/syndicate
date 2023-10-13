@@ -8,8 +8,9 @@ import AgentsAccountsTable from "../components/agent/AgentAccountsTable";
 import AdminLayout from "../components/admin/AdminLayout";
 
 export default function Homepage(props: {baseUrl: string, user: User}) {
+  const role = props.user.role === "ADMIN" || false
   const [currentUser, setCurrentUser] = useState<User>(props.user);
-  const [isAdmin, setIsAdmin] = useState<boolean>(props.user.role === "ADMIN");
+  const [isAdmin, setIsAdmin] = useState<boolean>(role);
 
   return (
     <div className="flex flex-col justify-center">
