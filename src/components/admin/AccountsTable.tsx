@@ -68,6 +68,8 @@ const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
 
 const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSelectedStartOfWeek: any}) => {
   const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
+  const [weeklyTotal, setWeeklyTotal] = useState<number>(0);
+  const [totalCollected, setTotalCollected] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [refreshKey, setRefreshKey] = useState<number>(0);
 
@@ -85,6 +87,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
   },[props.selectedStartOfWeek, refreshKey])
 
   const TableRows = () => {
+    let weeklyTotal = 0, totalCollected = 0
     return (
       <>
         {
@@ -99,6 +102,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                 weeklyFigureId = account.weeklyFigures[0].id;
                 weeklyFigureTotal += account.weeklyFigures[0].amount;
               }
+              weeklyTotal += weeklyFigureTotal;
               let adjustmentsSum = 0;
               if (account.weeklyFigures[0] && account.weeklyFigures[0].adjustments.length > 0) {
                 account.weeklyFigures[0].adjustments.map((adjustment) => {
@@ -110,6 +114,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                 })
                 adjustmentsTotal += adjustmentsSum
               }
+              totalCollected += adjustmentsTotal;
               elements.push(
                 <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""}`}>
                   <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.website}</td>
@@ -143,7 +148,9 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                 </td>
               </tr>
             )
-          return elements;
+            setWeeklyTotal(weeklyTotal)
+            setTotalCollected(totalCollected)
+            return elements;
           })
         }
       </>
@@ -152,8 +159,8 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
 
   return (
     <div className="flex flex-col justify-items-center items-center">
-      <SummarySection />
-      <table className="mt-4 table-auto min-w-[1375px]">
+      <SummarySection baseUrl={props.baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />
+      <table className="mt-4 table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
             <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-600 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500">
