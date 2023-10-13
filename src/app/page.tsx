@@ -26,7 +26,7 @@ const Page = async () => {
     })
 
   return (
-    <Homepage baseUrl={BASE_URL} user={user} />
+    <Homepage baseUrl={BASE_URL} user={user} role={user.role} />
   )
 }
 

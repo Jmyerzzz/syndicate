@@ -7,9 +7,9 @@ import { User } from "@prisma/client";
 import AgentsAccountsTable from "../components/agent/AgentAccountsTable";
 import AdminLayout from "../components/admin/AdminLayout";
 
-export default function Homepage(props: {baseUrl: string, user: User}) {
+export default function Homepage(props: {baseUrl: string, user: User, role: string}) {
   const [currentUser, setCurrentUser] = useState<User>(props.user);
-  const [isAdmin, setIsAdmin] = useState<boolean>(currentUser.role === "ADMIN");
+  const [isAdmin, setIsAdmin] = useState<boolean>(props.role === "ADMIN");
 
   return (
     <div className="flex flex-col justify-center">
