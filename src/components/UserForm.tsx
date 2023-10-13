@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface formValues {
   name: string,
+  risk: number,
   username: string,
   password: string
 }
@@ -17,15 +18,16 @@ const UserForm = (props: {title: string, action: string}) => {
 
   const initialValues: formValues = {
     name: '',
+    risk: 0,
     username: '',
     password: '',
   };
 
   const handleSubmit = async (values: any, actions: any) => {
-    let name, username, password, formData;
+    let name, risk, username, password, formData;
     if (props.title === "Sign Up") {
-      ({name, username, password} = values);
-      formData = {name, username, password};
+      ({name, risk, username, password} = values);
+      formData = {name, risk, username, password};
     } else {
       ({username, password} = values);
       formData = {username, password};
@@ -58,20 +60,36 @@ const UserForm = (props: {title: string, action: string}) => {
           {({ isSubmitting }) => (
             <Form>
               {props.title === "Sign Up" &&
-                <div className="mb-4 text-gray-500">
-                  <label htmlFor="name" className="block font-medium">
-                    Name
-                  </label>
-                  <Field
-                    type="name"
-                    id="name"
-                    name="name"
-                    className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
-                  />
-                  {error && error.toLowerCase().includes("name required") &&
-                  <div className="text-red-500">{error}</div>
-                }
-                </div>
+                <>
+                  <div className="mb-4 text-gray-500">
+                    <label htmlFor="name" className="block font-medium">
+                      Name
+                    </label>
+                    <Field
+                      type="name"
+                      id="name"
+                      name="name"
+                      className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
+                    />
+                    {error && error.toLowerCase().includes("name required") &&
+                      <div className="text-red-500">{error}</div>
+                    }
+                  </div>
+                  <div className="mb-4 text-gray-500">
+                    <label htmlFor="risk" className="block font-medium">
+                      Risk %
+                    </label>
+                    <Field
+                      type="risk"
+                      id="risk"
+                      name="risk"
+                      className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
+                    />
+                    {error && error.toLowerCase().includes("risk") &&
+                      <div className="text-red-500">{error}</div>
+                    }
+                  </div>
+                </>
               }
 
               <div className="mb-4 text-gray-500">

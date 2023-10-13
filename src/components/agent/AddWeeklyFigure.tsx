@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../Modal";
 
-const UpdateWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigureId: string, currentAmount: number, selectedStartOfWeek: Date, setRefreshKey: any}) => {
+const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOfWeek: Date, setRefreshKey: any}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -28,12 +28,10 @@ const UpdateWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure
   const handleAddAccount = (e: any) => {
     e.preventDefault();
 
-    fetch(props.baseUrl + "/api/figure", {
+    fetch(props.baseUrl + "/api/figure/add", {
       method: "POST",
       body: JSON.stringify({
-        currentAmount: props.currentAmount,
         account: props.account,
-        weeklyFigureId: props.weeklyFigureId,
         figureData: formData,
         date: props.selectedStartOfWeek
       })
@@ -58,10 +56,10 @@ const UpdateWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure
         className="ml-5 px-2 text-gray-100 bg-blue-400 hover:bg-blue-500 rounded"
         onClick={openModal}
       >
-        Update
+        Add
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="Update Weekly Figure">
+      <Modal isOpen={isModalOpen} onClose={closeModal} title="Add Weekly Figure">
         <div className="max-w-md mx-auto">
           <form onSubmit={handleAddAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
@@ -92,7 +90,7 @@ const UpdateWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure
                   className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 />
                 <label htmlFor="creditOperation" className="block text-gray-700 font-semibold">
-                  Credit
+                  Credit (+)
                 </label>
               </div>
               <div className="flex flex-row items-center">
@@ -105,7 +103,7 @@ const UpdateWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure
                   className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 />
                 <label htmlFor="debitOperation" className="block text-gray-700 font-semibold">
-                  Debit
+                  Debit (-)
                 </label>
               </div>
             </div>
@@ -114,7 +112,7 @@ const UpdateWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure
                 type="submit"
                 className="px-4 py-2 bg-blue-500 text-gray-100 rounded hover:bg-blue-600"
               >
-                Update
+                Add
               </button>
             </div>
           </form>
@@ -124,4 +122,4 @@ const UpdateWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure
   )
 }
 
-export default UpdateWeeklyFigure;
+export default AddWeeklyFigure;

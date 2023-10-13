@@ -26,7 +26,7 @@ const AgentsTable = (props: {baseUrl: string}) => {
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.name}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.username}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.role}</td>
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.risk_percentage}</td>
+              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.risk_percentage}%</td>
             </tr>
           )
         }
@@ -49,7 +49,7 @@ const AgentsTable = (props: {baseUrl: string}) => {
                   Role
                 </th>
                 <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
-                  Risk %
+                  Risk
                 </th>
               </tr>
             </thead>

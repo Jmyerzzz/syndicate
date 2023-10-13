@@ -42,16 +42,27 @@ model Account {
   password      String
   ip_location   String
   credit_line   Int
-  max_win        Int
+  max_win       Int
   weeklyFigures WeeklyFigure[]
 }
 
 model WeeklyFigure {
-  id         String   @id @map("_id")
-  Account    Account? @relation(fields: [account_id], references: [id])
-  account_id String?
-  amount     Float
-  date       DateTime
+  id          String       @id @map("_id")
+  Account     Account?     @relation(fields: [account_id], references: [id])
+  account_id  String?
+  amount      Float
+  date        DateTime
+  stiffed     Boolean      @default(false)
+  adjustments Adjustment[]
+}
+
+model Adjustment {
+  id           String        @id @map("_id")
+  WeeklyFigure WeeklyFigure? @relation(fields: [figure_id], references: [id])
+  figure_id    String?
+  amount       Float
+  operation    String
+  date         DateTime
 }
 
 enum Role {

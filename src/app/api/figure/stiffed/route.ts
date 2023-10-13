@@ -1,44 +1,35 @@
 import { NextResponse } from "next/server";
-
 import type { NextRequest } from "next/server";
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-async function main(date: Date) {
-  return await prisma.account.findMany({
-    include: {
-      user:true,
-      weeklyFigures: {
-        where: {
-          date: date,
-        },
-        include: {
-          adjustments: true,
-        },
-      },
+async function main(weeklyFigureId: string, stiffed: boolean) {
+  return await prisma.weeklyFigure.update({
+    where: {
+      id: weeklyFigureId
     },
-    orderBy: {
-      user: {
-        username: "asc",
-      },
+    data: {
+      stiffed: stiffed
     },
   })
 }
 
 export const POST = async (request: NextRequest) => {
   const data = await request.json();
-  const date = data;
+  const weeklyFigureId = data.weeklyFigureId;
+  const stiffed = data.stiffed;
+
   try {
-    const accounts = await main(date)
-    return new Response(JSON.stringify(accounts), {
+    await main(weeklyFigureId, stiffed)
+    return new Response(null, {
       status: 200,
     });
   } catch (e) {
     console.error(e)
       return NextResponse.json(
         {
-          error: "Error fetching accounts"
+          error: "Error marking weekly figure as stiffed"
         },
         {
           status: 400

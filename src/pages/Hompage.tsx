@@ -7,23 +7,9 @@ import { User } from "@prisma/client";
 import AgentsAccountsTable from "../components/agent/AgentAccountsTable";
 import AdminLayout from "../components/admin/AdminLayout";
 
-export default function Homepage(props: {baseUrl: string, user: lucia.User}) {
-  const [currentUser, setCurrentUser] = useState<User>();
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-
-  useEffect(() => {
-    fetch(props.baseUrl + "/api/user", {
-        method: "POST",
-        body: JSON.stringify({
-          userId: props.user.userId
-        })
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        setCurrentUser(data);
-        setIsAdmin(data.role === "ADMIN")
-      })
-  },[])
+export default function Homepage(props: {baseUrl: string, user: User}) {
+  const [currentUser, setCurrentUser] = useState<User>(props.user);
+  const [isAdmin, setIsAdmin] = useState<boolean>(props.user.role === "ADMIN");
 
   return (
     <div className="flex flex-col justify-center">

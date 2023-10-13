@@ -14,8 +14,19 @@ const Page = async () => {
   const session = await getPageSession();
   if (!session) redirect("/login");
 
+  const user = await fetch(BASE_URL + "/api/user", {
+    method: "POST",
+    body: JSON.stringify({
+      userId: session.user.userId
+    })
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data
+    })
+
   return (
-    <Homepage baseUrl={BASE_URL} user={session.user} />
+    <Homepage baseUrl={BASE_URL} user={user} />
   )
 }
 
