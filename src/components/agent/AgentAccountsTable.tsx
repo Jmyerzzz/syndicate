@@ -162,13 +162,13 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   }
 
   return (
-    <div className="flex flex-col justify-items-center items-center">
-      <div>
-        <div className="flex flex-row justify-between content-center px-2">
+    <div className="flex justify-center px-40">
+      <div className="flex flex-col items-center min-w-full">
+        <div className="flex flex-row justify-between content-center w-full">
           <div className="px-3 text-2xl uppercase text-blue-400 border-b border-solid border-blue-400">Weekly Figures</div>
           <WeekSelector setSelectedStartOfWeek={setSelectedStartOfWeek} />
         </div>
-        <table className="mt-4 table-auto min-w-[1140px]">
+        <table className="mt-4 table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
               <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-600 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500">
