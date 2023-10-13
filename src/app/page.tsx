@@ -12,7 +12,7 @@ const BASE_URL = process.env.URL || "";
 
 const Page = async () => {
   const session = await getPageSession();
-  if (!session) redirect("/login");
+  if (!session) redirect(BASE_URL + "/login");
 
   const user = await fetch(BASE_URL + "/api/user", {
     method: "POST",
