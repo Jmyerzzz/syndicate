@@ -5,6 +5,8 @@ import { LuciaError } from "lucia";
 
 import type { NextRequest } from "next/server";
 
+const BASE_URL = process.env.URL || "";
+
 export const POST = async (request: NextRequest) => {
   const formData = await request.json();
   const username = formData.username;
@@ -51,7 +53,7 @@ export const POST = async (request: NextRequest) => {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: "/" // redirect to profile page
+        Location: BASE_URL + "/" // redirect to profile page
       }
     });
   } catch (e) {

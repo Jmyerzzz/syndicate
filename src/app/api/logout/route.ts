@@ -3,6 +3,8 @@ import * as context from "next/headers";
 
 import type { NextRequest } from "next/server";
 
+const BASE_URL = process.env.URL || "";
+
 export const POST = async (request: NextRequest) => {
   const authRequest = auth.handleRequest(request.method, context);
   // check if user is authenticated
@@ -19,7 +21,7 @@ export const POST = async (request: NextRequest) => {
   return new Response(null, {
     status: 302,
     headers: {
-      Location: "/login" // redirect to login page
+      Location: BASE_URL + "/login" // redirect to login page
     }
   });
 };
