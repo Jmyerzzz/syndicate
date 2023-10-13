@@ -49,9 +49,21 @@ module.exports = {
             textShadow: '0 0 4px #b8d3ff,0 0 9px #b8d3ff,0 0 13px #b8d3ff,0 0 22px #4287f5,0 0 48px #4287f5,0 0 53px #4287f5',
           }
         },
+        sliding: {
+          '0%': {
+            backgroundPosition: '0% 50%',
+          },
+          '50%': {
+            backgroundPosition: '100% 50%',
+          },
+          '100%': {
+            backgroundPosition: '0% 50%',
+          }
+        }
       },
       animation: {
         'flicker-text': 'flicker 5s infinite',
+        'sliding': 'sliding 10s ease infinite'
       },
     },
   },

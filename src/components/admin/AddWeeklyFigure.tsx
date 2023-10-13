@@ -87,9 +87,9 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                   name="operation"
                   value="credit"
                   onChange={handleChange}
-                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="creditOperation" className="block text-gray-700 font-semibold">
+                <label htmlFor="creditOperation" className="block text-gray-700 font-semibold hover:cursor-pointer">
                   Credit (+)
                 </label>
               </div>
@@ -100,9 +100,9 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                   name="operation"
                   value="debit"
                   onChange={handleChange}
-                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="debitOperation" className="block text-gray-700 font-semibold">
+                <label htmlFor="debitOperation" className="block text-gray-700 font-semibold hover:cursor-pointer">
                   Debit (-)
                 </label>
               </div>

@@ -97,12 +97,11 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
         {
           groupedAccounts.map((user, index) => {
             const elements: React.ReactElement[] = [];
-            let weeklyFigureAmount: number, weeklyFigureId: string, weeklyFigureTotal = 0, adjustmentsTotal = 0;
+            let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
             user.accounts.map((account, index) => {
               weeklyFigureAmount = 0
               if (account.weeklyFigures.length > 0) {
                 weeklyFigureAmount = account.weeklyFigures[0].amount;
-                weeklyFigureId = account.weeklyFigures[0].id;
                 weeklyFigureTotal += account.weeklyFigures[0].amount;
               }
               let adjustmentsSum = 0;
@@ -117,19 +116,19 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                 adjustmentsTotal += adjustmentsSum
               }
               elements.push(
-                <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""}`}>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.website}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.username}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.password}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{account.ip_location}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">${account.credit_line.toLocaleString()}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-gray-500">${account.max_win.toLocaleString()}</td>
-                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200`}>
+                <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} text-gray-700`}>
+                  <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
+                  <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
+                  <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
+                  <td className="px-6 py-4 whitespace-no-wrap">{account.ip_location}</td>
+                  <td className="px-6 py-4 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
+                  <td className="px-6 py-4 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
+                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
                     {USDollar.format(weeklyFigureAmount)}
                   </td>
-                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 text-gray-500 font-medium border-l-2 border-gray-200`}>
+                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
                     <div className="flex flex-row justify-between items-center">
-                      <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-500"}`}>
+                      <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                         {USDollar.format(adjustmentsSum)}
                       </div>
                       <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} currentAmount={weeklyFigureAmount} selectedStartOfWeek={selectedStartOfWeek} setRefreshKey={setRefreshKey} />
@@ -141,10 +140,10 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
             elements.push(
               <tr key={"totals" + index}>
                 <td colSpan={6} className="px-6 py-2 bg-white text-right">Totals:</td>
-                <td className="px-6 py-2 whitespace-no-wrap text-gray-500">
+                <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                   {USDollar.format(weeklyFigureTotal)}
                 </td>
-                <td className="px-6 py-2 whitespace-no-wrap text-gray-500">
+                <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                   {USDollar.format(adjustmentsTotal)}
                 </td>
               </tr>
@@ -162,7 +161,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   }
 
   return (
-    <div className="flex justify-center px-20">
+    <div className="flex justify-center mb-6 px-20">
       <div className="flex flex-col items-center min-w-full">
         <div className="flex flex-row justify-between content-center w-full">
           <div className="px-3 text-2xl uppercase text-blue-400 border-b border-solid border-blue-400">Weekly Figures</div>
@@ -171,7 +170,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
         <table className="mt-4 table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
-              <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-600 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500">
+              <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500">
                 Accounts
               </th>
               <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
@@ -182,22 +181,22 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               </th>
             </tr>
             <tr>
-              <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                 Website
               </th>
-              <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                 Username
               </th>
-              <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                 Password
               </th>
-              <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                 IP Address
               </th>
-              <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                 Credit Line
               </th>
-              <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                 Max Win
               </th>
             </tr>
