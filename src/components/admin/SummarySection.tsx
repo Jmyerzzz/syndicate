@@ -32,11 +32,11 @@ const SummarySection = (props: {baseUrl: string, weeklyTotal: number, totalColle
         {!isLoading && <div className={`text-xl ${props.weeklyTotal >= 0 ? "text-green-500" : "text-red-500"} font-semibold`}>{USDollar.format(props.weeklyTotal)}</div>}
       </div>
       <div className="flex flex-col flex-grow items-center justify-center px-4 py-2">
-        <div className="text-md">Total Collected</div>
+        <div className="text-md">Total Adjustments</div>
         {!isLoading && <div className="text-xl font-semibold">{USDollar.format(props.totalCollected)}</div>}
       </div>
       <div className="flex flex-col flex-grow items-center justify-center px-4 py-2">
-        <div className="text-md">Total Paid</div>
+        <div className="text-md">Total Settled</div>
         {!isLoading &&
           <div className="text-xl font-semibold">
             {isNaN((props.totalCollected/props.weeklyTotal) * 100) ? 0 : ((props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%
@@ -44,10 +44,10 @@ const SummarySection = (props: {baseUrl: string, weeklyTotal: number, totalColle
         }
       </div>
       <div className="flex flex-col flex-grow items-center justify-center px-4 py-2">
-        <div className="text-md">Total Owed</div>
+        <div className="text-md">Total Unsettled</div>
         {!isLoading &&
           <div className="text-xl font-semibold">
-            {isNaN((100 - (props.totalCollected/props.weeklyTotal) * 100)) ? 0 : (100 - (props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%
+            {USDollar.format(props.weeklyTotal-props.totalCollected)} / {isNaN((100 - (props.totalCollected/props.weeklyTotal) * 100)) ? 0 : (100 - (props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%
           </div>
         }
       </div>

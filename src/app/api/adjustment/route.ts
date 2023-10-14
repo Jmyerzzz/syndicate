@@ -5,7 +5,7 @@ import ObjectID from 'bson-objectid';
 
 const prisma = new PrismaClient()
 
-async function main(weeklyFigure: any, adjustmentData: any) {
+async function main(weeklyFigure: any, adjustmentData: any, date: Date) {
   let newAmount;
   // const existingWeeklyFigure = await prisma.weeklyFigure.findUnique({
   //   where: {
@@ -32,10 +32,18 @@ async function main(weeklyFigure: any, adjustmentData: any) {
   //   })
   // }
 
-  if (adjustmentData.operation === "debit") {
-    newAmount = 0 - parseFloat(adjustmentData.amount);
-  } else if (adjustmentData.operation === "credit") {
-    newAmount = 0 + parseFloat(adjustmentData.amount);
+  if (parseFloat(adjustmentData.amount) !== 0) {
+    if (adjustmentData.operation === "debit") {
+      newAmount = parseFloat(weeklyFigure.amount) - parseFloat(adjustmentData.amount);
+    } else if (adjustmentData.operation === "credit") {
+      newAmount = parseFloat(weeklyFigure.amount) + parseFloat(adjustmentData.amount);
+    }
+  } else {
+    if (adjustmentData.operation === "debit") {
+      newAmount = 0 - parseFloat(adjustmentData.amount);
+    } else if (adjustmentData.operation === "credit") {
+      newAmount = 0 + parseFloat(adjustmentData.amount);
+    }
   }
 
   return await prisma.adjustment.create({
@@ -46,6 +54,7 @@ async function main(weeklyFigure: any, adjustmentData: any) {
       operation: adjustmentData.operation,
       zero_out: adjustmentData.zero_out,
       transaction_date: new Date(),
+      week_start: date
     },
   })
 }
@@ -54,9 +63,10 @@ export const POST = async (request: NextRequest) => {
   const data = await request.json();
   const weeklyFigure = data.weeklyFigure;
   const adjustmentData = data.adjustmentData;
+  const date = data.date
 
   try {
-    await main(weeklyFigure, adjustmentData)
+    await main(weeklyFigure, adjustmentData, date)
     return new Response(null, {
       status: 200,
     });

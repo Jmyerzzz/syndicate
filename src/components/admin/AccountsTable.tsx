@@ -87,19 +87,15 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                 weeklyFigureAmount = account.weeklyFigures[0].amount;
                 weeklyFigureTotal += account.weeklyFigures[0].amount;
               }
-              weeklyTotal += weeklyFigureTotal;
+              weeklyTotal += weeklyFigureAmount;
               let adjustmentsSum = 0;
               if (account.weeklyFigures[0] && account.weeklyFigures[0].adjustments.length > 0) {
                 account.weeklyFigures[0].adjustments.map((adjustment) => {
-                  if (adjustment.operation === "credit") {
-                    adjustmentsSum += adjustment.amount;
-                  } else {
-                    adjustmentsSum -= adjustment.amount;
-                  }
+                  adjustmentsSum += adjustment.amount;
                 })
                 adjustmentsTotal += adjustmentsSum
               }
-              totalCollected += adjustmentsTotal;
+              totalCollected += adjustmentsSum;
               const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
               !collapsedRows.includes(index) && (
                 elements.push(
@@ -119,7 +115,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                     <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
                       <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                         {USDollar.format(adjustmentsSum)}
-                        <button type="button" onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="ml-4 px-1 w-5/12 bg-gray-500 text-gray-100 rounded hover:bg-gray-600">
+                        <button type="button" disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className={`ml-4 px-1 w-5/12 bg-gray-500 text-gray-100 rounded ${account.weeklyFigures.length > 0 && "hover:bg-gray-600"}`}>
                           {stiffed ? "Unstiff" : "Stiff"}
                         </button>
                       </div>
@@ -196,7 +192,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             </th>
           </tr>
         </thead>
-        <tbody className="bg-white text-gray-500 divide-y divide-gray-200">
+        <tbody className="bg-white text-gray-700 divide-y divide-gray-200">
           {
             isLoading ? (
               <tr>

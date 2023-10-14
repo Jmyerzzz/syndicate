@@ -39,21 +39,21 @@ const AgentsTable = (props: {baseUrl: string}) => {
           <table className="mt-4 table-auto">
             <thead className="text-gray-100">
               <tr>
-                <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+                <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                   Name
                 </th>
-                <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+                <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                   Username
                 </th>
-                <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+                <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                   Role
                 </th>
-                <th className="px-6 py-3 bg-gray-600 text-left text-sm font-bold uppercase tracking-wider">
+                <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
                   Risk
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white text-gray-500 divide-y divide-gray-200">
+            <tbody className="bg-white text-gray-700 divide-y divide-gray-200">
             {
             isLoading ? (
               <tr>

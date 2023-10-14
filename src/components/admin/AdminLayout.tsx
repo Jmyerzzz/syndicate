@@ -4,6 +4,7 @@ import AccountsTable from "./AccountsTable"
 import AgentsTable from "./AgentsTable"
 import { startOfWeek } from "date-fns";
 import { User } from "@prisma/client";
+import TransactionsTable from "./TransactionsTable";
 
 const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
@@ -23,11 +24,11 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
             Transactions
           </button>
         </div>
-        {adminTab === "accounts" && <WeekSelector setSelectedStartOfWeek={setSelectedStartOfWeek} />}
+        {(adminTab === "accounts" || adminTab === "transactions") && <WeekSelector setSelectedStartOfWeek={setSelectedStartOfWeek} />}
       </div>
       {adminTab === "accounts" && <AccountsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />}
       {adminTab === "agents" && <AgentsTable baseUrl={props.baseUrl} />}
-      {/* {adminTab === "transactions" && <TransactionsTable  />} */}
+      {adminTab === "transactions" && <TransactionsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} />}
     </div>
   )
 }

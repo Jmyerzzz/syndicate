@@ -66,11 +66,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               let adjustmentsSum = 0;
               if (account.weeklyFigures[0] && account.weeklyFigures[0].adjustments.length > 0) {
                 account.weeklyFigures[0].adjustments.map((adjustment) => {
-                  if (adjustment.operation === "credit") {
-                    adjustmentsSum += adjustment.amount;
-                  } else {
-                    adjustmentsSum -= adjustment.amount;
-                  }
+                  adjustmentsSum += adjustment.amount;
                 })
                 adjustmentsTotal += adjustmentsSum
               }
@@ -90,7 +86,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                         {USDollar.format(adjustmentsSum)}
                       </div>
-                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} setRefreshKey={setRefreshKey} />
+                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} selectedStartOfWeek={selectedStartOfWeek} setRefreshKey={setRefreshKey} />
                     </div>
                   </td>
                   <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../Modal";
 
-const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure: any, setRefreshKey: any}) => {
+const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure: any, selectedStartOfWeek: any, setRefreshKey: any}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -34,6 +34,7 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
       body: JSON.stringify({
         weeklyFigure: props.weeklyFigure,
         adjustmentData: formData,
+        date: props.selectedStartOfWeek,
       })
     })
 
@@ -61,10 +62,11 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
       body: JSON.stringify({
         weeklyFigure: weeklyFigure,
         adjustmentData: {
-          amount: weeklyFigure.amount - adjustmentSum,
+          amount: adjustmentSum,
           operation: weeklyFigure.amount > 0 ? "credit" : "debit",
           zero_out: true,
-        }
+        },
+        date: props.selectedStartOfWeek,
       })
     })
 
@@ -78,7 +80,8 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
   return (
     <div>
       <button
-        className="ml-5 px-2 text-gray-100 bg-blue-400 hover:bg-blue-500 rounded"
+        className={`ml-5 px-2 text-gray-100 bg-blue-400 ${props.weeklyFigure && "hover:bg-blue-600"} rounded`}
+        disabled={!props.weeklyFigure}
         onClick={openModal}
       >
         Update
