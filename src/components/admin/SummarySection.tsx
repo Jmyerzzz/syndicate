@@ -37,11 +37,19 @@ const SummarySection = (props: {baseUrl: string, weeklyTotal: number, totalColle
       </div>
       <div className="flex flex-col flex-grow items-center justify-center px-4 py-2">
         <div className="text-md">Total Paid</div>
-        {!isLoading && <div className="text-xl font-semibold">{((props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%</div>}
+        {!isLoading &&
+          <div className="text-xl font-semibold">
+            {isNaN((props.totalCollected/props.weeklyTotal) * 100) ? 0 : ((props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%
+          </div>
+        }
       </div>
       <div className="flex flex-col flex-grow items-center justify-center px-4 py-2">
         <div className="text-md">Total Owed</div>
-        {!isLoading && <div className="text-xl font-semibold">{(100 - (props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%</div>}
+        {!isLoading &&
+          <div className="text-xl font-semibold">
+            {isNaN((100 - (props.totalCollected/props.weeklyTotal) * 100)) ? 0 : (100 - (props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%
+          </div>
+        }
       </div>
     </div>
   )
