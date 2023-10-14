@@ -61,7 +61,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
 
   const TableRows = () => {
     let weeklyTotal = 0, totalCollected = 0
-    const [collapsedRows, setCollapsedRows] = useState([]);
+    const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
 
     const handleRowClick = (index: number) => {
       const currentIndex = collapsedRows.indexOf(index);
@@ -77,7 +77,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
     return (
       <>
         {
-          groupedAccounts.map((user, index: number) => {
+          groupedAccounts.map((user, index) => {
             const elements: React.ReactElement[] = [];
             let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
             elements.push(<tr key={"user" + index} onClick={() => handleRowClick(index)}><td colSpan={9} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">{user.username}</td></tr>)
