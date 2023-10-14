@@ -22,7 +22,7 @@ const SummarySection = (props: {baseUrl: string, weeklyTotal: number, totalColle
   },[])
 
   return (
-    <div className="flex items-start justify-center min-w-full min-h-[68px] text-gray-700 bg-white">
+    <div className="flex items-start justify-center min-w-full min-h-[68px] text-gray-100 bg-gray-700 rounded">
       <div className="flex flex-col flex-grow items-center justify-center px-4 py-2">
         <div className="text-md">Agents</div>
         {!isLoading && <div className="text-xl font-semibold">{agentsCount}</div>}

@@ -2,7 +2,9 @@ import { useMemo, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import SummarySection from "./SummarySection";
 import AddWeeklyFigure from "./AddWeeklyFigure";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Account, UserAccounts, USDollar } from "@/types/types";
+import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
   const grouped: { [userId: string]: Account[] } = {};
@@ -80,7 +82,13 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
           groupedAccounts.map((user, index) => {
             const elements: React.ReactElement[] = [];
             let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
-            elements.push(<tr key={"user" + index} onClick={() => handleRowClick(index)}><td colSpan={9} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">{user.username}</td></tr>)
+            elements.push(
+              <tr key={"user" + index} onClick={() => handleRowClick(index)}>
+                <td colSpan={9} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
+                  {!collapsedRows.includes(index) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
+                  {user.username}
+                </td>
+              </tr>)
             user.accounts.map((account) => {
               weeklyFigureAmount = 0
               if (account.weeklyFigures.length > 0) {
@@ -99,7 +107,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
               const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
               !collapsedRows.includes(index) && (
                 elements.push(
-                  <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} text-gray-700`}>
+                  <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "bg-white"} text-gray-700`}>
                     <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
                     <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
                     <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
@@ -129,15 +137,15 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             })
             !collapsedRows.includes(index) && (
               elements.push(
-                <tr key={"totals" + index}>
-                  <td colSpan={6} className="px-6 py-2 bg-white text-right">Totals:</td>
+                <tr key={"totals" + index} className="bg-white">
+                  <td colSpan={6} className={`px-6 py-2 text-right ${index === groupedAccounts.length-1 && "rounded-bl"}`}>Totals:</td>
                   <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                     {USDollar.format(weeklyFigureTotal)}
                   </td>
                   <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                     {USDollar.format(adjustmentsTotal)}
                   </td>
-                  <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                  <td className={`px-6 py-2 whitespace-no-wrap font-semibold text-gray-700 ${index === groupedAccounts.length-1 && "rounded-br"}`}>
                     {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
                   </td>
                 </tr>
@@ -158,7 +166,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
       <table className="mt-4 table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
-            <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500">
+            <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
               Accounts
             </th>
             <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
@@ -167,7 +175,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
               Adjustments
             </th>
-            <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
+            <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700 rounded-tr">
               Balance
             </th>
           </tr>
@@ -192,11 +200,11 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             </th>
           </tr>
         </thead>
-        <tbody className="bg-white text-gray-700 divide-y divide-gray-200">
+        <tbody className="text-gray-700 divide-y divide-gray-200">
           {
             isLoading ? (
               <tr>
-                <td colSpan={8} className="mx-auto py-3 text-center bg-black">
+                <td colSpan={9} className="mx-auto py-3 text-center bg-[17, 23, 41]">
                   <Oval
                     height={60}
                     width={60}

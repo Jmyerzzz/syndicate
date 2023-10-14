@@ -71,7 +71,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                 adjustmentsTotal += adjustmentsSum
               }
               elements.push(
-                <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} text-gray-700`}>
+                <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "bg-white"} text-gray-700`}>
                   <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
                   <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
                   <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
@@ -96,8 +96,8 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               )
             })
             elements.push(
-              <tr key={"totals" + index}>
-                <td colSpan={6} className="px-6 py-2 bg-white text-right">Totals:</td>
+              <tr key={"totals" + index} className="bg-white">
+                <td colSpan={6} className="px-6 py-2 text-right">Totals:</td>
                 <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                   {USDollar.format(weeklyFigureTotal)}
                 </td>
@@ -113,7 +113,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
           })
         }
           <tr>
-            <td colSpan={9} className="bg-gray-400 hover:bg-gray-500 text-gray-100">
+            <td colSpan={9} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
               <AddAccount baseUrl={props.baseUrl} user={props.currentUser} setRefreshKey={setRefreshKey} />
             </td>
           </tr>
@@ -131,7 +131,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
         <table className="mt-4 table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
-              <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500">
+              <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
                 Accounts
               </th>
               <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
@@ -140,7 +140,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
                 Adjustments
               </th>
-              <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
+              <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700 rounded-tr">
                 Balance
               </th>
             </tr>
@@ -165,11 +165,11 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white text-gray-500 divide-y divide-gray-200">
+          <tbody className="text-gray-500 divide-y divide-gray-200">
             {
               isLoading ? (
                 <tr>
-                  <td colSpan={7} className="mx-auto py-3 text-center bg-black">
+                  <td colSpan={9} className="mx-auto py-3 text-center bg-[17, 23, 41]">
                     <Oval
                       height={60}
                       width={60}
