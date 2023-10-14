@@ -28,7 +28,7 @@ const WeekSelector = ( props: {setSelectedStartOfWeek: Dispatch<SetStateAction<D
   const endOfWeekDate = addDays(startOfWeekDate, 6);
 
   return (
-    <div className="flex justify-center items-center mb-3 text-gray-500">
+    <div className="flex justify-center items-center text-gray-500">
       <button
         className="px-3 mr-1 rounded text-gray-100 hover:text-blue-400"
         onClick={goToPreviousWeek}

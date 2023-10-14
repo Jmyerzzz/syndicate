@@ -14,7 +14,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
 
   return (
     <div className="mb-6 px-20">
-      <div className="flex flex-col content-center text-gray-100">
+      <div className="flex flex-col content-center mb-3 text-gray-100">
         <div className="flex flex-row justify-center mb-3">
           <button className={`flex flex-row items-center px-3 text-2xl uppercase ${adminTab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setAdminTab("accounts")}>
             <FontAwesomeIcon icon={faSackDollar} width={20} className="mr-2" />

@@ -6,6 +6,8 @@ import { startOfWeek } from "date-fns";
 import { Oval } from "react-loader-spinner";
 import UpdateAdjustments from "./UpdateAdjustments";
 import { Account, UserAccounts, USDollar } from "@/types/types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
 
 const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
   const grouped: { [userId: string]: Account[] } = {};
@@ -125,7 +127,10 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
     <div className="flex justify-center mb-6 px-20">
       <div className="flex flex-col items-center min-w-full">
         <div className="flex flex-row justify-between content-center w-full">
-          <div className="px-3 text-2xl uppercase text-blue-400 border-b border-solid border-blue-400">Weekly Figures</div>
+          <div className="flex flex-row items-center px-3 text-2xl uppercase text-blue-400 border-b border-solid border-blue-400">
+            <FontAwesomeIcon icon={faSackDollar} width={20} className="mr-2" />
+            Weekly Figures
+          </div>
           <WeekSelector setSelectedStartOfWeek={setSelectedStartOfWeek} />
         </div>
         <table className="mt-4 table-auto min-w-full">
