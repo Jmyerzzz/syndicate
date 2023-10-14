@@ -53,7 +53,8 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
   return (
     <div>
       <button
-        className="ml-5 px-2 text-gray-100 bg-blue-400 hover:bg-blue-500 rounded"
+        className={`ml-5 px-2 text-gray-100 bg-blue-400 ${props.account.weeklyFigures.length === 0 && "hover:bg-blue-500"} rounded`}
+        disabled={props.account.weeklyFigures.length > 0}
         onClick={openModal}
       >
         Add
@@ -72,6 +73,11 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                 name="amount"
                 value={formData.amount}
                 onChange={handleChange}
+                onKeyDown={(event) => {
+                  if (/\+|-/.test(event.key)) {
+                      event.preventDefault();
+                  }
+                }}
                 className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />

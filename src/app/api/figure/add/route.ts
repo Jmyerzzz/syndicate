@@ -7,11 +7,12 @@ const prisma = new PrismaClient()
 
 async function main(account: any, figureData: any, date: Date) {
   let newAmount;
+  const amount = figureData.amount;
 
   if (figureData.operation === "debit") {
-    newAmount = 0 - parseFloat(figureData.amount);
+    newAmount = 0 - parseFloat(amount);
   } else if (figureData.operation === "credit") {
-    newAmount = 0 + parseFloat(figureData.amount);
+    newAmount = 0 + parseFloat(amount);
   }
 
   return await prisma.weeklyFigure.create({

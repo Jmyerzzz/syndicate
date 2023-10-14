@@ -7,6 +7,7 @@ const prisma = new PrismaClient()
 
 async function main(weeklyFigure: any, adjustmentData: any, date: Date) {
   let newAmount;
+  const amount = adjustmentData.amount;
   // const existingWeeklyFigure = await prisma.weeklyFigure.findUnique({
   //   where: {
   //     id: weeklyFigureId,
@@ -32,17 +33,13 @@ async function main(weeklyFigure: any, adjustmentData: any, date: Date) {
   //   })
   // }
 
-  if (parseFloat(adjustmentData.amount) !== 0) {
-    if (adjustmentData.operation === "debit") {
-      newAmount = parseFloat(weeklyFigure.amount) - parseFloat(adjustmentData.amount);
-    } else if (adjustmentData.operation === "credit") {
-      newAmount = parseFloat(weeklyFigure.amount) + parseFloat(adjustmentData.amount);
-    }
+  if (adjustmentData.zero_out) {
+    newAmount = parseFloat(weeklyFigure.amount) - parseFloat(amount);
   } else {
     if (adjustmentData.operation === "debit") {
-      newAmount = 0 - parseFloat(adjustmentData.amount);
+      newAmount = 0 - parseFloat(amount);
     } else if (adjustmentData.operation === "credit") {
-      newAmount = 0 + parseFloat(adjustmentData.amount);
+      newAmount = 0 + parseFloat(amount);
     }
   }
 

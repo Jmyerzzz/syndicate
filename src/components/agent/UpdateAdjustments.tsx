@@ -100,6 +100,11 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
                 name="amount"
                 value={formData.amount}
                 onChange={handleChange}
+                onKeyDown={(event) => {
+                  if (/\+|-/.test(event.key)) {
+                      event.preventDefault();
+                  }
+                }}
                 className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
