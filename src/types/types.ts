@@ -39,3 +39,7 @@ export const USDollar = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   signDisplay: 'always',
 });
+
+export const dateTimeFormat = new Intl.DateTimeFormat('en-US', {
+  dateStyle: 'short', timeStyle: 'short', timeZone: 'America/Los_Angeles'
+})

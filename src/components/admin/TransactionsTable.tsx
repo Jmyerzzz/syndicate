@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Oval } from "react-loader-spinner";
-import { Account, UserAccounts, USDollar } from "@/types/types";
+import { Account, UserAccounts, USDollar, dateTimeFormat } from "@/types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -78,7 +78,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) 
                   elements.push(
                     <tr key={"figure" + index} className="px-6 py-4 whitespace-no-wrap bg-gray-200 border-t-2 border-gray-700">
                       <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0)  && index0 === user.accounts.length-1) && "rounded-bl"}`}>FIGURE</td>
-                      <td className="px-6 py-4 whitespace-no-wrap">{figure.transaction_date}</td>
+                      <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(figure.transaction_date))}</td>
                       <td className={`px-6 py-4 whitespace-no-wrap ${figure.amount > 0 ? "text-green-500" : figure.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(figure.amount)}</td>
                       <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && index0 === user.accounts.length-1) && "rounded-br"}`}></td>
                     </tr>
@@ -89,7 +89,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) 
                     elements.push(
                       <tr key={"adjustment" + index} className="px-6 py-4 whitespace-no-wrap bg-white">
                         <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index1 === figure.adjustments.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
-                        <td className="px-6 py-4 whitespace-no-wrap">{adjustment.transaction_date}</td>
+                        <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(adjustment.transaction_date))}</td>
                         <td className={`px-6 py-4 whitespace-no-wrap ${adjustment.amount > 0 ? "text-green-500" : adjustment.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(adjustment.amount)}</td>
                         <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index1 === figure.adjustments.length-1 && "rounded-br"}`}>{adjustment.zero_out ? "ZEROED" : ""}</td>
                       </tr>
