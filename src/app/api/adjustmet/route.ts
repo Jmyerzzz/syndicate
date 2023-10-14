@@ -5,7 +5,7 @@ import ObjectID from 'bson-objectid';
 
 const prisma = new PrismaClient()
 
-async function main(weeklyFigure: any, adjustmentData: any) {
+async function main(weeklyFigureId: string, adjustmentData: any, date: Date) {
   let newAmount;
   // const existingWeeklyFigure = await prisma.weeklyFigure.findUnique({
   //   where: {
@@ -41,22 +41,22 @@ async function main(weeklyFigure: any, adjustmentData: any) {
   return await prisma.adjustment.create({
     data: {
       id: new ObjectID().toString(),
-      figure_id: weeklyFigure.id,
+      figure_id: weeklyFigureId,
       amount: newAmount!,
       operation: adjustmentData.operation,
-      zero_out: adjustmentData.zero_out,
-      transaction_date: new Date(),
+      transaction_date: date,
     },
   })
 }
 
 export const POST = async (request: NextRequest) => {
   const data = await request.json();
-  const weeklyFigure = data.weeklyFigure;
+  const weeklyFigureId = data.weeklyFigureId;
   const adjustmentData = data.adjustmentData;
+  const date = data.date;
 
   try {
-    await main(weeklyFigure, adjustmentData)
+    await main(weeklyFigureId, adjustmentData, date)
     return new Response(null, {
       status: 200,
     });

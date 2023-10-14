@@ -19,9 +19,11 @@ async function main(account: any, figureData: any, date: Date) {
       id: new ObjectID().toString(),
       account_id: account.id,
       amount: newAmount!,
-      date: date,
+      transaction_date: new Date(),
+      week_start: date,
     },
   })
+  
 }
 
 export const POST = async (request: NextRequest) => {

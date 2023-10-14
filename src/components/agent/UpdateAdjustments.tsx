@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../Modal";
 
-const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure: any, currentAmount: number, selectedStartOfWeek: Date, setRefreshKey: any}) => {
+const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure: any, setRefreshKey: any}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -14,7 +14,8 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
 
   const [formData, setFormData] = useState({
     amount: undefined,
-    operation: ''
+    operation: '',
+    zero_out: false
   });
 
   const handleChange = (e: any) => {
@@ -33,7 +34,6 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
       body: JSON.stringify({
         weeklyFigure: props.weeklyFigure,
         adjustmentData: formData,
-        date: props.selectedStartOfWeek
       })
     })
 
@@ -44,7 +44,8 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
     // Clear the form
     setFormData({
       amount: undefined,
-      operation: ''
+      operation: '',
+      zero_out: false
     });
 
     closeModal();
@@ -62,8 +63,8 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
         adjustmentData: {
           amount: weeklyFigure.amount - adjustmentSum,
           operation: weeklyFigure.amount > 0 ? "credit" : "debit",
-        },
-        date: props.selectedStartOfWeek
+          zero_out: true,
+        }
       })
     })
 

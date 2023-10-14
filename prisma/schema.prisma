@@ -47,22 +47,24 @@ model Account {
 }
 
 model WeeklyFigure {
-  id          String       @id @map("_id")
-  Account     Account?     @relation(fields: [account_id], references: [id])
-  account_id  String?
-  amount      Float
-  date        DateTime
-  stiffed     Boolean      @default(false)
-  adjustments Adjustment[]
+  id               String       @id @map("_id")
+  Account          Account?     @relation(fields: [account_id], references: [id])
+  account_id       String?
+  amount           Float
+  transaction_date DateTime
+  week_start       DateTime
+  stiffed          Boolean      @default(false)
+  adjustments      Adjustment[]
 }
 
 model Adjustment {
-  id           String        @id @map("_id")
-  WeeklyFigure WeeklyFigure? @relation(fields: [figure_id], references: [id])
-  figure_id    String?
-  amount       Float
-  operation    String
-  date         DateTime
+  id               String        @id @map("_id")
+  WeeklyFigure     WeeklyFigure? @relation(fields: [figure_id], references: [id])
+  figure_id        String?
+  amount           Float
+  operation        String
+  zero_out         Boolean       @default(false)
+  transaction_date DateTime
 }
 
 enum Role {

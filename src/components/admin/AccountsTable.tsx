@@ -2,48 +2,7 @@ import { useMemo, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import SummarySection from "./SummarySection";
 import AddWeeklyFigure from "./AddWeeklyFigure";
-
-interface Account {
-  id: string;
-  user: {
-    id: string;
-    name: string;
-    username: string;
-    role: string;
-    risk_percentage: number | null;
-  };
-  website: string;
-  username: string;
-  password: string;
-  ip_location: string;
-  credit_line: number;
-  max_win: number;
-  weeklyFigures: Array<{
-    id: string;
-    account_id: string;
-    amount: number;
-    date: string;
-    stiffed: boolean;
-    adjustments: Array<{
-      id: string;
-      figure_id: string;
-      amount: number;
-      operation: string;
-      date: string;
-    }>
-  }>;
-}
-
-interface UserAccounts {
-  username: string;
-  accounts: Account[];
-}
-
-let USDollar = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  signDisplay: 'always',
-});
+import { Account, UserAccounts, USDollar } from "@/types/types";
 
 const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
   const grouped: { [userId: string]: Account[] } = {};
@@ -102,14 +61,27 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
 
   const TableRows = () => {
     let weeklyTotal = 0, totalCollected = 0
+    const [collapsedRows, setCollapsedRows] = useState([]);
+
+    const handleRowClick = (index: number) => {
+      const currentIndex = collapsedRows.indexOf(index);
+      const newCollapsedRows = [...collapsedRows];
+      if (currentIndex === -1) {
+        newCollapsedRows.push(index);
+      } else {
+        newCollapsedRows.splice(currentIndex, 1);
+      }
+      setCollapsedRows(newCollapsedRows);
+    };
+
     return (
       <>
         {
-          groupedAccounts.map((user, index) => {
+          groupedAccounts.map((user, index: number) => {
             const elements: React.ReactElement[] = [];
             let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
-            elements.push(<tr key={"user" + index}><td colSpan={9} className="px-6 bg-gray-500 text-gray-100 text-lg">{user.username}</td></tr>)
-            user.accounts.map((account, index) => {
+            elements.push(<tr key={"user" + index} onClick={() => handleRowClick(index)}><td colSpan={9} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">{user.username}</td></tr>)
+            user.accounts.map((account) => {
               weeklyFigureAmount = 0
               if (account.weeklyFigures.length > 0) {
                 weeklyFigureAmount = account.weeklyFigures[0].amount;
@@ -129,47 +101,51 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
               }
               totalCollected += adjustmentsTotal;
               const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
+              !collapsedRows.includes(index) && (
+                elements.push(
+                  <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} text-gray-700`}>
+                    <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
+                    <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
+                    <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
+                    <td className="px-6 py-4 whitespace-no-wrap">{account.ip_location}</td>
+                    <td className="px-6 py-4 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
+                    <td className="px-6 py-4 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
+                    <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
+                      <div className="flex flex-row justify-between items-center">
+                        {USDollar.format(weeklyFigureAmount)}
+                        <AddWeeklyFigure baseUrl={props.baseUrl} account={account} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                      </div>
+                    </td>
+                    <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
+                      <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
+                        {USDollar.format(adjustmentsSum)}
+                        <button type="button" onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="ml-4 px-1 w-5/12 bg-gray-500 text-gray-100 rounded hover:bg-gray-600">
+                          {stiffed ? "Unstiff" : "Stiff"}
+                        </button>
+                      </div>
+                    </td>
+                    <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
+                      {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
+                    </td>
+                  </tr>
+                )
+              )
+            })
+            !collapsedRows.includes(index) && (
               elements.push(
-                <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} text-gray-700`}>
-                  <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap">{account.ip_location}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
-                  <td className="px-6 py-4 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
-                  <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
-                    <div className="flex flex-row justify-between items-center">
-                      {USDollar.format(weeklyFigureAmount)}
-                      <AddWeeklyFigure baseUrl={props.baseUrl} account={account} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
-                    </div>
+                <tr key={"totals" + index}>
+                  <td colSpan={6} className="px-6 py-2 bg-white text-right">Totals:</td>
+                  <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                    {USDollar.format(weeklyFigureTotal)}
                   </td>
-                  <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
-                    <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
-                      {USDollar.format(adjustmentsSum)}
-                      <button type="button" onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="ml-4 px-1 w-5/12 bg-gray-500 text-gray-100 rounded hover:bg-gray-600">
-                        {stiffed ? "Unstiff" : "Stiff"}
-                      </button>
-                    </div>
+                  <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                    {USDollar.format(adjustmentsTotal)}
                   </td>
-                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
-                    {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
+                  <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                    {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
                   </td>
                 </tr>
               )
-            })
-            elements.push(
-              <tr key={"totals" + index}>
-                <td colSpan={6} className="px-6 py-2 bg-white text-right">Totals:</td>
-                <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
-                  {USDollar.format(weeklyFigureTotal)}
-                </td>
-                <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
-                  {USDollar.format(adjustmentsTotal)}
-                </td>
-                <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
-                  {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
-                </td>
-              </tr>
             )
             setWeeklyTotal(weeklyTotal)
             setTotalCollected(totalCollected)

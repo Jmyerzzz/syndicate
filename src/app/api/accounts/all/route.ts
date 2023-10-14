@@ -11,7 +11,7 @@ async function main(date: Date) {
       user:true,
       weeklyFigures: {
         where: {
-          date: date,
+          week_start: date,
         },
         include: {
           adjustments: true,

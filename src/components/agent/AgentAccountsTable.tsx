@@ -5,48 +5,7 @@ import { User } from "@prisma/client";
 import { startOfWeek } from "date-fns";
 import { Oval } from "react-loader-spinner";
 import UpdateAdjustments from "./UpdateAdjustments";
-
-interface Account {
-  id: string;
-  user: {
-    id: string;
-    name: string;
-    username: string;
-    role: string;
-    risk_percentage: number | null;
-  };
-  website: string;
-  username: string;
-  password: string;
-  ip_location: string;
-  credit_line: number;
-  max_win: number;
-  weeklyFigures: Array<{
-    id: string;
-    account_id: string;
-    amount: number;
-    date: string;
-    stiffed: boolean;
-    adjustments: Array<{
-      id: string;
-      figure_id: string;
-      amount: number;
-      operation: string;
-      date: string;
-    }>
-  }>;
-}
-
-interface UserAccounts {
-  username: string;
-  accounts: Account[];
-}
-
-let USDollar = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  signDisplay: 'always',
-});
+import { Account, UserAccounts, USDollar } from "@/types/types";
 
 const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
   const grouped: { [userId: string]: Account[] } = {};
@@ -131,7 +90,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                         {USDollar.format(adjustmentsSum)}
                       </div>
-                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} currentAmount={weeklyFigureAmount} selectedStartOfWeek={selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} setRefreshKey={setRefreshKey} />
                     </div>
                   </td>
                   <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
