@@ -65,6 +65,7 @@ model Adjustment {
   operation        String
   zero_out         Boolean       @default(false)
   transaction_date DateTime
+  week_start       DateTime
 }
 
 enum Role {
