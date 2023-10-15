@@ -35,7 +35,7 @@ const WeekSelector = ( props: {setSelectedStartOfWeek: Dispatch<SetStateAction<D
       >
         <FontAwesomeIcon icon={faChevronLeft} size={"lg"} />
       </button>
-      <div className="text-lg font-bold text-gray-100 rounded">
+      <div className="text-sm sm:text-lg font-bold text-gray-100 rounded">
         Week of {format(startOfWeekDate, 'MMMM d, yyyy')} -{' '}
         {format(endOfWeekDate, 'MMMM d, yyyy')}
       </div>

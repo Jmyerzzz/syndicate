@@ -16,15 +16,15 @@ const NavBar = (props: {baseUrl: string, session: any}) => {
   }
   return (
     <nav className="bg-[17, 23, 41]">
-      <div className="px-20 mx-auto flex items-center justify-center pt-6 pb-10">
+      <div className="sm:px-20 mx-auto flex flex-col sm:flex-row items-center justify-center pt-6 pb-4 sm:pb-10">
         {props.session &&
-          <div className="flex flex-auto w-1/3"></div>
+          <div className="flex flex-auto sm:w-1/3"></div>
         }
-        <div className="flex flex-auto justify-center w-1/3 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
+        <div className="flex flex-auto justify-center mb-3 sm:mb-0 sm:w-1/3 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
           Syndicate
         </div>
         {props.session &&
-          <div className="flex flex-auto justify-end w-1/3">
+          <div className="flex flex-auto justify-end sm:w-1/3">
             <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
               Log Out
               <div>

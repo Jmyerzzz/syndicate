@@ -161,7 +161,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
   }
 
   return (
-    <div className="flex flex-col justify-items-center items-center">
+    <div className="flex flex-col sm:justify-items-center sm:items-center overflow-x-auto">
       <SummarySection baseUrl={props.baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />
       <table className="mt-4 table-auto min-w-full">
         <thead className="text-gray-100">
