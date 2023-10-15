@@ -6,29 +6,10 @@ import { startOfWeek } from "date-fns";
 import { Oval } from "react-loader-spinner";
 import UpdateAdjustments from "./UpdateAdjustments";
 import { Account, UserAccounts, USDollar } from "@/types/types";
+import { groupAccountsByUser } from "@/util/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
 
-const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
-  const grouped: { [userId: string]: Account[] } = {};
-
-  accounts.forEach((account) => {
-    const username = account.user.username;
-
-    if (!grouped[username]) {
-      grouped[username] = [];
-    }
-
-    grouped[username].push(account);
-  });
-
-  const userAccountsArray: UserAccounts[] = Object.keys(grouped).map((username) => ({
-    username,
-    accounts: grouped[username],
-  }));
-
-  return userAccountsArray;
-}
 
 const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefined}) => {
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));

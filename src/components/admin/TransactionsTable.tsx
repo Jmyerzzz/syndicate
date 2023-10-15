@@ -1,29 +1,9 @@
 import { useMemo, useState } from "react";
 import { Oval } from "react-loader-spinner";
-import { Account, UserAccounts, USDollar, dateTimeFormat } from "@/types/types";
+import { USDollar, dateTimeFormat } from "@/types/types";
+import { groupAccountsByUser } from "@/util/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-
-const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
-  const grouped: { [userId: string]: Account[] } = {};
-
-  accounts.forEach((account) => {
-    const username = account.user.username;
-
-    if (!grouped[username]) {
-      grouped[username] = [];
-    }
-
-    grouped[username].push(account);
-  });
-
-  const userAccountsArray: UserAccounts[] = Object.keys(grouped).map((username) => ({
-    username,
-    accounts: grouped[username],
-  }));
-
-  return userAccountsArray;
-}
 
 const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
   const [groupedAccounts, setGroupedAccounts] = useState<any[]>([]);
@@ -88,10 +68,10 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) 
                   !collapsedRows.includes(index) && (
                     elements.push(
                       <tr key={"adjustment" + index} className="px-6 py-4 whitespace-no-wrap bg-white">
-                        <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index1 === figure.adjustments.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
+                        <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
                         <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(adjustment.transaction_date))}</td>
                         <td className={`px-6 py-4 whitespace-no-wrap ${adjustment.amount > 0 ? "text-green-500" : adjustment.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(adjustment.amount)}</td>
-                        <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index1 === figure.adjustments.length-1 && "rounded-br"}`}>{adjustment.zero_out ? "ZEROED" : ""}</td>
+                        <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-br"}`}>{adjustment.zero_out ? "ZEROED" : ""}</td>
                       </tr>
                     )
                   )

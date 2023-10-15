@@ -32,6 +32,7 @@ export interface Account {
 
 export interface UserAccounts {
   username: string;
+  risk: number;
   accounts: Account[];
 }
 export const USDollar = new Intl.NumberFormat('en-US', {

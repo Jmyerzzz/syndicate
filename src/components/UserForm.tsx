@@ -53,7 +53,7 @@ const UserForm = (props: {title: string, action: string}) => {
   }
 
   return (
-    <div className="flex flex-grow items-center justify-center bg-black mb-20">
+    <div className="flex flex-grow items-center justify-center bg-[17,23,41] mb-20">
       <div className="bg-white p-8 rounded w-80">
         <h2 className="text-2xl text-gray-600 font-bold mb-4">{props.title}</h2>
         <Formik initialValues={initialValues} onSubmit={(values, actions) => handleSubmit(values, actions)}>

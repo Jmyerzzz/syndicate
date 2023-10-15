@@ -3,29 +3,9 @@ import { Oval } from "react-loader-spinner";
 import SummarySection from "./SummarySection";
 import AddWeeklyFigure from "./AddWeeklyFigure";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Account, UserAccounts, USDollar } from "@/types/types";
+import { UserAccounts, USDollar } from "@/types/types";
+import { groupAccountsByUser } from "@/util/util";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-
-const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
-  const grouped: { [userId: string]: Account[] } = {};
-
-  accounts.forEach((account) => {
-    const username = account.user.username;
-
-    if (!grouped[username]) {
-      grouped[username] = [];
-    }
-
-    grouped[username].push(account);
-  });
-
-  const userAccountsArray: UserAccounts[] = Object.keys(grouped).map((username) => ({
-    username,
-    accounts: grouped[username],
-  }));
-
-  return userAccountsArray;
-}
 
 const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSelectedStartOfWeek: any}) => {
   const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
@@ -86,7 +66,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
               <tr key={"user" + index} onClick={() => handleRowClick(index)}>
                 <td colSpan={9} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
                   {!collapsedRows.includes(index) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
-                  {user.username}
+                  {user.username} - {user.risk}% Risk
                 </td>
               </tr>)
             user.accounts.map((account) => {
