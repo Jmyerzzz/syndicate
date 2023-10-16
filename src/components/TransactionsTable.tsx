@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import { USDollar, dateTimeFormat } from "@/types/types";
 import { groupAccountsByUser } from "@/util/util";
@@ -10,23 +10,20 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
   const [groupedAccounts, setGroupedAccounts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  if (!props.currentUser) {
-    useMemo(() => {
+    useEffect(() => {
       setIsLoading(true)
-      fetch(props.baseUrl + "/api/accounts/all", {
-          method: "POST",
-          body: JSON.stringify(props.selectedStartOfWeek)
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          setGroupedAccounts(groupAccountsByUser(data))
-          setIsLoading(false)
-        })
-    },[props.selectedStartOfWeek])
-  } else {
-    useMemo(() => {
-      setIsLoading(true);
-      fetch(props.baseUrl + "/api/accounts/user", {
+      if (!props.currentUser) {
+        fetch(props.baseUrl + "/api/accounts/all", {
+            method: "POST",
+            body: JSON.stringify(props.selectedStartOfWeek)
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            setGroupedAccounts(groupAccountsByUser(data))
+            setIsLoading(false)
+          })
+      } else {
+        fetch(props.baseUrl + "/api/accounts/user", {
           method: "POST",
           body: JSON.stringify({
             date: props.selectedStartOfWeek,
@@ -38,8 +35,8 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
           setGroupedAccounts(groupAccountsByUser(data));
           setIsLoading(false);
         })
+      }
     },[props.selectedStartOfWeek])
-  }
 
   const TableRows = () => {
     const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
