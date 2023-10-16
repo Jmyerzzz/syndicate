@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
 import EditAccount from "../EditAccount";
 import AddWeeklyFigure from "./AddWeeklyFigure";
-import EditWeeklyFigure from "./EditWeeklyFigure";
+import EditWeeklyFigure from "../EditWeeklyFigure";
 
 
 const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefined, selectedStartOfWeek: Date}) => {

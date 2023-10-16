@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import SummarySection from "./SummarySection";
 import AddWeeklyFigure from "../agent/AddWeeklyFigure";
@@ -7,6 +7,7 @@ import { UserAccounts, USDollar } from "@/types/types";
 import { groupAccountsByUser } from "@/util/util";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import EditAccount from "../EditAccount";
+import EditWeeklyFigure from "../EditWeeklyFigure";
 
 const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
   const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
@@ -15,7 +16,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [refreshKey, setRefreshKey] = useState<number>(0);
 
-  useMemo(() => {
+  useEffect(() => {
     setIsLoading(true)
     fetch(props.baseUrl + "/api/accounts/all", {
         method: "POST",
@@ -103,7 +104,14 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
                     <td className="px-3 py-2 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
                     <td className="px-3 py-2 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
                     <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
-                      {USDollar.format(weeklyFigureAmount)}
+                      <div className="flex flex-row justify-between items-center">
+                        {USDollar.format(weeklyFigureAmount)}
+                        {account.weeklyFigures[0] ? (
+                          <EditWeeklyFigure baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                        ) : (
+                          <AddWeeklyFigure baseUrl={props.baseUrl} account={account} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                        )}
+                      </div>
                     </td>
                     <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
                       <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>

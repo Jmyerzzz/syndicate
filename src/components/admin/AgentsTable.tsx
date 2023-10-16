@@ -23,6 +23,7 @@ const AgentsTable = (props: {baseUrl: string}) => {
         {
           agentList?.map((agent, index) => 
             <tr key={index} className="bg-white">
+              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{index+1}</td>
               <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-bl"}`}>{agent.name}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.username}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.role}</td>
@@ -38,6 +39,9 @@ const AgentsTable = (props: {baseUrl: string}) => {
       <table className="mt-4 table-auto">
         <thead className="text-gray-100">
           <tr>
+            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+              #
+            </th>
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
               Name
             </th>
