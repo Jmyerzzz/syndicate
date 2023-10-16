@@ -1,14 +1,14 @@
 import { useMemo, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import SummarySection from "./SummarySection";
-import AddWeeklyFigure from "./AddWeeklyFigure";
+import AddWeeklyFigure from "../agent/AddWeeklyFigure";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserAccounts, USDollar } from "@/types/types";
 import { groupAccountsByUser } from "@/util/util";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import EditAccount from "../EditAccount";
 
-const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSelectedStartOfWeek: any}) => {
+const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
   const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
   const [weeklyTotal, setWeeklyTotal] = useState<number>(0);
   const [totalCollected, setTotalCollected] = useState<number>(0);
@@ -65,7 +65,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
             elements.push(
               <tr key={"user" + index} onClick={() => handleRowClick(index)}>
-                <td colSpan={11} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
+                <td colSpan={11} className="px-3 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
                   {!collapsedRows.includes(index) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
                   {user.username} - {user.risk}% Risk
                 </td>
@@ -88,27 +88,24 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
               const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
               !collapsedRows.includes(index) && (
                 elements.push(
-                  <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "bg-white"} text-gray-700`}>
-                    <td className="px-6 py-4 whitespace-no-wrap">
+                  <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "even:bg-white odd:bg-gray-100"} text-gray-700`}>
+                    <td className="px-3 py-2 whitespace-no-wrap">
                       <div className="flex flex-row items-center">
                         <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={setRefreshKey} />
                         {account.website}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{account.bookie}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{account.referral}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">{account.ip_location}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
-                    <td className="px-6 py-4 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
-                    <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
-                      <div className="flex flex-row justify-between items-center">
-                        {USDollar.format(weeklyFigureAmount)}
-                        <AddWeeklyFigure baseUrl={props.baseUrl} account={account} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
-                      </div>
+                    <td className="px-3 py-2 whitespace-no-wrap">{account.bookie}</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">{account.referral}</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">{account.username}</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">{account.password}</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">{account.ip_location}</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
+                    <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
+                      {USDollar.format(weeklyFigureAmount)}
                     </td>
-                    <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
+                    <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
                       <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                         {USDollar.format(adjustmentsSum)}
                         <button type="button" disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className={`ml-4 px-1 w-5/12 bg-gray-500 text-gray-100 rounded ${account.weeklyFigures.length > 0 && "hover:bg-gray-600"}`}>
@@ -116,7 +113,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                         </button>
                       </div>
                     </td>
-                    <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-6 py-4 whitespace-no-wrap bg-gray-100 font-medium border-l-2 border-gray-200`}>
+                    <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
                       {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
                     </td>
                   </tr>
@@ -125,18 +122,26 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             })
             !collapsedRows.includes(index) && (
               elements.push(
-                <tr key={"totals" + index} className="bg-white">
-                  <td colSpan={8} className={`px-6 py-2 text-right ${index === groupedAccounts.length-1 && "rounded-bl"}`}>Totals:</td>
-                  <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
-                    {USDollar.format(weeklyFigureTotal)}
-                  </td>
-                  <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
-                    {USDollar.format(adjustmentsTotal)}
-                  </td>
-                  <td className={`px-6 py-2 whitespace-no-wrap font-semibold text-gray-700 ${index === groupedAccounts.length-1 && "rounded-br"}`}>
-                    {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
-                  </td>
-                </tr>
+                <>
+                  <tr key={"totals" + index} className="bg-white">
+                    <td colSpan={8} className="px-3 py-2 text-right">Totals:</td>
+                    <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                      {USDollar.format(weeklyFigureTotal)}
+                    </td>
+                    <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                      {USDollar.format(adjustmentsTotal)}
+                    </td>
+                    <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+                      {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
+                    </td>
+                  </tr>
+                  <tr key={"totals" + index} className="bg-white">
+                    <td colSpan={8} className={`px-3 py-2 text-right ${index === groupedAccounts.length-1 && "rounded-bl"}`}>Syndicate Way:</td>
+                    <td colSpan={8} className={`px-3 py-2 whitespace-no-wrap font-semibold text-gray-700 ${index === groupedAccounts.length-1 && "rounded-br"}`}>
+                      {USDollar.format(weeklyFigureTotal * ((100-user.risk)/100))}
+                    </td>
+                  </tr>
+                </>
               )
             )
             setWeeklyTotal(weeklyTotal)
@@ -155,42 +160,42 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
         <table className="mt-4 table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
-              <th colSpan={8} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
+              <th colSpan={8} className="mx-auto px-3 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
                 Accounts
               </th>
-              <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
+              <th rowSpan={2} className="mx-auto px-3 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
                 Weekly Figure
               </th>
-              <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
+              <th rowSpan={2} className="px-3 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
                 Adjustments
               </th>
-              <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700 rounded-tr">
+              <th rowSpan={2} className="px-3 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700 rounded-tr">
                 Balance
               </th>
             </tr>
             <tr>
-              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Website
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Bookie
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Referral
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Username
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Password
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 IP Address
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Credit Line
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Max Win
               </th>
             </tr>
@@ -199,7 +204,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             {
               isLoading ? (
                 <tr>
-                  <td colSpan={9} className="mx-auto py-3 text-center bg-[17, 23, 41]">
+                  <td colSpan={11} className="mx-auto py-3 text-center bg-[17, 23, 41]">
                     <Oval
                       height={60}
                       width={60}

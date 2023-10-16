@@ -4,23 +4,42 @@ import { USDollar, dateTimeFormat } from "@/types/types";
 import { groupAccountsByUser } from "@/util/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { User } from "@prisma/client";
 
-const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
+const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, currentUser?: User|undefined}) => {
   const [groupedAccounts, setGroupedAccounts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useMemo(() => {
-    setIsLoading(true)
-    fetch(props.baseUrl + "/api/accounts/all", {
-        method: "POST",
-        body: JSON.stringify(props.selectedStartOfWeek)
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        setGroupedAccounts(groupAccountsByUser(data))
-        setIsLoading(false)
-      })
-  },[props.selectedStartOfWeek])
+  if (!props.currentUser) {
+    useMemo(() => {
+      setIsLoading(true)
+      fetch(props.baseUrl + "/api/accounts/all", {
+          method: "POST",
+          body: JSON.stringify(props.selectedStartOfWeek)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setGroupedAccounts(groupAccountsByUser(data))
+          setIsLoading(false)
+        })
+    },[props.selectedStartOfWeek])
+  } else {
+    useMemo(() => {
+      setIsLoading(true);
+      fetch(props.baseUrl + "/api/accounts/user", {
+          method: "POST",
+          body: JSON.stringify({
+            date: props.selectedStartOfWeek,
+            username: props.currentUser?.username
+          })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setGroupedAccounts(groupAccountsByUser(data));
+          setIsLoading(false);
+        })
+    },[props.selectedStartOfWeek])
+  }
 
   const TableRows = () => {
     const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
@@ -60,7 +79,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) 
                       <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
                       <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(figure.transaction_date))}</td>
                       <td className={`px-6 py-4 whitespace-no-wrap ${figure.amount > 0 ? "text-green-500" : figure.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(figure.amount)}</td>
-                      <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-br"}`}></td>
+                      <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-br"}`}>{account.website}</td>
                     </tr>
                   )
                 )

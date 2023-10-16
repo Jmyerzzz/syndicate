@@ -66,7 +66,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
   return (
     <div className="flex items-center pr-2">
       <button
-        className="text-gray-200"
+        className="text-blue-200"
         onClick={openModal}
       >
         <FontAwesomeIcon icon={faPenToSquare} size={"lg"} />
