@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import WeekSelector from "../WeekSelector"
 import { startOfWeek } from "date-fns";
 import { User } from "@prisma/client";

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import WeekSelector from "../WeekSelector"
 import AccountsTable from "./AccountsTable"
 import AgentsTable from "./AgentsTable"
@@ -13,7 +13,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
   const [adminTab, setAdminTab] = useState<string>("accounts");
   const [agentsCount, setAgentsCount] = useState<number>(0);
 
-  useMemo(() => {
+  useEffect(() => {
     fetch(props.baseUrl + "/api/agents/count", {
         method: "GET"
       })

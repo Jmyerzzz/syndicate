@@ -1,11 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
 
 const AgentsTable = (props: {baseUrl: string}) => {
   const [agentList, setAgentList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useMemo(() => {
+  useEffect(() => {
     setIsLoading(true)
     fetch(props.baseUrl + "/api/agents/all", {
         method: "GET"

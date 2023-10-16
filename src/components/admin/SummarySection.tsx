@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 
 let USDollar = new Intl.NumberFormat('en-US', {
   style: 'currency',

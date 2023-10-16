@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import AddAccount from "./AddAccount";
 import WeekSelector from "../WeekSelector";
 import { User } from "@prisma/client";
@@ -19,7 +19,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [refreshKey, setRefreshKey] = useState<number>(0);
 
-  useMemo(() => {
+  useEffect(() => {
     setIsLoading(true);
     fetch(props.baseUrl + "/api/accounts/user", {
         method: "POST",
