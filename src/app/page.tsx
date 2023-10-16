@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Syndicate Accounting',
 }
 
-const BASE_URL = process.env.URL || "";
+const BASE_URL = process.env.NODE_ENV === "production" ? "https://syndicate-eta.vercel.app" : "http://localhost:3000";
 
 const Page = async () => {
   const session = await getPageSession();
