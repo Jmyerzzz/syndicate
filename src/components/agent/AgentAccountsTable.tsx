@@ -57,8 +57,10 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               elements.push(
                 <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "bg-white"} text-gray-700`}>
                   <td className="px-6 py-4 whitespace-no-wrap">
-                    <EditAccount baseUrl={props.baseUrl} user={props.currentUser} account={account} setRefreshKey={setRefreshKey} />
-                    {account.website}
+                    <div className="flex flex-row items-center">
+                      <EditAccount baseUrl={props.baseUrl} user={props.currentUser} account={account} setRefreshKey={setRefreshKey} />
+                      {account.website}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
                   <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>

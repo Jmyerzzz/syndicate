@@ -65,9 +65,9 @@ const EditAccount = (props: {baseUrl: string, user?: any, account: any, setRefre
   };
 
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="flex items-center pr-2">
       <button
-        className="w-full py-1 text-gray-200"
+        className="text-gray-200"
         onClick={openModal}
       >
         <FontAwesomeIcon icon={faPenToSquare} size={"lg"} />
