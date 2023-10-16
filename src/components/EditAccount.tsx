@@ -2,9 +2,8 @@ import { useState } from "react";
 import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { User } from "@prisma/client";
 
-const EditAccount = (props: {baseUrl: string, user?: any, account: any, setRefreshKey: any}) => {
+const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -37,13 +36,13 @@ const EditAccount = (props: {baseUrl: string, user?: any, account: any, setRefre
   const handleEditAccount = (e: any) => {
     e.preventDefault();
 
-    // fetch(props.baseUrl + "/api/accounts/add", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     accountData: formData,
-    //     user: props.user
-    //   })
-    // })
+    fetch(props.baseUrl + "/api/accounts/edit", {
+      method: "POST",
+      body: JSON.stringify({
+        accountId: props.account.id,
+        accountData: formData,
+      })
+    })
 
     setTimeout(() => {
       props.setRefreshKey((oldKey: number) => oldKey +1)
@@ -193,7 +192,7 @@ const EditAccount = (props: {baseUrl: string, user?: any, account: any, setRefre
                 type="submit"
                 className="px-4 py-2 bg-blue-500 text-gray-100 rounded hover:bg-blue-600"
               >
-                Add Account
+                Update Account
               </button>
             </div>
           </form>

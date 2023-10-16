@@ -91,7 +91,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
                   <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "bg-white"} text-gray-700`}>
                     <td className="px-6 py-4 whitespace-no-wrap">
                       <div className="flex flex-row items-center">
-                        <EditAccount baseUrl={props.baseUrl} user={account.user} account={account} setRefreshKey={setRefreshKey} />
+                        <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={setRefreshKey} />
                         {account.website}
                       </div>
                     </td>
