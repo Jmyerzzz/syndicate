@@ -33,7 +33,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
         setGroupedAccounts(groupAccountsByUser(data));
         setIsLoading(false);
       })
-  },[props.selectedStartOfWeek, refreshKey])
+  },[props, refreshKey])
 
   const TableRows = () => {
     return (
