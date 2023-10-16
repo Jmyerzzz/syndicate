@@ -38,6 +38,8 @@ model Account {
   user          User           @relation(fields: [user_id], references: [id])
   user_id       String         @unique
   website       String
+  bookie        String?
+  referral      String?
   username      String
   password      String
   ip_location   String

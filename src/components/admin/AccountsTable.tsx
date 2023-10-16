@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserAccounts, USDollar } from "@/types/types";
 import { groupAccountsByUser } from "@/util/util";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import EditAccount from "../EditAccount";
 
 const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSelectedStartOfWeek: any}) => {
   const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
@@ -64,7 +65,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
             elements.push(
               <tr key={"user" + index} onClick={() => handleRowClick(index)}>
-                <td colSpan={9} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
+                <td colSpan={11} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
                   {!collapsedRows.includes(index) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
                   {user.username} - {user.risk}% Risk
                 </td>
@@ -88,7 +89,14 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
               !collapsedRows.includes(index) && (
                 elements.push(
                   <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "bg-white"} text-gray-700`}>
-                    <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
+                    <td className="px-6 py-4 whitespace-no-wrap">
+                      <div className="flex flex-row justify-start items-center">
+                        {account.website}
+                        <EditAccount baseUrl={props.baseUrl} user={account.user} account={account} setRefreshKey={setRefreshKey} />
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap">{account.bookie}</td>
+                    <td className="px-6 py-4 whitespace-no-wrap">{account.referral}</td>
                     <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
                     <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
                     <td className="px-6 py-4 whitespace-no-wrap">{account.ip_location}</td>
@@ -118,7 +126,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             !collapsedRows.includes(index) && (
               elements.push(
                 <tr key={"totals" + index} className="bg-white">
-                  <td colSpan={6} className={`px-6 py-2 text-right ${index === groupedAccounts.length-1 && "rounded-bl"}`}>Totals:</td>
+                  <td colSpan={8} className={`px-6 py-2 text-right ${index === groupedAccounts.length-1 && "rounded-bl"}`}>Totals:</td>
                   <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                     {USDollar.format(weeklyFigureTotal)}
                   </td>
@@ -146,7 +154,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
       <table className="mt-4 table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
-            <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
+            <th colSpan={8} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
               Accounts
             </th>
             <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
@@ -160,22 +168,28 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
             </th>
           </tr>
           <tr>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
               Website
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              Bookie
+            </th>
+            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              Referral
+            </th>
+            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
               Username
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
               Password
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
               IP Address
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
               Credit Line
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
               Max Win
             </th>
           </tr>

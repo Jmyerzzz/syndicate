@@ -13,7 +13,7 @@ export default function Homepage(props: {baseUrl: string, user: User, role: stri
 
   return (
     <div className="flex flex-col justify-center">
-      {/* <button className="text-2xl font-bold text-gray-500" onClick={() => setIsAdmin(!isAdmin)}>{isAdmin ? 'Admin' : 'Agent'} View</button> */}
+      <button className="text-2xl font-bold text-gray-500" onClick={() => setIsAdmin(!isAdmin)}>{isAdmin ? 'Admin' : 'Agent'} View</button>
       {isAdmin ? (
         <AdminLayout baseUrl={props.baseUrl} user={currentUser} />
       ) : (

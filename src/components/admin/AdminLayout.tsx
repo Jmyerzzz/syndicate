@@ -11,6 +11,17 @@ import { faArrowsRotate, faSackDollar, faUser } from "@fortawesome/free-solid-sv
 const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
   const [adminTab, setAdminTab] = useState<string>("accounts");
+  const [agentsCount, setAgentsCount] = useState<number>(0);
+
+  useMemo(() => {
+    fetch(props.baseUrl + "/api/agents/count", {
+        method: "GET"
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        setAgentsCount(data);
+      })
+  },[])
 
   return (
     <div className="mb-6 sm:px-20">
@@ -25,7 +36,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
           <button className={`flex flex-row items-center mb-3 sm:mb-0 mx-5 px-3 text-2xl uppercase ${adminTab === "agents" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setAdminTab("agents")}>
             <FontAwesomeIcon icon={faUser} width={20} className="mr-2" />
             <div>
-              Agents
+              Agents ({agentsCount})
             </div>
           </button>
           <button className={`flex flex-row items-center px-3 text-2xl uppercase ${adminTab === "transactions" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setAdminTab("transactions")}>

@@ -9,6 +9,7 @@ import { Account, UserAccounts, USDollar } from "@/types/types";
 import { groupAccountsByUser } from "@/util/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
+import EditAccount from "../EditAccount";
 
 
 const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefined}) => {
@@ -55,7 +56,10 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               }
               elements.push(
                 <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "bg-white"} text-gray-700`}>
-                  <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
+                  <td className="px-6 py-4 whitespace-no-wrap">
+                    <EditAccount baseUrl={props.baseUrl} user={props.currentUser} account={account} setRefreshKey={setRefreshKey} />
+                    {account.website}
+                  </td>
                   <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
                   <td className="px-6 py-4 whitespace-no-wrap">{account.password}</td>
                   <td className="px-6 py-4 whitespace-no-wrap">{account.ip_location}</td>
@@ -80,7 +84,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
             })
             elements.push(
               <tr key={"totals" + index} className="bg-white">
-                <td colSpan={6} className="px-6 py-2 text-right">Totals:</td>
+                <td colSpan={8} className="px-6 py-2 text-right">Totals:</td>
                 <td className="px-6 py-2 whitespace-no-wrap font-semibold text-gray-700">
                   {USDollar.format(weeklyFigureTotal)}
                 </td>
@@ -96,7 +100,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
           })
         }
           <tr>
-            <td colSpan={9} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
+            <td colSpan={11} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
               <AddAccount baseUrl={props.baseUrl} user={props.currentUser} setRefreshKey={setRefreshKey} />
             </td>
           </tr>
@@ -117,8 +121,8 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
         <table className="mt-4 table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
-              <th colSpan={6} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
-                Accounts
+              <th colSpan={8} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
+                Accounts ({props.currentUser?.username} - {props.currentUser?.risk_percentage}% Risk)
               </th>
               <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
                 Weekly Figure
@@ -131,22 +135,28 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               </th>
             </tr>
             <tr>
-              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Website
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Bookie
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Referral
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Username
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Password
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 IP Address
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Credit Line
               </th>
-              <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Max Win
               </th>
             </tr>

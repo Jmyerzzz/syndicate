@@ -8,6 +8,8 @@ export interface Account {
     risk_percentage: number | null;
   };
   website: string;
+  bookie: string;
+  referral: string;
   username: string;
   password: string;
   ip_location: string;

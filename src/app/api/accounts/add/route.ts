@@ -11,6 +11,8 @@ async function main(user: any, accountData: any) {
       id: new ObjectID().toString(),
       user_id: user.id,
       website: accountData.website,
+      bookie: accountData.bookie,
+      referral: accountData.referral,
       username: accountData.username,
       password: accountData.password,
       ip_location: accountData.ipLocation,

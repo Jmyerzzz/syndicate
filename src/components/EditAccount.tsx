@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Modal from "../Modal";
+import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { User } from "@prisma/client";
 
-const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) => {
+const EditAccount = (props: {baseUrl: string, user?: any, account: any, setRefreshKey: any}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -16,14 +16,14 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
   };
 
   const [formData, setFormData] = useState({
-    website: '',
-    bookie: '',
-    referral: '',
-    username: '',
-    password: '',
-    ipLocation: '',
-    creditLine: 0,
-    maxWin: 0,
+    website: props.account.website,
+    bookie: props.account.bookie,
+    referral: props.account.referral,
+    username: props.account.username,
+    password: props.account.password,
+    ipLocation: props.account.ip_location,
+    creditLine: props.account.credit_line,
+    maxWin: props.account.max_win,
   });
 
   const handleChange = (e: any) => {
@@ -34,16 +34,16 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
     }));
   };
 
-  const handleAddAccount = (e: any) => {
+  const handleEditAccount = (e: any) => {
     e.preventDefault();
 
-    fetch(props.baseUrl + "/api/accounts/add", {
-      method: "POST",
-      body: JSON.stringify({
-        accountData: formData,
-        user: props.user
-      })
-    })
+    // fetch(props.baseUrl + "/api/accounts/add", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     accountData: formData,
+    //     user: props.user
+    //   })
+    // })
 
     setTimeout(() => {
       props.setRefreshKey((oldKey: number) => oldKey +1)
@@ -67,15 +67,15 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
   return (
     <div className="flex items-center justify-center w-full">
       <button
-        className="w-full py-1 text-gray-100"
+        className="w-full py-1 text-gray-200"
         onClick={openModal}
       >
-        <FontAwesomeIcon icon={faPlus} size={"lg"} />
+        <FontAwesomeIcon icon={faPenToSquare} size={"lg"} />
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="Add Account">
+      <Modal isOpen={isModalOpen} onClose={closeModal} title="Edit Account">
         <div className="max-w-md mx-auto p-4">
-          <form onSubmit={handleAddAccount} className="bg-white p-4 rounded">
+          <form onSubmit={handleEditAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
               <label htmlFor="website" className="block text-gray-700 font-semibold">
                 Website
@@ -203,4 +203,4 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
   )
 }
 
-export default AddAccount;
+export default EditAccount;
