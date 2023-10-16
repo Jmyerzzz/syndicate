@@ -149,76 +149,78 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, setSe
   }
 
   return (
-    <div className="flex flex-col sm:justify-items-center sm:items-center overflow-x-auto">
+    <>
       <SummarySection baseUrl={props.baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />
-      <table className="mt-4 table-auto min-w-full">
-        <thead className="text-gray-100">
-          <tr>
-            <th colSpan={8} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
-              Accounts
-            </th>
-            <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
-              Weekly Figure
-            </th>
-            <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
-              Adjustments
-            </th>
-            <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700 rounded-tr">
-              Balance
-            </th>
-          </tr>
-          <tr>
-            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-              Website
-            </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-              Bookie
-            </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-              Referral
-            </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-              Username
-            </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-              Password
-            </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-              IP Address
-            </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-              Credit Line
-            </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-              Max Win
-            </th>
-          </tr>
-        </thead>
-        <tbody className="text-gray-700 divide-y divide-gray-200">
-          {
-            isLoading ? (
-              <tr>
-                <td colSpan={9} className="mx-auto py-3 text-center bg-[17, 23, 41]">
-                  <Oval
-                    height={60}
-                    width={60}
-                    color="#4287f5"
-                    wrapperStyle={{display: "flex", "justifyContent": "center"}}
-                    visible={true}
-                    ariaLabel='oval-loading'
-                    secondaryColor="#4d64ab"
-                    strokeWidth={2}
-                    strokeWidthSecondary={2}
-                  />
-                </td>
-              </tr>
-            ) : (
-              <TableRows />
-            )
-          }
-        </tbody>
-      </table>
-    </div>
+      <div className="flex flex-col sm:justify-items-center sm:items-center overflow-x-auto">
+        <table className="mt-4 table-auto min-w-full">
+          <thead className="text-gray-100">
+            <tr>
+              <th colSpan={8} className="mx-auto px-6 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
+                Accounts
+              </th>
+              <th rowSpan={2} className="mx-auto px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
+                Weekly Figure
+              </th>
+              <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700">
+                Adjustments
+              </th>
+              <th rowSpan={2} className="px-6 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-gray-700 rounded-tr">
+                Balance
+              </th>
+            </tr>
+            <tr>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Website
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Bookie
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Referral
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Username
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Password
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                IP Address
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Credit Line
+              </th>
+              <th className="px-6 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+                Max Win
+              </th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-700 divide-y divide-gray-200">
+            {
+              isLoading ? (
+                <tr>
+                  <td colSpan={9} className="mx-auto py-3 text-center bg-[17, 23, 41]">
+                    <Oval
+                      height={60}
+                      width={60}
+                      color="#4287f5"
+                      wrapperStyle={{display: "flex", "justifyContent": "center"}}
+                      visible={true}
+                      ariaLabel='oval-loading'
+                      secondaryColor="#4d64ab"
+                      strokeWidth={2}
+                      strokeWidthSecondary={2}
+                    />
+                  </td>
+                </tr>
+              ) : (
+                <TableRows />
+              )
+            }
+          </tbody>
+        </table>
+      </div>
+    </>
   )
 }
 
