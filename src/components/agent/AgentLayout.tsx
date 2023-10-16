@@ -10,17 +10,6 @@ import AgentsAccountsTable from "./AgentAccountsTable";
 const AgentLayout = (props: {baseUrl: string, user: User|undefined}) => {
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
   const [tab, setTab] = useState<string>("accounts");
-  const [agentsCount, setAgentsCount] = useState<number>(0);
-
-  useMemo(() => {
-    fetch(props.baseUrl + "/api/agents/count", {
-        method: "GET"
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        setAgentsCount(data);
-      })
-  },[])
 
   return (
     <div className="mb-6 sm:px-5">
