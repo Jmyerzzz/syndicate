@@ -12,8 +12,8 @@ const akiraSB = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Syndicate',
-  description: 'Syndicate Accounting',
+  title: 'Wagers',
+  description: 'Wagers Accounting',
 }
 
 const BASE_URL = process.env.URL || "";

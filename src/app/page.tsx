@@ -4,8 +4,8 @@ import { Metadata } from 'next'
 import Homepage from '@/pages/Hompage'
  
 export const metadata: Metadata = {
-  title: 'Syndicate',
-  description: 'Syndicate Accounting',
+  title: 'Wagers',
+  description: 'Wagers Accounting',
 }
 
 const BASE_URL = process.env.NODE_ENV === "production" ? "https://syndicate-eta.vercel.app" : "http://localhost:3000";

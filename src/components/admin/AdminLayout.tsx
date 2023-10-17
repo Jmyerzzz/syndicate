@@ -36,7 +36,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
     <div className="mb-6 sm:px-5">
       <div className="flex flex-row justify-between items-center">
         <div className="flex justify-start w-1/6 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
-          Syndicate
+          WAGERS
         </div>
         <div className="flex flex-col w-2/3 content-center mb-3 text-gray-100">
           <div className="flex flex-col sm:flex-row items-center justify-center mb-3">

@@ -59,7 +59,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
             const elements: React.ReactElement[] = [];
             elements.push(
               <tr key={"user" + index} onClick={() => handleRowClick(index)}>
-                <td colSpan={5} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
+                <td colSpan={6} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
                   {!collapsedRows.includes(index) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
                   {user.username}
                 </td>
@@ -74,6 +74,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
                   elements.push(
                     <tr key={"figure" + index} className="px-6 py-4 whitespace-no-wrap bg-gray-200 border-t-2 border-gray-700">
                       <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
+                      <td className="px-6 py-4 whitespace-no-wrap">{user.username}</td>
                       <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
                       <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(figure.transaction_date))}</td>
                       <td className={`px-6 py-4 whitespace-no-wrap ${figure.amount > 0 ? "text-green-500" : figure.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(figure.amount)}</td>
@@ -86,6 +87,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
                     elements.push(
                       <tr key={"adjustment" + index} className="px-6 py-4 whitespace-no-wrap bg-white">
                         <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
+                        <td className="px-6 py-4 whitespace-no-wrap">{user.username}</td>
                         <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
                         <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(adjustment.transaction_date))}</td>
                         <td className={`px-6 py-4 whitespace-no-wrap ${adjustment.amount > 0 ? "text-green-500" : adjustment.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(adjustment.amount)}</td>
@@ -111,6 +113,9 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
               Type
             </th>
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+              Username
+            </th>
+            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
               Website
             </th>
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
@@ -128,7 +133,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
         {
         isLoading ? (
           <tr>
-            <td colSpan={5} className="mx-auto py-3 text-center bg-[17, 23, 41]">
+            <td colSpan={6} className="mx-auto py-3 text-center bg-[17, 23, 41]">
               <Oval
                 height={60}
                 width={60}
