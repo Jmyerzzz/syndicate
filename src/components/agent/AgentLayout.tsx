@@ -5,7 +5,7 @@ import { startOfWeek } from "date-fns";
 import { User } from "@prisma/client";
 import TransactionsTable from "../TransactionsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowsRotate, faRightFromBracket, faSackDollar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowsRotate, faBook, faRightFromBracket, faSackDollar, faUser } from "@fortawesome/free-solid-svg-icons";
 import AgentsAccountsTable from "./AgentAccountsTable";
 
 const AgentLayout = (props: {baseUrl: string, user: User|undefined}) => {
@@ -34,7 +34,7 @@ const AgentLayout = (props: {baseUrl: string, user: User|undefined}) => {
             </div>
           </button>
           <button className={`flex flex-row items-center px-3 text-2xl uppercase ${tab === "transactions" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setTab("transactions")}>
-            <FontAwesomeIcon icon={faArrowsRotate} width={20} className="mr-2" />
+            <FontAwesomeIcon icon={faBook} width={20} className="mr-2" />
             <div>
               Transactions
             </div>

@@ -6,7 +6,7 @@ import { startOfWeek } from "date-fns";
 import { User } from "@prisma/client";
 import TransactionsTable from "../TransactionsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowsRotate, faRightFromBracket, faSackDollar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowsRotate, faBook, faRightFromBracket, faSackDollar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import RunnersTable from "./RunnersTable";
 
@@ -47,7 +47,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
             </div>
           </button>
           <button className={`flex flex-row items-center mb-3 sm:mb-0 ml-5 px-3 text-2xl uppercase ${adminTab === "runners" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setAdminTab("runners")}>
-            <FontAwesomeIcon icon={faSackDollar} width={20} className="mr-2" />
+            <FontAwesomeIcon icon={faArrowsRotate} width={20} className="mr-2" />
             <div>
               Runners
             </div>
@@ -59,7 +59,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
             </div>
           </button>
           <button className={`flex flex-row items-center px-3 text-2xl uppercase ${adminTab === "transactions" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setAdminTab("transactions")}>
-            <FontAwesomeIcon icon={faArrowsRotate} width={20} className="mr-2" />
+            <FontAwesomeIcon icon={faBook} width={20} className="mr-2" />
             <div>
               Transactions
             </div>
