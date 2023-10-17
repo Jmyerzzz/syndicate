@@ -265,7 +265,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
               const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
               !collapsedRows.includes(index0) && (
                 elements.push(
-                  <tr key={index0 + index1 + "main"} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : account.weeklyFigures[0] && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" : "even:bg-white odd:bg-gray-100"} text-gray-700`}>
+                  <tr key={index0 + index1 + "main"} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" : "even:bg-white odd:bg-gray-100"} text-gray-700`}>
                     <td className="px-3 py-2 whitespace-no-wrap">{index1+1}</td>
                     <td className="px-3 py-2 whitespace-no-wrap">
                       <div className="flex flex-row items-center">
@@ -280,7 +280,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
                     <td className="px-3 py-2 whitespace-no-wrap">{account.ip_location}</td>
                     <td className="px-3 py-2 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
                     <td className="px-3 py-2 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
-                    <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
+                    <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
                       <div className="flex flex-row justify-between items-center">
                         {USDollar.format(weeklyFigureAmount)}
                         {account.weeklyFigures[0] ? (
@@ -298,7 +298,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
                         </button>
                       </div>
                     </td>
-                    <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
+                    <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
                       {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
                     </td>
                   </tr>

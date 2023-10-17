@@ -27,7 +27,8 @@ model User {
   name            String
   username        String
   role            Role      @default(AGENT)
-  risk_percentage Int?
+  risk_percentage Int
+  gabe_way        Int?
   Session         Session[]
   Key             Key[]
   Account         Account[]

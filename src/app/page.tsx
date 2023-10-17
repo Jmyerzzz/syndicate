@@ -14,7 +14,7 @@ const Page = async () => {
   const session = await getPageSession();
   if (!session) redirect(BASE_URL + "/login");
 
-  const user = await fetch(BASE_URL + "/api/user", {
+  const user = await fetch(BASE_URL + "/api/user/get", {
     method: "POST",
     body: JSON.stringify({
       userId: session.user.userId

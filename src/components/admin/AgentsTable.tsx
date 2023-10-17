@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
+import EditUser from "./EditUser";
 
 const AgentsTable = (props: {baseUrl: string}) => {
   const [agentList, setAgentList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [refreshKey, setRefreshKey] = useState<number>(0);
 
   useEffect(() => {
     setIsLoading(true)
@@ -15,7 +17,7 @@ const AgentsTable = (props: {baseUrl: string}) => {
         setAgentList(data);
         setIsLoading(false)
       })
-  },[])
+  },[refreshKey])
 
   const TableRows = () => {
     return(
@@ -23,11 +25,17 @@ const AgentsTable = (props: {baseUrl: string}) => {
         {
           agentList?.map((agent, index) => 
             <tr key={index} className="bg-white">
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{index+1}</td>
-              <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-bl"}`}>{agent.name}</td>
+              <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-bl"}`}>{index+1}</td>
+              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">
+                <div className="flex flex-row items-center">
+                  <EditUser baseUrl={props.baseUrl} user={agent} setRefreshKey={setRefreshKey} />
+                  {agent.name}
+                </div>
+              </td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.username}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.role}</td>
-              <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-br"}`}>{agent.risk_percentage}%</td>
+              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.risk_percentage}%</td>
+              <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-br"}`}>{agent.gabe_way || 0}%</td>
             </tr>
           )
         }
@@ -54,13 +62,16 @@ const AgentsTable = (props: {baseUrl: string}) => {
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
               Risk
             </th>
+            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+              Gabe Way
+            </th>
           </tr>
         </thead>
         <tbody className="text-gray-700 divide-y divide-gray-200">
         {
         isLoading ? (
           <tr>
-            <td colSpan={4} className="mx-auto py-3 text-center bg-[17, 23, 41]">
+            <td colSpan={5} className="mx-auto py-3 text-center bg-[17, 23, 41]">
               <Oval
                 height={60}
                 width={60}

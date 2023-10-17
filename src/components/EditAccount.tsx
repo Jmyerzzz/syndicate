@@ -118,8 +118,8 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
-                UserName
+              <label htmlFor="username" className="block text-gray-700 font-semibold">
+                Username
               </label>
               <input
                 type="text"
@@ -132,7 +132,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="password" className="block text-gray-700 font-semibold">
                 Password
               </label>
               <input
@@ -146,7 +146,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="ipLocation" className="block text-gray-700 font-semibold">
                 IP Address
               </label>
               <input
@@ -160,7 +160,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="creditLine" className="block text-gray-700 font-semibold">
                 Credit Line
               </label>
               <input
@@ -174,7 +174,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="maxWin" className="block text-gray-700 font-semibold">
                 Max Win
               </label>
               <input

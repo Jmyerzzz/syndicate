@@ -7,7 +7,7 @@ let USDollar = new Intl.NumberFormat('en-US', {
 
 const SummarySection = (props: {baseUrl: string, weeklyTotal: number, totalCollected: number}) => {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-center min-w-full text-gray-100 bg-gray-700 rounded">
+    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-center min-w-full mt-3 text-gray-100 bg-gray-700 rounded">
       <div className="flex flex-row flex-grow">
         <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-gray-700 rounded-tl sm:rounded-l">
           <div className="text-sm sm:text-md">Weekly Total</div>
