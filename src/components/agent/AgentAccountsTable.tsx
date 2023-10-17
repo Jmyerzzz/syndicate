@@ -108,12 +108,6 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                     {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
                   </td>
                 </tr>
-                <tr key={"totals" + index} className="bg-white">
-                  <td colSpan={8} className={`px-3 py-2 text-right ${index === groupedAccounts.length-1 && "rounded-bl"}`}>Syndicate Way:</td>
-                  <td colSpan={8} className={`px-3 py-2 whitespace-no-wrap font-semibold text-gray-700 ${index === groupedAccounts.length-1 && "rounded-br"}`}>
-                    {USDollar.format(weeklyFigureTotal * ((100-user.risk)/100))}
-                  </td>
-                </tr>
               </>
             )
           return elements;
@@ -129,7 +123,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   }
 
   return (
-    <div className="flex justify-center mb-6 px-5">
+    <div className="flex justify-center mb-6">
       <table className="mt-4 table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>

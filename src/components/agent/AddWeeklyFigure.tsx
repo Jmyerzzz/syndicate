@@ -62,6 +62,9 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
 
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Add Weekly Figure">
         <div className="max-w-md mx-auto">
+          <div className="px-4 text-xl text-gray-700 font-semibold">
+            {props.account.website}
+          </div>
           <form onSubmit={handleAddAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
               <label htmlFor="amount" className="block text-gray-700 font-semibold">

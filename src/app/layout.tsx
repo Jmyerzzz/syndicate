@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${akiraSB.variable}`}>
-        <NavBar baseUrl={BASE_URL} session={session} />
+        {/* <NavBar baseUrl={BASE_URL} session={session} /> */}
         {children}
       </body>
     </html>

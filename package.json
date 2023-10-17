@@ -10,8 +10,10 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^16.3.0",
     "@lucia-auth/adapter-prisma": "^3.0.2",
     "@prisma/client": "5.4.2",
+    "@types/react-beautiful-dnd": "^13.1.5",
     "bson-objectid": "^2.0.4",
     "date-fns": "^2.30.0",
     "formik": "^2.4.5",
@@ -19,6 +21,7 @@
     "next": "13.5.4",
     "prisma": "^5.4.2",
     "react": "^18",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18",
     "react-loader-spinner": "^5.4.5"
   },
