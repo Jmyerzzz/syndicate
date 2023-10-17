@@ -12,7 +12,7 @@ async function main(userId: string, userData: any) {
     },
     data: {
       name: userData.name,
-      username: userData.name,
+      username: userData.username,
       risk_percentage: userData.risk,
       gabe_way: parseInt(userData.gabeWay)
     }

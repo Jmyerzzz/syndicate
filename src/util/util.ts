@@ -16,6 +16,7 @@ export const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
   const userAccountsArray: UserAccounts[] = Object.keys(grouped).map((username) => ({
     username,
     risk: grouped[username][0].user.risk_percentage!,
+    gabe_way: grouped[username][0].user.gabe_way!,
     accounts: grouped[username],
   }));
 

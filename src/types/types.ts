@@ -5,7 +5,8 @@ export interface Account {
     name: string;
     username: string;
     role: string;
-    risk_percentage: number | null;
+    risk_percentage: number;
+    gabe_way: number | null;
   };
   website: string;
   bookie: string;
@@ -35,6 +36,7 @@ export interface Account {
 export interface UserAccounts {
   username: string;
   risk: number;
+  gabe_way: number | null;
   accounts: Account[];
 }
 export const USDollar = new Intl.NumberFormat('en-US', {

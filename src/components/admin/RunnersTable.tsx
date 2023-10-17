@@ -76,10 +76,10 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
             {USDollar.format(user.risk/100 * weeklyFigureTotal)}
           </td>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700 font-medium">
-            {USDollar.format(adjustmentsTotal)}
+            {user.username !== "gabrieladzich" ? USDollar.format((100 - user.risk + (user.gabe_way || 0))/100 * weeklyFigureTotal) : USDollar.format(0)}
           </td>
           <td className={`${index0 === groupedAccounts.length - 1 && "rounded-br"} px-3 py-2 whitespace-no-wrap text-gray-700 font-medium`}>
-            {USDollar.format((100 - user.risk)/100 * weeklyFigureTotal)}
+            {user.username !== "gabrieladzich" ? USDollar.format((100 - user.risk - (user.gabe_way || 0))/100 * weeklyFigureTotal) : USDollar.format((100 - user.risk)/100 * weeklyFigureTotal)}
           </td>
         </tr>
       );
