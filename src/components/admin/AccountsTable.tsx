@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import SummarySection from "./SummarySection";
-import AddWeeklyFigure from "../agent/AddWeeklyFigure";
+import AddWeeklyFigure from "../AddWeeklyFigure";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserAccounts, USDollar } from "@/types/types";
 import { groupAccountsByUser } from "@/util/util";

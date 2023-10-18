@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "../Modal";
+import Modal from "./Modal";
 
 const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOfWeek: Date, setRefreshKey: any}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

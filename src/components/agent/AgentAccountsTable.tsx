@@ -10,7 +10,7 @@ import { groupAccountsByUser } from "@/util/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
 import EditAccount from "../EditAccount";
-import AddWeeklyFigure from "./AddWeeklyFigure";
+import AddWeeklyFigure from "../AddWeeklyFigure";
 import EditWeeklyFigure from "../EditWeeklyFigure";
 
 
