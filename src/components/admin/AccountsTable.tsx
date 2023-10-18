@@ -345,7 +345,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
         <table className="table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
-              <th colSpan={9} className="mx-auto px-3 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
+              <th colSpan={9} className="mx-auto px-3 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-left sm:text-center border-b-2 border-gray-500 rounded-tl">
                 Accounts
               </th>
               <th rowSpan={2} className="mx-auto px-3 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">

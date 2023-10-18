@@ -27,7 +27,7 @@ const AgentsTable = (props: {baseUrl: string}) => {
         {
           agentList?.map((agent, index) => 
             <tr key={index} className="bg-white">
-              <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-bl"}`}>{index+1}</td>
+              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{index+1}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">
                 <div className="flex flex-row items-center">
                   <EditUser baseUrl={props.baseUrl} user={agent} setRefreshKey={setRefreshKey} />
@@ -38,15 +38,15 @@ const AgentsTable = (props: {baseUrl: string}) => {
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.role}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.risk_percentage}%</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.gabe_way}%</td>
-              <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-br"}`}>{100 - (agent.risk_percentage + (agent.gabe_way || 0))}%</td>
+              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{100 - (agent.risk_percentage + (agent.gabe_way || 0))}%</td>
             </tr>
           )
         }
         <tr>
-            <td colSpan={7} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
-              <AddUser setRefreshKey={setRefreshKey} />
-            </td>
-          </tr>
+          <td colSpan={7} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
+            <AddUser setRefreshKey={setRefreshKey} />
+          </td>
+        </tr>
       </>
     )
   }

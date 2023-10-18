@@ -29,11 +29,19 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
 
   return (
     <nav className="mt-4 bg-[17, 23, 41]">
-      <div className="flex flex-row justify-between items-center">
-        <div className="flex justify-start w-1/6 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
+      <div className="flex flex-col sm:flex-row justify-between items-center">
+        <div className="flex sm:justify-start sm:w-1/6 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
           WAGERS
         </div>
-        <div className="flex flex-row w-2/3 items-center justify-center text-gray-100">
+        <div className="sm:hidden mb-3">
+          <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
+            Log Out
+            <div>
+              <FontAwesomeIcon icon={faRightFromBracket} className="ml-2" />
+            </div>
+          </button>
+        </div>
+        <div className="flex flex-col sm:flex-row sm:w-2/3 items-center justify-center text-gray-100">
           <button className={`flex flex-row items-center mb-3 sm:mb-0 px-3 text-2xl uppercase ${props.tab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("accounts")}>
             <FontAwesomeIcon icon={faSackDollar} width={20} className="mr-2" />
             <div>
@@ -63,7 +71,7 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
             </div>
           </button>
         </div>
-        <div className="flex justify-end w-1/6">
+        <div className="hidden sm:flex sm:justify-end sm:w-1/6">
           <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
             Log Out
             <div>

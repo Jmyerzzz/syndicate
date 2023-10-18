@@ -68,7 +68,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
       elements.push(
         <tr key={user.username + "weekly_totals"} className={`${weeklyFigureTotal !== adjustmentsTotal ? "bg-red-200" : weeklyFigureTotal !== adjustmentsTotal ? "bg-green-200" : "even:bg-white odd:bg-gray-100"}`}>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700">{index0}</td>
-          <td className={`${index0 === groupedAccounts.length - 1 && "rounded-bl"} px-3 py-2 whitespace-no-wrap text-gray-700`}>{user.accounts[0].user.name}</td>
+          <td className="px-3 py-2 whitespace-no-wrap text-gray-700">{user.accounts[0].user.name}</td>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700">{user.accounts[0].user.username}</td>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700">
             {USDollar.format(weeklyFigureTotal)}
@@ -82,7 +82,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700 font-medium">
             {user.username !== "gabrieladzich" ? USDollar.format((100 - user.risk + (user.gabe_way || 0))/100 * weeklyFigureTotal) : USDollar.format(0)}
           </td>
-          <td className={`${index0 === groupedAccounts.length - 1 && "rounded-br"} px-3 py-2 whitespace-no-wrap text-gray-700 font-medium`}>
+          <td className="px-3 py-2 whitespace-no-wrap text-gray-700 font-medium">
             {USDollar.format((100 - user.risk - (user.gabe_way || 0))/100 * weeklyFigureTotal)}
           </td>
         </tr>
@@ -90,7 +90,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
     });
     elements.push(
       <tr key={"weekly_totals"} className="bg-white">
-        <td colSpan={3} className="px-3 py-2 text-right">Totals:</td>
+        <td colSpan={3} className="px-3 py-2 text-right rounded-bl">Totals:</td>
         <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
           {USDollar.format(weeklyTotal)}
         </td>
@@ -103,7 +103,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
         <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
           {USDollar.format(gTotal)}
         </td>
-        <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+        <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700 rounded-br">
           {USDollar.format(tTotal)}
         </td>
       </tr>
