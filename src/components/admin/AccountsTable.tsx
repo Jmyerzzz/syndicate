@@ -321,7 +321,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
                     </td>
                   </tr>
                   <tr key={user.username + "synd_totals"} className="bg-white">
-                    <td colSpan={9} className={`px-3 py-2 text-right ${index0 === groupedAccounts.length-1 && "rounded-bl"}`}>Syndicate Way:</td>
+                    <td colSpan={9} className={`px-3 py-2 text-right ${index0 === groupedAccounts.length-1 && "rounded-bl"}`}>T Way:</td>
                     <td colSpan={9} className={`px-3 py-2 whitespace-no-wrap font-semibold text-gray-700 ${index0 === groupedAccounts.length-1 && "rounded-br"}`}>
                       {USDollar.format(weeklyFigureTotal * ((100-user.risk)/100))}
                     </td>

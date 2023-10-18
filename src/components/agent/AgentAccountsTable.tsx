@@ -39,10 +39,10 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
     return (
       <>
         {
-          groupedAccounts.map((user, index) => {
+          groupedAccounts.map((user, index0) => {
             const elements: React.ReactElement[] = [];
             let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
-            user.accounts.map((account, index) => {
+            user.accounts.map((account, index1) => {
               weeklyFigureAmount = 0
               if (account.weeklyFigures.length > 0) {
                 weeklyFigureAmount = account.weeklyFigures[0].amount;
@@ -55,8 +55,10 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                 })
                 adjustmentsTotal += adjustmentsSum
               }
+              const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
               elements.push(
-                <tr key={index} className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "even:bg-white odd:bg-gray-100"} text-gray-700`}>
+                <tr key={index1} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" :  "even:bg-white odd:bg-gray-100"} text-gray-700`}>
+                  <td className="px-3 py-2 whitespace-no-wrap">{index1+1}</td>
                   <td className="px-3 py-2 whitespace-no-wrap">
                     <div className="flex flex-row items-center">
                       <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={setRefreshKey} />
@@ -80,7 +82,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       )}
                     </div>
                   </td>
-                  <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
+                  <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
                     <div className="flex flex-row justify-between items-center">
                       <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                         {USDollar.format(adjustmentsSum)}
@@ -88,7 +90,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
                     </div>
                   </td>
-                  <td className={`${ account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
+                  <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
                     {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
                   </td>
                 </tr>
@@ -96,8 +98,8 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
             })
             elements.push(
               <>
-                <tr key={"totals" + index} className="bg-white">
-                  <td colSpan={8} className="px-3 py-2 text-right">Totals:</td>
+                <tr key={"totals" + index0} className="bg-white">
+                  <td colSpan={9} className="px-3 py-2 text-right">Totals:</td>
                   <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
                     {USDollar.format(weeklyFigureTotal)}
                   </td>
@@ -114,7 +116,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
           })
         }
           <tr>
-            <td colSpan={11} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
+            <td colSpan={12} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
               <AddAccount baseUrl={props.baseUrl} user={props.currentUser} setRefreshKey={setRefreshKey} />
             </td>
           </tr>
@@ -127,7 +129,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
       <table className="mt-4 table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
-            <th colSpan={8} className="mx-auto px-3 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
+            <th colSpan={9} className="mx-auto px-3 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
               Accounts ({props.currentUser?.username} - {props.currentUser?.risk_percentage}% Risk)
             </th>
             <th rowSpan={2} className="mx-auto px-3 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
@@ -141,6 +143,9 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
             </th>
           </tr>
           <tr>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              #
+            </th>
             <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
               Website
             </th>
@@ -171,7 +176,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
           {
             isLoading ? (
               <tr>
-                <td colSpan={11} className="mx-auto py-3 text-center bg-[17, 23, 41]">
+                <td colSpan={12} className="mx-auto py-3 text-center bg-[17, 23, 41]">
                   <Oval
                     height={60}
                     width={60}

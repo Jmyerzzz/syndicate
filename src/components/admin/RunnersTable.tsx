@@ -32,8 +32,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
   },[props.selectedStartOfWeek, refreshKey])
 
   const TableRows = () => {
-    let weeklyTotal = 0;
-    let totalCollected = 0;
+    let weeklyTotal = 0,totalCollected = 0, agentsTotal = 0, gTotal = 0, tTotal = 0;
     const elements: React.ReactElement[] = [];
   
     groupedAccounts.forEach((user, index0) => {
@@ -61,9 +60,14 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
         setWeeklyTotal(weeklyTotal);
         setTotalCollected(totalCollected);
       });
-  
+
+      agentsTotal += user.risk/100 * weeklyFigureTotal;
+      gTotal += ((100 - user.risk + (user.gabe_way || 0))/100 * weeklyFigureTotal);
+      tTotal += ((100 - user.risk - (user.gabe_way || 0))/100 * weeklyFigureTotal);
+
       elements.push(
-        <tr key={user.username + "totals"} className={`${weeklyFigureTotal !== adjustmentsTotal ? "bg-red-200" : weeklyFigureTotal !== adjustmentsTotal ? "bg-green-200" : "even:bg-white odd:bg-gray-100"}`}>
+        <tr key={user.username + "weekly_totals"} className={`${weeklyFigureTotal !== adjustmentsTotal ? "bg-red-200" : weeklyFigureTotal !== adjustmentsTotal ? "bg-green-200" : "even:bg-white odd:bg-gray-100"}`}>
+          <td className="px-3 py-2 whitespace-no-wrap text-gray-700">{index0}</td>
           <td className={`${index0 === groupedAccounts.length - 1 && "rounded-bl"} px-3 py-2 whitespace-no-wrap text-gray-700`}>{user.accounts[0].user.name}</td>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700">{user.accounts[0].user.username}</td>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700">
@@ -79,12 +83,32 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
             {user.username !== "gabrieladzich" ? USDollar.format((100 - user.risk + (user.gabe_way || 0))/100 * weeklyFigureTotal) : USDollar.format(0)}
           </td>
           <td className={`${index0 === groupedAccounts.length - 1 && "rounded-br"} px-3 py-2 whitespace-no-wrap text-gray-700 font-medium`}>
-            {user.username !== "gabrieladzich" ? USDollar.format((100 - user.risk - (user.gabe_way || 0))/100 * weeklyFigureTotal) : USDollar.format((100 - user.risk)/100 * weeklyFigureTotal)}
+            {USDollar.format((100 - user.risk - (user.gabe_way || 0))/100 * weeklyFigureTotal)}
           </td>
         </tr>
       );
     });
-  
+    elements.push(
+      <tr key={"weekly_totals"} className="bg-white">
+        <td colSpan={3} className="px-3 py-2 text-right">Totals:</td>
+        <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+          {USDollar.format(weeklyTotal)}
+        </td>
+        <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+          {USDollar.format(totalCollected)}
+        </td>
+        <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+          {USDollar.format(agentsTotal)}
+        </td>
+        <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+          {USDollar.format(gTotal)}
+        </td>
+        <td className="px-3 py-2 whitespace-no-wrap font-semibold text-gray-700">
+          {USDollar.format(tTotal)}
+        </td>
+      </tr>
+    )
+
     return elements;
   };
 
@@ -95,6 +119,9 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
         <table className="mt-4 table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tl">
+                #
+              </th>
               <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tl">
                 Name
               </th>
@@ -114,7 +141,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
                 Gabe Way
               </th>
               <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tr">
-                Syndicate Way
+                T Way
               </th>
             </tr>
           </thead>
@@ -123,7 +150,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
             {
               isLoading ? (
                 <tr>
-                  <td colSpan={7} className="mx-auto py-3 text-center bg-[17, 23, 41]">
+                  <td colSpan={8} className="mx-auto py-3 text-center bg-[17, 23, 41]">
                     <Oval
                       height={60}
                       width={60}

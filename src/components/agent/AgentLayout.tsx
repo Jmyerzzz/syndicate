@@ -27,13 +27,13 @@ const AgentLayout = (props: {baseUrl: string, user: User|undefined}) => {
           WAGERS
         </div>
         <div className="flex flex-row w-2/3 items-center justify-center text-gray-100">
-          <button className={`flex flex-row items-center mb-3 sm:mb-0 px-3 text-2xl uppercase ${tab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setTab("accounts")}>
+          <button className={`flex flex-row items-center mx-2 px-3 text-2xl uppercase ${tab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setTab("accounts")}>
             <FontAwesomeIcon icon={faSackDollar} width={20} className="mr-2" />
             <div>
               Weekly Figures
             </div>
           </button>
-          <button className={`flex flex-row items-center px-3 text-2xl uppercase ${tab === "transactions" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setTab("transactions")}>
+          <button className={`flex flex-row items-center mx-2 px-3 text-2xl uppercase ${tab === "transactions" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => setTab("transactions")}>
             <FontAwesomeIcon icon={faBook} width={20} className="mr-2" />
             <div>
               Transactions

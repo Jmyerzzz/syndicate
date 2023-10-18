@@ -35,7 +35,8 @@ const AgentsTable = (props: {baseUrl: string}) => {
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.username}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.role}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.risk_percentage}%</td>
-              <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-br"}`}>{agent.gabe_way || 0}%</td>
+              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.gabe_way}%</td>
+              <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index === agentList.length-1 && "rounded-br"}`}>{100 - (agent.risk_percentage + (agent.gabe_way || 0))}%</td>
             </tr>
           )
         }
@@ -63,7 +64,10 @@ const AgentsTable = (props: {baseUrl: string}) => {
               Risk
             </th>
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
-              Gabe Way
+              G Way
+            </th>
+            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+              T Way
             </th>
           </tr>
         </thead>
