@@ -11,6 +11,7 @@ export const POST = async (request: NextRequest) => {
   const formData = await request.json();
   const name = formData.name;
   const risk = parseInt(formData.risk);
+  const gabeWay = parseInt(formData.gabeWay);
   const username = formData.username;
   const password = formData.password;
   // basic check
@@ -34,6 +35,19 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json(
       {
         error: "Risk required"
+      },
+      {
+        status: 400
+      }
+    );
+  }
+  if (
+    typeof gabeWay !== "number" ||
+    !gabeWay
+  ) {
+    return NextResponse.json(
+      {
+        error: "Gabe Way required"
       },
       {
         status: 400
@@ -78,6 +92,7 @@ export const POST = async (request: NextRequest) => {
       attributes: {
         name,
         risk_percentage: risk,
+        gabe_way: gabeWay,
         username
       }
     });

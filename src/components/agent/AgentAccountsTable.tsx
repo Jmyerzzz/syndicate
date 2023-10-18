@@ -125,8 +125,8 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   }
 
   return (
-    <div className="flex justify-center mb-6">
-      <table className="mt-4 table-auto min-w-full">
+    <div className="flex justify-center mt-4 mb-6">
+      <table className="table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
             <th colSpan={9} className="mx-auto px-3 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">

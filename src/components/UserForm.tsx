@@ -3,16 +3,16 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 interface formValues {
   name: string,
   risk: number,
   username: string,
-  password: string
+  password: string,
+  gabeWay: number
 }
 
-const UserForm = (props: {title: string, action: string}) => {
+const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) => {
   const router = useRouter();
   const [error, setError] = useState("");
 
@@ -21,13 +21,14 @@ const UserForm = (props: {title: string, action: string}) => {
     risk: 0,
     username: '',
     password: '',
+    gabeWay: 0
   };
 
   const handleSubmit = async (values: any, actions: any) => {
-    let name, risk, username, password, formData;
+    let name, risk, gabeWay, username, password, formData;
     if (props.title === "Sign Up") {
-      ({name, risk, username, password} = values);
-      formData = {name, risk, username, password};
+      ({name, risk, gabeWay, username, password} = values);
+      formData = {name, risk, gabeWay, username, password};
     } else {
       ({username, password} = values);
       formData = {username, password};
@@ -45,7 +46,13 @@ const UserForm = (props: {title: string, action: string}) => {
       if (res.status === 0) {
         // redirected
         // when using `redirect: "manual"`, response status 0 is returned
-        return router.refresh();
+        if (props.setRefreshKey) {
+          setTimeout(() => {
+            props.setRefreshKey((oldKey: number) => oldKey +1)
+          }, 1000)
+        } else {
+          return router.refresh();
+        }
       }
   
       actions.setSubmitting(false);
@@ -80,9 +87,23 @@ const UserForm = (props: {title: string, action: string}) => {
                       Risk %
                     </label>
                     <Field
-                      type="risk"
+                      type="number"
                       id="risk"
                       name="risk"
+                      className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
+                    />
+                    {error && error.toLowerCase().includes("risk") &&
+                      <div className="text-red-500">{error}</div>
+                    }
+                  </div>
+                  <div className="mb-4 text-gray-500">
+                    <label htmlFor="gabeWay" className="block font-medium">
+                      G Way %
+                    </label>
+                    <Field
+                      type="number"
+                      id="gabeWay"
+                      name="gabeWay"
                       className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
                     />
                     {error && error.toLowerCase().includes("risk") &&
@@ -132,13 +153,6 @@ const UserForm = (props: {title: string, action: string}) => {
             </Form>
           )}
         </Formik>
-        <div className="mt-3 text-gray-500">
-          {props.title === "Sign Up" ? (
-            <Link href="/login">Have an account? Sign in</Link>
-          ) : (
-            <Link href="/signup">Don&apos;t have an account? Sign up</Link>
-          )}
-        </div>
       </div>
     </div>
   );

@@ -8,13 +8,13 @@ import TransactionsTable from "../TransactionsTable";
 import RunnersTable from "./RunnersTable";
 import NavBar from "../NavBar";
 
-const AdminLayout = (props: {baseUrl: string, user: User|undefined}) => {
+const AdminLayout = (props: {baseUrl: string, user: User|undefined, isAdmin: boolean}) => {
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
   const [tab, setTab] = useState<string>("accounts");
 
   return (
     <div className="mb-6 sm:px-5">
-      <NavBar baseUrl={props.baseUrl} user={props.user} tab={tab} setTab={setTab} />
+      <NavBar baseUrl={props.baseUrl} isAdmin={props.isAdmin} tab={tab} setTab={setTab} />
       {(tab === "accounts" || tab === "transactions" || tab === "runners") && <WeekSelector setSelectedStartOfWeek={setSelectedStartOfWeek} />}
       {tab === "accounts" && <AccountsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} />}
       {tab === "runners" && <RunnersTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} />}

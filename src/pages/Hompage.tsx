@@ -14,9 +14,9 @@ export default function Homepage(props: {baseUrl: string, user: User, role: stri
     <div className="flex flex-col justify-center">
       {/* <button className="text-2xl font-bold text-gray-500" onClick={() => setIsAdmin(!isAdmin)}>{isAdmin ? 'Admin' : 'Agent'} View</button> */}
       {isAdmin ? (
-        <AdminLayout baseUrl={props.baseUrl} user={currentUser} />
+        <AdminLayout baseUrl={props.baseUrl} user={currentUser} isAdmin={isAdmin} />
       ) : (
-        <AgentLayout baseUrl={props.baseUrl} user={currentUser} />
+        <AgentLayout baseUrl={props.baseUrl} user={currentUser} isAdmin={isAdmin} />
       )}
     </div>
   )

@@ -105,8 +105,8 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
     )
   }
   return (
-    <div className="flex flex-col sm:justify-items-center sm:items-center">
-      <table className="mt-4 table-auto min-w-full">
+    <div className="flex flex-col sm:justify-items-center sm:items-center mt-4">
+      <table className="table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">

@@ -4,6 +4,7 @@ declare namespace Lucia {
   type DatabaseUserAttributes = {
     name: string;
     risk_percentage: number;
+    gabe_way: number;
     username: string;
   };
   type DatabaseSessionAttributes = {};

@@ -115,8 +115,8 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
   return (
     <>
       <SummarySection baseUrl={props.baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />
-      <div className="flex flex-col sm:justify-items-center sm:items-center overflow-x-auto">
-        <table className="mt-4 table-auto min-w-full">
+      <div className="flex flex-col sm:justify-items-center sm:items-center mt-4 overflow-x-auto">
+        <table className="table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
               <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tl">

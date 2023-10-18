@@ -6,10 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsRotate, faBook, faRightFromBracket, faSackDollar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@prisma/client';
 
-const NavBar = (props: {baseUrl: string, user: User|undefined, tab: string, setTab: any}) => {
+const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: any}) => {
   const router = useRouter();
   const [agentsCount, setAgentsCount] = useState<number>(0);
-  const [isAdmin, setIsAdmin] = useState<boolean>(props.user!.role === "ADMIN");
 
   const logOut = async () => {
     await fetch(props.baseUrl + "/api/logout", {
@@ -29,7 +28,7 @@ const NavBar = (props: {baseUrl: string, user: User|undefined, tab: string, setT
   },[])
 
   return (
-    <nav className="bg-[17, 23, 41]">
+    <nav className="mt-4 bg-[17, 23, 41]">
       <div className="flex flex-row justify-between items-center">
         <div className="flex justify-start w-1/6 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
           WAGERS
@@ -41,7 +40,7 @@ const NavBar = (props: {baseUrl: string, user: User|undefined, tab: string, setT
               Weekly Figures
             </div>
           </button>
-          {isAdmin && (
+          {props.isAdmin && (
             <>
               <button className={`flex flex-row items-center mb-3 sm:mb-0 ml-5 px-3 text-2xl uppercase ${props.tab === "runners" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("runners")}>
                 <FontAwesomeIcon icon={faArrowsRotate} width={20} className="mr-2" />
