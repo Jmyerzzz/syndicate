@@ -13,7 +13,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined, isAdmin: boo
   const [tab, setTab] = useState<string>("accounts");
 
   return (
-    <div className="mb-6 sm:px-5">
+    <div className="mb-6 md:px-5">
       <NavBar baseUrl={props.baseUrl} isAdmin={props.isAdmin} tab={tab} setTab={setTab} />
       {(tab === "accounts" || tab === "transactions" || tab === "runners") && <WeekSelector setSelectedStartOfWeek={setSelectedStartOfWeek} />}
       {tab === "accounts" && <AccountsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} />}

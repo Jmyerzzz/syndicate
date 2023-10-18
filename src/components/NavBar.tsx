@@ -29,11 +29,11 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
 
   return (
     <nav className="mt-4 bg-[17, 23, 41]">
-      <div className="flex flex-col sm:flex-row justify-between items-center">
-        <div className="flex sm:justify-start sm:w-1/6 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
+      <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex md:justify-start md:w-1/6 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
           WAGERS
         </div>
-        <div className="sm:hidden mb-3">
+        <div className="md:hidden mb-3">
           <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
             Log Out
             <div>
@@ -41,8 +41,8 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
             </div>
           </button>
         </div>
-        <div className="flex flex-col sm:flex-row sm:w-2/3 items-center justify-center text-gray-100">
-          <button className={`flex flex-row items-center mb-3 sm:mb-0 px-3 text-2xl uppercase ${props.tab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("accounts")}>
+        <div className="flex flex-col md:flex-row md:w-2/3 items-center justify-center text-gray-100">
+          <button className={`flex flex-row items-center mb-3 md:mb-0 px-3 text-2xl uppercase ${props.tab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("accounts")}>
             <FontAwesomeIcon icon={faSackDollar} width={20} className="mr-2" />
             <div>
               Weekly Figures
@@ -50,13 +50,13 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
           </button>
           {props.isAdmin && (
             <>
-              <button className={`flex flex-row items-center mb-3 sm:mb-0 ml-5 px-3 text-2xl uppercase ${props.tab === "runners" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("runners")}>
+              <button className={`flex flex-row items-center mb-3 md:mb-0 ml-5 px-3 text-2xl uppercase ${props.tab === "runners" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("runners")}>
                 <FontAwesomeIcon icon={faArrowsRotate} width={20} className="mr-2" />
                 <div>
                   Runners
                 </div>
               </button>
-              <button className={`flex flex-row items-center mb-3 sm:mb-0 mx-5 px-3 text-2xl uppercase ${props.tab === "agents" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("agents")}>
+              <button className={`flex flex-row items-center mb-3 md:mb-0 mx-5 px-3 text-2xl uppercase ${props.tab === "agents" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("agents")}>
                 <FontAwesomeIcon icon={faUser} width={20} className="mr-2" />
                 <div>
                   Agents ({agentsCount})
@@ -71,7 +71,7 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
             </div>
           </button>
         </div>
-        <div className="hidden sm:flex sm:justify-end sm:w-1/6">
+        <div className="hidden md:flex md:justify-end md:w-1/6">
           <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
             Log Out
             <div>
