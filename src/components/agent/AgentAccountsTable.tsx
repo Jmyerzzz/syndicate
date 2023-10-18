@@ -125,11 +125,11 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   }
 
   return (
-    <div className="flex justify-center mt-4 mb-6">
+    <div className="flex md:justify-items-center md:items-center mt-4 overflow-x-auto">
       <table className="table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
-            <th colSpan={9} className="mx-auto px-3 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-center border-b-2 border-gray-500 rounded-tl">
+            <th colSpan={9} className="mx-auto px-3 py-3 bg-gray-700 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-gray-500 rounded-tl">
               Accounts ({props.currentUser?.username} - {props.currentUser?.risk_percentage}% Risk)
             </th>
             <th rowSpan={2} className="mx-auto px-3 py-3 bg-gray-800 text-md font-bold uppercase tracking-wider text-center">
