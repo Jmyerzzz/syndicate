@@ -122,7 +122,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
               <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tl">
                 #
               </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tl">
+              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
                 Name
               </th>
               <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">

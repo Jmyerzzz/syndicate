@@ -60,10 +60,10 @@ const AgentsTable = (props: {baseUrl: string}) => {
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Role
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Risk
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               G Way
             </th>
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">

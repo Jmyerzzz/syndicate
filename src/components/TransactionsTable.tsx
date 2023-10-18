@@ -112,10 +112,10 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
               Type
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Username
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Website
             </th>
             <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
