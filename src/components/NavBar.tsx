@@ -1,12 +1,15 @@
 'use client'
 
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate, faBook, faRightFromBracket, faSackDollar, faUser } from '@fortawesome/free-solid-svg-icons';
+import { User } from '@prisma/client';
 
-const NavBar = (props: {baseUrl: string, session: any}) => {
+const NavBar = (props: {baseUrl: string, user: User|undefined, tab: string, setTab: any}) => {
   const router = useRouter();
+  const [agentsCount, setAgentsCount] = useState<number>(0);
+  const [isAdmin, setIsAdmin] = useState<boolean>(props.user!.role === "ADMIN");
 
   const logOut = async () => {
     await fetch(props.baseUrl + "/api/logout", {
@@ -14,25 +17,61 @@ const NavBar = (props: {baseUrl: string, session: any}) => {
     })
       .then(() => router.refresh())
   }
+
+  useEffect(() => {
+    fetch(props.baseUrl + "/api/agents/count", {
+        method: "GET"
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        setAgentsCount(data);
+      })
+  },[])
+
   return (
     <nav className="bg-[17, 23, 41]">
-      <div className="sm:px-20 mx-auto flex flex-col sm:flex-row items-center justify-center pt-6 pb-4 sm:pb-10">
-        {props.session &&
-          <div className="flex flex-auto sm:w-1/3"></div>
-        }
-        <div className="flex flex-auto justify-center mb-3 sm:mb-0 sm:w-1/3 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
-          Syndicate
+      <div className="flex flex-row justify-between items-center">
+        <div className="flex justify-start w-1/6 animate-flicker-text text-4xl font-akira-sb text-white tracking-wide uppercase">
+          WAGERS
         </div>
-        {props.session &&
-          <div className="flex flex-auto justify-end sm:w-1/3">
-            <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
-              Log Out
-              <div>
-                <FontAwesomeIcon icon={faRightFromBracket} className="ml-2" />
-              </div>
-            </button>
-          </div>
-        }
+        <div className="flex flex-row w-2/3 items-center justify-center text-gray-100">
+          <button className={`flex flex-row items-center mb-3 sm:mb-0 px-3 text-2xl uppercase ${props.tab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("accounts")}>
+            <FontAwesomeIcon icon={faSackDollar} width={20} className="mr-2" />
+            <div>
+              Weekly Figures
+            </div>
+          </button>
+          {isAdmin && (
+            <>
+              <button className={`flex flex-row items-center mb-3 sm:mb-0 ml-5 px-3 text-2xl uppercase ${props.tab === "runners" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("runners")}>
+                <FontAwesomeIcon icon={faArrowsRotate} width={20} className="mr-2" />
+                <div>
+                  Runners
+                </div>
+              </button>
+              <button className={`flex flex-row items-center mb-3 sm:mb-0 mx-5 px-3 text-2xl uppercase ${props.tab === "agents" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("agents")}>
+                <FontAwesomeIcon icon={faUser} width={20} className="mr-2" />
+                <div>
+                  Agents ({agentsCount})
+                </div>
+              </button>
+            </>
+          )}
+          <button className={`flex flex-row items-center px-3 text-2xl uppercase ${props.tab === "transactions" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("transactions")}>
+            <FontAwesomeIcon icon={faBook} width={20} className="mr-2" />
+            <div>
+              Transactions
+            </div>
+          </button>
+        </div>
+        <div className="flex justify-end w-1/6">
+          <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
+            Log Out
+            <div>
+              <FontAwesomeIcon icon={faRightFromBracket} className="ml-2" />
+            </div>
+          </button>
+        </div>
       </div>
     </nav>
   );

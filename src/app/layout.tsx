@@ -16,19 +16,15 @@ export const metadata: Metadata = {
   description: 'Wagers Accounting',
 }
 
-const BASE_URL = process.env.URL || "";
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const session = await getPageSession();
 
   return (
     <html lang="en">
       <body className={`${inter.className} ${akiraSB.variable}`}>
-        {/* <NavBar baseUrl={BASE_URL} session={session} /> */}
         {children}
       </body>
     </html>
