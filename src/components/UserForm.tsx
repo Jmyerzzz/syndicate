@@ -60,7 +60,7 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
   }
 
   return (
-    <div className="flex flex-grow items-center justify-center bg-[17,23,41] mb-20">
+    <div className={`flex flex-grow items-center justify-center bg-[17,23,41] ${props.title === "Log In" && "h-screen"}`}>
       <div className="bg-white p-8 rounded w-80">
         <h2 className="text-2xl text-gray-600 font-bold mb-4">{props.title}</h2>
         <Formik initialValues={initialValues} onSubmit={(values, actions) => handleSubmit(values, actions)}>
