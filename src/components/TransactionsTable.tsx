@@ -74,8 +74,8 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
                   elements.push(
                     <tr key={"figure" + index} className="px-6 py-4 whitespace-no-wrap bg-gray-200 border-t-2 border-gray-700">
                       <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
-                      <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
                       <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
+                      <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
                       <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(figure.transaction_date))}</td>
                       <td className={`px-6 py-4 whitespace-no-wrap ${figure.amount > 0 ? "text-green-500" : figure.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(figure.amount)}</td>
                       <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-br"}`}></td>
