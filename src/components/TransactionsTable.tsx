@@ -26,7 +26,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
             const elements: React.ReactElement[] = [];
             elements.push(
               <tr key={"user" + index} onClick={() => handleRowClick(index)}>
-                <td colSpan={6} className="px-6 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
+                <td colSpan={6} className="px-3 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
                   {!collapsedRows.includes(index) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
                   {user.username}
                 </td>
@@ -36,26 +36,26 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
               account.weeklyFigures.map((figure: any, index1: number) => {
                 !collapsedRows.includes(index) && (
                   elements.push(
-                    <tr key={"figure" + index} className="px-6 py-4 whitespace-no-wrap bg-gray-200">
-                      <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
-                      <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
-                      <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
-                      <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(figure.transaction_date))}</td>
-                      <td className={`px-6 py-4 whitespace-no-wrap ${figure.amount > 0 ? "text-green-500" : figure.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(figure.amount)}</td>
-                      <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-br"}`}></td>
+                    <tr key={"figure" + index} className="px-3 py-2 whitespace-no-wrap bg-gray-200">
+                      <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
+                      <td className="px-3 py-2 whitespace-no-wrap">{account.username}</td>
+                      <td className="px-3 py-2 whitespace-no-wrap">{account.website}</td>
+                      <td className="px-3 py-2 whitespace-no-wrap">{dateTimeFormat.format(new Date(figure.transaction_date))}</td>
+                      <td className={`px-3 py-2 whitespace-no-wrap ${figure.amount > 0 ? "text-green-500" : figure.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(figure.amount)}</td>
+                      <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-br"}`}></td>
                     </tr>
                   )
                 )
                 figure.adjustments.map((adjustment: any, index2: number) => {
                   !collapsedRows.includes(index) && (
                     elements.push(
-                      <tr key={"adjustment" + index} className="px-6 py-4 whitespace-no-wrap bg-white">
-                        <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
-                        <td className="px-6 py-4 whitespace-no-wrap">{user.username}</td>
-                        <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
-                        <td className="px-6 py-4 whitespace-no-wrap">{dateTimeFormat.format(new Date(adjustment.transaction_date))}</td>
-                        <td className={`px-6 py-4 whitespace-no-wrap ${adjustment.amount > 0 ? "text-green-500" : adjustment.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(adjustment.amount)}</td>
-                        <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-br"}`}>{adjustment.zero_out ? "ZEROED" : ""}</td>
+                      <tr key={"adjustment" + index} className="px-3 py-2 whitespace-no-wrap bg-white">
+                        <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
+                        <td className="px-3 py-2 whitespace-no-wrap">{user.username}</td>
+                        <td className="px-3 py-2 whitespace-no-wrap">{account.website}</td>
+                        <td className="px-3 py-2 whitespace-no-wrap">{dateTimeFormat.format(new Date(adjustment.transaction_date))}</td>
+                        <td className={`px-3 py-2 whitespace-no-wrap ${adjustment.amount > 0 ? "text-green-500" : adjustment.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(adjustment.amount)}</td>
+                        <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-br"}`}>{adjustment.zero_out ? "ZEROED" : ""}</td>
                       </tr>
                     )
                   )
@@ -73,22 +73,22 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
       <table className="table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
               Type
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Username
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Website
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Date
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Amount
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
               Details
             </th>
           </tr>

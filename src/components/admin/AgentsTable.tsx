@@ -9,18 +9,18 @@ const AgentsTable = (props: {baseUrl: string, agentList: any[], isLoading: boole
         {
           props.agentList?.map((agent, index) => 
             <tr key={index} className="even:bg-white odd:bg-gray-100">
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{index+1}</td>
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">
+              <td className="px-3 py-2 whitespace-no-wrap text-gray-500">{index+1}</td>
+              <td className="px-3 py-2 whitespace-no-wrap text-gray-500">
                 <div className="flex flex-row items-center">
                   <EditUser baseUrl={props.baseUrl} user={agent} setRefreshKey={props.setRefreshKey} />
                   {agent.name}
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.username}</td>
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.role}</td>
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.risk_percentage}%</td>
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{agent.gabe_way}%</td>
-              <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{100 - (agent.risk_percentage + (agent.gabe_way || 0))}%</td>
+              <td className="px-3 py-2 whitespace-no-wrap text-gray-500">{agent.username}</td>
+              <td className="px-3 py-2 whitespace-no-wrap text-gray-500">{agent.role}</td>
+              <td className="px-3 py-2 whitespace-no-wrap text-gray-500">{agent.risk_percentage}%</td>
+              <td className="px-3 py-2 whitespace-no-wrap text-gray-500">{agent.gabe_way}%</td>
+              <td className="px-3 py-2 whitespace-no-wrap text-gray-500">{100 - (agent.risk_percentage + (agent.gabe_way || 0))}%</td>
             </tr>
           )
         }
@@ -37,25 +37,25 @@ const AgentsTable = (props: {baseUrl: string, agentList: any[], isLoading: boole
       <table className="table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
               #
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Name
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Username
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Role
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               Risk
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
               G Way
             </th>
-            <th className="px-6 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+            <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
               T Way
             </th>
           </tr>
