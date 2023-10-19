@@ -1,45 +1,19 @@
-import { useEffect, useState } from "react";
 import AddAccount from "./AddAccount";
-import WeekSelector from "../WeekSelector";
 import { User } from "@prisma/client";
-import { startOfWeek } from "date-fns";
 import { Oval } from "react-loader-spinner";
 import UpdateAdjustments from "./UpdateAdjustments";
-import { Account, UserAccounts, USDollar } from "@/types/types";
-import { groupAccountsByUser } from "@/util/util";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
+import { UserAccounts, USDollar } from "@/types/types";
 import EditAccount from "../EditAccount";
 import AddWeeklyFigure from "../AddWeeklyFigure";
 import EditWeeklyFigure from "../EditWeeklyFigure";
 
 
-const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefined, selectedStartOfWeek: Date}) => {
-  const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [refreshKey, setRefreshKey] = useState<number>(0);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(props.baseUrl + "/api/accounts/user", {
-        method: "POST",
-        body: JSON.stringify({
-          date: props.selectedStartOfWeek,
-          username: props.currentUser?.username
-        })
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        setGroupedAccounts(groupAccountsByUser(data));
-        setIsLoading(false);
-      })
-  },[props, refreshKey])
-
+const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefined, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], isLoading: boolean, setRefreshKey: any}) => {
   const TableRows = () => {
     return (
       <>
         {
-          groupedAccounts.map((user, index0) => {
+          props.groupedAccounts.map((user, index0) => {
             const elements: React.ReactElement[] = [];
             let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
             user.accounts.map((account, index1) => {
@@ -61,7 +35,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                   <td className="px-3 py-2 whitespace-no-wrap">{index1+1}</td>
                   <td className="px-3 py-2 whitespace-no-wrap">
                     <div className="flex flex-row items-center">
-                      <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={setRefreshKey} />
+                      <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={props.setRefreshKey} />
                       {account.website}
                     </div>
                   </td>
@@ -76,9 +50,9 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                     <div className="flex flex-row justify-between items-center">
                       {USDollar.format(weeklyFigureAmount)}
                       {account.weeklyFigures[0] ? (
-                        <EditWeeklyFigure baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                        <EditWeeklyFigure baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={props.setRefreshKey} />
                       ) : (
-                        <AddWeeklyFigure baseUrl={props.baseUrl} account={account} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                        <AddWeeklyFigure baseUrl={props.baseUrl} account={account} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={props.setRefreshKey} />
                       )}
                     </div>
                   </td>
@@ -87,7 +61,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                         {USDollar.format(adjustmentsSum)}
                       </div>
-                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={setRefreshKey} />
+                      <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={props.setRefreshKey} />
                     </div>
                   </td>
                   <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
@@ -117,7 +91,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
         }
           <tr>
             <td colSpan={12} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
-              <AddAccount baseUrl={props.baseUrl} user={props.currentUser} setRefreshKey={setRefreshKey} />
+              <AddAccount baseUrl={props.baseUrl} user={props.currentUser} setRefreshKey={props.setRefreshKey} />
             </td>
           </tr>
       </>
@@ -125,7 +99,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
   }
 
   return (
-    <div className="flex md:justify-items-center md:items-center mt-4 overflow-x-auto">
+    <div className="flex 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <table className="table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
@@ -174,7 +148,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
         </thead>
         <tbody className="text-gray-500 divide-y divide-gray-200">
           {
-            isLoading ? (
+            props.isLoading ? (
               <tr>
                 <td colSpan={12} className="mx-auto py-3 text-center bg-[17, 23, 41]">
                   <Oval

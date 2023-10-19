@@ -1,41 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 import SummarySection from "./SummarySection";
-import AddWeeklyFigure from "../AddWeeklyFigure";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserAccounts, USDollar } from "@/types/types";
-import { groupAccountsByUser } from "@/util/util";
-import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import EditAccount from "../EditAccount";
-import EditWeeklyFigure from "../EditWeeklyFigure";
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import React from "react";
 
-const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
-  const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
+const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], isLoading: boolean}) => {
   const [weeklyTotal, setWeeklyTotal] = useState<number>(0);
   const [totalCollected, setTotalCollected] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [refreshKey, setRefreshKey] = useState<number>(0);
-
-  useEffect(() => {
-    setIsLoading(true)
-    fetch(props.baseUrl + "/api/accounts/all", {
-        method: "POST",
-        body: JSON.stringify(props.selectedStartOfWeek)
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        setGroupedAccounts(groupAccountsByUser(data))
-        setIsLoading(false)
-      })
-  },[props.selectedStartOfWeek, refreshKey])
 
   const TableRows = () => {
     let weeklyTotal = 0,totalCollected = 0, agentsTotal = 0, gTotal = 0, tTotal = 0;
     const elements: React.ReactElement[] = [];
   
-    groupedAccounts.forEach((user, index0) => {
+    props.groupedAccounts.forEach((user, index0) => {
       let weeklyFigureTotal = 0;
       let adjustmentsTotal = 0;
   
@@ -115,7 +92,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
   return (
     <>
       <SummarySection baseUrl={props.baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />
-      <div className="flex flex-col md:justify-items-center md:items-center mt-4 overflow-x-auto">
+      <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
         <table className="table-auto min-w-full">
           <thead className="text-gray-100">
             <tr>
@@ -148,7 +125,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date}) => {
           {/* <DraggableTableRows /> */}
           <tbody className="text-gray-700 divide-y divide-gray-200">
             {
-              isLoading ? (
+              props.isLoading ? (
                 <tr>
                   <td colSpan={8} className="mx-auto py-3 text-center bg-[17, 23, 41]">
                     <Oval

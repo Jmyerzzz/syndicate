@@ -1,43 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Oval } from "react-loader-spinner";
-import { USDollar, dateTimeFormat } from "@/types/types";
-import { groupAccountsByUser } from "@/util/util";
+import { USDollar, UserAccounts, dateTimeFormat } from "@/types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { User } from "@prisma/client";
 
-const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, currentUser?: User|undefined}) => {
-  const [groupedAccounts, setGroupedAccounts] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-      setIsLoading(true)
-      if (!props.currentUser) {
-        fetch(props.baseUrl + "/api/accounts/all", {
-            method: "POST",
-            body: JSON.stringify(props.selectedStartOfWeek)
-          })
-          .then((response) => response.json())
-          .then((data) => {
-            setGroupedAccounts(groupAccountsByUser(data))
-            setIsLoading(false)
-          })
-      } else {
-        fetch(props.baseUrl + "/api/accounts/user", {
-          method: "POST",
-          body: JSON.stringify({
-            date: props.selectedStartOfWeek,
-            username: props.currentUser?.username
-          })
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          setGroupedAccounts(groupAccountsByUser(data));
-          setIsLoading(false);
-        })
-      }
-    },[props.selectedStartOfWeek])
-
+const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts?: UserAccounts[], isLoading: boolean,}) => {
   const TableRows = () => {
     const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
 
@@ -55,7 +22,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
     return(
       <>
         {
-          groupedAccounts?.map((user, index) => {
+          props.groupedAccounts?.map((user, index) => {
             const elements: React.ReactElement[] = [];
             elements.push(
               <tr key={"user" + index} onClick={() => handleRowClick(index)}>
@@ -105,7 +72,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
     )
   }
   return (
-    <div className="flex flex-col md:justify-items-center md:items-center mt-4 overflow-x-auto">
+    <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <table className="table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
@@ -131,7 +98,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, c
         </thead>
         <tbody className="text-gray-700 divide-y divide-gray-200">
         {
-        isLoading ? (
+        props.isLoading ? (
           <tr>
             <td colSpan={6} className="mx-auto py-3 text-center bg-[17, 23, 41]">
               <Oval

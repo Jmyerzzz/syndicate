@@ -1,4 +1,4 @@
-import { Account, UserAccounts } from "@/types/types";
+import { Account, UserAccounts, BookieData } from "@/types/types";
 
 export const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
   const grouped: { [userId: string]: Account[] } = {};
@@ -22,3 +22,29 @@ export const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
 
   return userAccountsArray;
 }
+
+export const groupAccountsByBookie = (userAccounts: UserAccounts[]): BookieData[] => {
+  const groupedData: { [key: string]: BookieData } = {};
+
+  userAccounts.forEach((userAccount) => {
+    userAccount.accounts.forEach((account) => {
+      const compositeKey = `${account.bookie}_${account.website}`;
+      const [name, website] = compositeKey.split('_');
+      if (groupedData[name]) {
+        const websiteExists = groupedData[name].websites.find((w) => w.website === website);
+        if (websiteExists) {
+          websiteExists.accounts.push(account);
+        } else {
+          groupedData[name].websites.push({ website, accounts: [account] });
+        }
+      } else {
+        groupedData[name] = {
+          name,
+          websites: [{ website, accounts: [account] }],
+        };
+      }
+    });
+  });
+
+  return Object.values(groupedData);
+};

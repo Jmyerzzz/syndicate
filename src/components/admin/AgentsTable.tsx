@@ -1,36 +1,18 @@
-import { useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import EditUser from "./EditUser";
-import UserForm from "../UserForm";
 import AddUser from "./AddUser";
 
-const AgentsTable = (props: {baseUrl: string}) => {
-  const [agentList, setAgentList] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [refreshKey, setRefreshKey] = useState<number>(0);
-
-  useEffect(() => {
-    setIsLoading(true)
-    fetch(props.baseUrl + "/api/agents/all", {
-        method: "GET"
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        setAgentList(data);
-        setIsLoading(false)
-      })
-  },[refreshKey])
-
+const AgentsTable = (props: {baseUrl: string, agentList: any[], isLoading: boolean, setRefreshKey: any}) => {
   const TableRows = () => {
     return(
       <>
         {
-          agentList?.map((agent, index) => 
+          props.agentList?.map((agent, index) => 
             <tr key={index} className="bg-white">
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{index+1}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">
                 <div className="flex flex-row items-center">
-                  <EditUser baseUrl={props.baseUrl} user={agent} setRefreshKey={setRefreshKey} />
+                  <EditUser baseUrl={props.baseUrl} user={agent} setRefreshKey={props.setRefreshKey} />
                   {agent.name}
                 </div>
               </td>
@@ -44,14 +26,14 @@ const AgentsTable = (props: {baseUrl: string}) => {
         }
         <tr>
           <td colSpan={7} className="bg-gray-400 hover:bg-gray-500 text-gray-100 rounded-b">
-            <AddUser setRefreshKey={setRefreshKey} />
+            <AddUser setRefreshKey={props.setRefreshKey} />
           </td>
         </tr>
       </>
     )
   }
   return (
-    <div className="flex flex-col md:justify-items-center md:items-center mt-4 overflow-x-auto">
+    <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <table className="table-auto min-w-full">
         <thead className="text-gray-100">
           <tr>
@@ -80,7 +62,7 @@ const AgentsTable = (props: {baseUrl: string}) => {
         </thead>
         <tbody className="text-gray-700 divide-y divide-gray-200">
         {
-        isLoading ? (
+        props.isLoading ? (
           <tr>
             <td colSpan={7} className="mx-auto py-3 text-center bg-[17, 23, 41]">
               <Oval

@@ -7,9 +7,9 @@ let USDollar = new Intl.NumberFormat('en-US', {
 
 const SummarySection = (props: {baseUrl: string, weeklyTotal: number, totalCollected: number}) => {
   return (
-    <div className="flex flex-col md:flex-row md:items-start md:justify-center min-w-full mt-3 text-gray-100 bg-gray-700 rounded">
+    <div className="flex flex-col sm:flex-row 2xl:items-start 2xl:justify-center min-w-full mt-3 text-gray-100 bg-gray-700 rounded">
       <div className="flex flex-row flex-grow">
-        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-gray-700 rounded-tl md:rounded-l">
+        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-gray-700 rounded-tl sm:rounded-l">
           <div className="text-sm md:text-md">Weekly Total</div>
           <div className={`text-lg md:text-xl ${props.weeklyTotal >= 0 ? "text-green-500" : "text-red-500"} font-semibold`}>{USDollar.format(props.weeklyTotal)}</div>
         </div>
@@ -25,7 +25,7 @@ const SummarySection = (props: {baseUrl: string, weeklyTotal: number, totalColle
             {isNaN((props.totalCollected/props.weeklyTotal) * 100) ? 0 : ((props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%
           </div>
         </div>
-        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-gray-700 rounded-br md:rounded-r">
+        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-gray-700 rounded-br sm:rounded-r">
           <div className="text-sm md:text-md">Total Unsettled</div>
           <div className="text-xl font-semibold">
             {USDollar.format(props.weeklyTotal-props.totalCollected)} / {isNaN((100 - (props.totalCollected/props.weeklyTotal) * 100)) ? 0 : (100 - (props.totalCollected/props.weeklyTotal) * 100).toFixed(2)}%

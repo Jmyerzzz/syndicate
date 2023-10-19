@@ -39,6 +39,15 @@ export interface UserAccounts {
   gabe_way: number | null;
   accounts: Account[];
 }
+
+export interface BookieData {
+  name: string;
+  websites: {
+    website: string;
+    accounts: Account[];
+  }[];
+}
+
 export const USDollar = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
