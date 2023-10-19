@@ -39,7 +39,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
 
                 !collapsedRows.includes(index) && (
                   elements.push(
-                    <tr key={"figure" + index} className="px-6 py-4 whitespace-no-wrap bg-gray-200 border-t-2 border-gray-700">
+                    <tr key={"figure" + index} className="px-6 py-4 whitespace-no-wrap bg-gray-200">
                       <td className={`px-6 py-4 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
                       <td className="px-6 py-4 whitespace-no-wrap">{account.username}</td>
                       <td className="px-6 py-4 whitespace-no-wrap">{account.website}</td>
@@ -96,7 +96,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
             </th>
           </tr>
         </thead>
-        <tbody className="text-gray-700 divide-y divide-gray-200">
+        <tbody className="text-gray-700">
         {
         props.isLoading ? (
           <tr>

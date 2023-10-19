@@ -43,7 +43,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
       tTotal += ((100 - user.risk - (user.gabe_way || 0))/100 * weeklyFigureTotal);
 
       elements.push(
-        <tr key={user.username + "weekly_totals"} className={`${weeklyFigureTotal !== adjustmentsTotal ? "bg-red-200" : weeklyFigureTotal !== adjustmentsTotal ? "bg-green-200" : "even:bg-white odd:bg-gray-100"}`}>
+        <tr key={user.username + "weekly_totals"} className={`${weeklyFigureTotal !== adjustmentsTotal ? "bg-red-200" : weeklyFigureTotal !== adjustmentsTotal ? "bg-green-200" : "even:bg-white odd:bg-gray-200"}`}>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700">{index0}</td>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700">{user.accounts[0].user.name}</td>
           <td className="px-3 py-2 whitespace-no-wrap text-gray-700">{user.accounts[0].user.username}</td>
@@ -123,7 +123,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
             </tr>
           </thead>
           {/* <DraggableTableRows /> */}
-          <tbody className="text-gray-700 divide-y divide-gray-200">
+          <tbody className="text-gray-700">
             {
               props.isLoading ? (
                 <tr>

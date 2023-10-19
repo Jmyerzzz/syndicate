@@ -101,7 +101,7 @@ const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolea
             </tr>
           </thead>
           {/* <DraggableTableRows /> */}
-          <tbody className="text-gray-700 divide-y divide-gray-200">
+          <tbody className="text-gray-700">
             {
               props.isLoading ? (
                 <tr>

@@ -31,7 +31,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
               }
               const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
               elements.push(
-                <tr key={index1} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" :  "even:bg-white odd:bg-gray-100"} text-gray-700`}>
+                <tr key={index1} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" :  "even:bg-white odd:bg-gray-200"} text-gray-700`}>
                   <td className="px-3 py-2 whitespace-no-wrap">{index1+1}</td>
                   <td className="px-3 py-2 whitespace-no-wrap">
                     <div className="flex flex-row items-center">
@@ -46,7 +46,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                   <td className="px-3 py-2 whitespace-no-wrap">{account.ip_location}</td>
                   <td className="px-3 py-2 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
                   <td className="px-3 py-2 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
-                  <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200`}>
+                  <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-300`}>
                     <div className="flex flex-row justify-between items-center">
                       {USDollar.format(weeklyFigureAmount)}
                       {account.weeklyFigures[0] ? (
@@ -56,7 +56,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       )}
                     </div>
                   </td>
-                  <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
+                  <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-300">
                     <div className="flex flex-row justify-between items-center">
                       <div className={`${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                         {USDollar.format(adjustmentsSum)}
@@ -64,7 +64,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
                       <UpdateAdjustments baseUrl={props.baseUrl} account={account} weeklyFigure={account.weeklyFigures[0]} selectedStartOfWeek={props.selectedStartOfWeek} setRefreshKey={props.setRefreshKey} />
                     </div>
                   </td>
-                  <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
+                  <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-300">
                     {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
                   </td>
                 </tr>
@@ -146,7 +146,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
             </th>
           </tr>
         </thead>
-        <tbody className="text-gray-500 divide-y divide-gray-200">
+        <tbody className="text-gray-500">
           {
             props.isLoading ? (
               <tr>

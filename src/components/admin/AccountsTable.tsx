@@ -85,7 +85,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
   //           <tbody
   //             {...provided.droppableProps}
   //             ref={provided.innerRef}
-  //             className="text-gray-700 divide-y divide-gray-200"
+  //             className="text-gray-700"
   //           >
   //             {groupedAccounts.map((user, index0) => {
   //               let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
@@ -122,7 +122,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
   //                               {...provided.draggableProps}
   //                               {...provided.dragHandleProps}
   //                               key={index1 + "row"}
-  //                               className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "even:bg-white odd:bg-gray-100"} text-gray-700`}
+  //                               className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : "even:bg-white odd:bg-gray-200"} text-gray-700`}
   //                               style={getItemStyle(
   //                                 snapshot.isDragging,
   //                                 provided.draggableProps.style
@@ -245,7 +245,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
         const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
         !collapsedRows.includes(index0) && (
           elements.push(
-            <tr key={user.username + "data" + index1} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" : "even:bg-white odd:bg-gray-100"} text-gray-700`}>
+            <tr key={user.username + "data" + index1} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" : "even:bg-white odd:bg-gray-200"} text-gray-700`}>
               <td className="px-3 py-2 whitespace-no-wrap">{index1+1}</td>
               <td className="px-3 py-2 whitespace-no-wrap">
                 <div className="flex flex-row items-center">
@@ -260,7 +260,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
               <td className="px-3 py-2 whitespace-no-wrap">{account.ip_location}</td>
               <td className="px-3 py-2 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
               <td className="px-3 py-2 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
-              <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
+              <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-300">
                 <div className="flex flex-row justify-between items-center">
                   {USDollar.format(weeklyFigureAmount)}
                   {account.weeklyFigures[0] ? (
@@ -270,7 +270,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
                   )}
                 </div>
               </td>
-              <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
+              <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-300">
                 <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-gray-700"}`}>
                   {USDollar.format(adjustmentsSum)}
                   <button type="button" disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className={`ml-2 w-5/12 bg-gray-300 text-gray-500 rounded ${account.weeklyFigures.length > 0 && "hover:bg-gray-400"}`}>
@@ -278,7 +278,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
                   </button>
                 </div>
               </td>
-              <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-200">
+              <td className="px-3 py-2 whitespace-no-wrap font-medium border-l-2 border-gray-300">
                 {USDollar.format(weeklyFigureAmount-adjustmentsSum)}
               </td>
             </tr>
@@ -366,7 +366,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
             </tr>
           </thead>
           {/* <DraggableTableRows /> */}
-          <tbody className="text-gray-700 divide-y divide-gray-200">
+          <tbody className="text-gray-700">
             {
               props.isLoading ? (
                 <tr>
