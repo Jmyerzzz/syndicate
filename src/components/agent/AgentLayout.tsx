@@ -35,7 +35,7 @@ const AgentLayout = (props: {baseUrl: string, user: User|undefined, isAdmin: boo
   },[selectedStartOfWeek])
 
   return (
-    <div className="mb-6 sm:px-5">
+    <div className="mb-6 md:px-5">
       <NavBar baseUrl={props.baseUrl} isAdmin={props.isAdmin} tab={tab} setTab={setTab} />
       <WeekSelector selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />
       {tab === "accounts" && <AgentsAccountsTable baseUrl={props.baseUrl} currentUser={props.user} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
