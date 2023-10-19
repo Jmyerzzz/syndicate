@@ -8,7 +8,7 @@ const AgentsTable = (props: {baseUrl: string, agentList: any[], isLoading: boole
       <>
         {
           props.agentList?.map((agent, index) => 
-            <tr key={index} className="even:bg-white odd:bg-gray-200">
+            <tr key={index} className="even:bg-white odd:bg-gray-100">
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">{index+1}</td>
               <td className="px-6 py-4 whitespace-no-wrap text-gray-500">
                 <div className="flex flex-row items-center">

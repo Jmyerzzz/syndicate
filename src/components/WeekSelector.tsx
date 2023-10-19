@@ -4,8 +4,8 @@ import { Dispatch, SetStateAction } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
-const WeekSelector = ( props: {setSelectedStartOfWeek: Dispatch<SetStateAction<Date>>} ) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+const WeekSelector = ( props: {selectedStartOfWeek: Date, setSelectedStartOfWeek: Dispatch<SetStateAction<Date>>} ) => {
+  const [selectedDate, setSelectedDate] = useState(props.selectedStartOfWeek || new Date());
 
   const goToPreviousWeek = () => {
     setSelectedDate((prevDate) => {

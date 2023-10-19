@@ -48,7 +48,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined, isAdmin: boo
   return (
     <div className="mb-6 sm:px-5">
       <NavBar baseUrl={props.baseUrl} isAdmin={props.isAdmin} tab={tab} setTab={setTab} />
-      {(tab === "accounts" || tab === "transactions" || tab === "runners") && <WeekSelector setSelectedStartOfWeek={setSelectedStartOfWeek} />}
+      {(tab === "accounts" || tab === "transactions" || tab === "runners") && <WeekSelector selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />}
       {tab === "accounts" && <AccountsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
       {tab === "runners" && <RunnersTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
       {tab === "transactions" && <TransactionsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
