@@ -34,9 +34,6 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
             )
             user.accounts.map((account: any, index0: number) => {
               account.weeklyFigures.map((figure: any, index1: number) => {
-                console.log(`${index0}, ${(user.accounts.length-1)}`)
-                console.log(`${index1}, ${(account.weeklyFigures.length-1)}`)
-
                 !collapsedRows.includes(index) && (
                   elements.push(
                     <tr key={"figure" + index} className="px-6 py-4 whitespace-no-wrap bg-gray-200">

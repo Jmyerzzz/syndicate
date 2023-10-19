@@ -9,8 +9,6 @@ import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons
 const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolean}) => {
   const groupedByBookie = groupAccountsByBookie(props.groupedAccounts);
 
-  console.log(groupedByBookie)
-
   const TableRows = () => {
     const elements: React.ReactElement[] = [];
     const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
