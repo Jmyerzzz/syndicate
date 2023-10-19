@@ -58,6 +58,8 @@ model WeeklyFigure {
   week_start       DateTime
   stiffed          Boolean      @default(false)
   adjustments      Adjustment[]
+
+  @@index([week_start])
 }
 
 model Adjustment {
