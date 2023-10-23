@@ -1,13 +1,8 @@
-import { useState } from "react";
 import { Oval } from "react-loader-spinner";
-import SummarySection from "./SummarySection";
 import { UserAccounts, USDollar } from "@/types/types";
 import React from "react";
 
 const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], isLoading: boolean}) => {
-  const [weeklyTotal, setWeeklyTotal] = useState<number>(0);
-  const [totalCollected, setTotalCollected] = useState<number>(0);
-
   const TableRows = () => {
     let weeklyTotal = 0,totalCollected = 0, agentsTotal = 0, gTotal = 0, tTotal = 0;
     const elements: React.ReactElement[] = [];
@@ -23,7 +18,6 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
           weeklyFigureAmount = account.weeklyFigures[0].amount;
           weeklyFigureTotal += account.weeklyFigures[0].amount;
         }
-        weeklyTotal += weeklyFigureAmount;
   
         let adjustmentsSum = 0;
         if (account.weeklyFigures[0] && account.weeklyFigures[0].adjustments.length > 0) {
@@ -32,10 +26,6 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
           });
           adjustmentsTotal += adjustmentsSum;
         }
-        totalCollected += adjustmentsSum;
-  
-        setWeeklyTotal(weeklyTotal);
-        setTotalCollected(totalCollected);
       });
 
       agentsTotal += user.risk/100 * weeklyFigureTotal;
@@ -85,70 +75,65 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
         </td>
       </tr>
     )
-
     return elements;
   };
 
   return (
-    <>
-      <SummarySection baseUrl={props.baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />
-      <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
-        <table className="table-auto min-w-full">
-          <thead className="text-gray-100">
-            <tr>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tl">
-                #
-              </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-                Name
-              </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-                Username
-              </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-                Weekly Figure Total
-              </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-                Adjustments Total
-              </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-                Agent Way
-              </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
-                Gabe Way
-              </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tr">
-                T Way
-              </th>
-            </tr>
-          </thead>
-          {/* <DraggableTableRows /> */}
-          <tbody className="text-gray-700">
-            {
-              props.isLoading ? (
-                <tr>
-                  <td colSpan={8} className="mx-auto py-3 text-center bg-[17, 23, 41]">
-                    <Oval
-                      height={60}
-                      width={60}
-                      color="#4287f5"
-                      wrapperStyle={{display: "flex", "justifyContent": "center"}}
-                      visible={true}
-                      ariaLabel='oval-loading'
-                      secondaryColor="#4d64ab"
-                      strokeWidth={2}
-                      strokeWidthSecondary={2}
-                    />
-                  </td>
-                </tr>
-              ) : (
-                <TableRows />
-              )
-            }
-          </tbody>
-        </table>
-      </div>
-    </>
+    <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
+      <table className="table-auto min-w-full">
+        <thead className="text-gray-100">
+          <tr>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tl">
+              #
+            </th>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              Name
+            </th>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              Username
+            </th>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              Weekly Figure Total
+            </th>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              Adjustments Total
+            </th>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              Agent Way
+            </th>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider">
+              Gabe Way
+            </th>
+            <th className="px-3 py-3 bg-gray-700 text-left text-xs font-bold uppercase tracking-wider rounded-tr">
+              T Way
+            </th>
+          </tr>
+        </thead>
+        <tbody className="text-gray-700">
+          {
+            props.isLoading ? (
+              <tr>
+                <td colSpan={8} className="mx-auto py-3 text-center bg-[17, 23, 41]">
+                  <Oval
+                    height={60}
+                    width={60}
+                    color="#4287f5"
+                    wrapperStyle={{display: "flex", "justifyContent": "center"}}
+                    visible={true}
+                    ariaLabel='oval-loading'
+                    secondaryColor="#4d64ab"
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                  />
+                </td>
+              </tr>
+            ) : (
+              <TableRows />
+            )
+          }
+        </tbody>
+      </table>
+    </div>
   )
 }
 

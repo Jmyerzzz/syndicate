@@ -4,11 +4,9 @@ import { Dispatch, SetStateAction } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
-const WeekSelector = ( props: {selectedStartOfWeek: Date, setSelectedStartOfWeek: Dispatch<SetStateAction<Date>>} ) => {
-  const [selectedDate, setSelectedDate] = useState(props.selectedStartOfWeek || new Date());
-
+const WeekSelector = ( props: {selectedDate: Date, setSelectedDate: Dispatch<SetStateAction<Date>>, selectedStartOfWeek: Date, setSelectedStartOfWeek: Dispatch<SetStateAction<Date>>} ) => {
   const goToPreviousWeek = () => {
-    setSelectedDate((prevDate) => {
+    props.setSelectedDate((prevDate) => {
       const date = addDays(prevDate, -7);
       props.setSelectedStartOfWeek(startOfWeek(date, { weekStartsOn: 1 }));
       return date;
@@ -17,14 +15,14 @@ const WeekSelector = ( props: {selectedStartOfWeek: Date, setSelectedStartOfWeek
   };
 
   const goToNextWeek = () => {
-    setSelectedDate((prevDate) => {
+    props.setSelectedDate((prevDate) => {
       const date = addDays(prevDate, 7);
       props.setSelectedStartOfWeek(startOfWeek(date, { weekStartsOn: 1 }));
       return date;
     });
   };
 
-  const startOfWeekDate = startOfWeek(selectedDate, { weekStartsOn: 1 });
+  const startOfWeekDate = startOfWeek(props.selectedDate, { weekStartsOn: 1 });
   const endOfWeekDate = addDays(startOfWeekDate, 6);
 
   return (
