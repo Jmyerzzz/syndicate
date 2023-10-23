@@ -133,7 +133,13 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
     })
     props.setWeeklyTotal(weeklyTotal)
     props.setTotalCollected(totalCollected)
-    return elements;
+    return (
+      <>
+        {elements.map((element, index) => (
+          <React.Fragment key={index}>{element}</React.Fragment>
+        ))}
+      </>
+    );
   }
 
   return (
