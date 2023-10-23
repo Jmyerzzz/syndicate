@@ -62,7 +62,13 @@ const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolea
         })
       })
     })
-    return elements;
+    return (
+      <>
+        {elements.map((element, index) => (
+          <React.Fragment key={index}>{element}</React.Fragment>
+        ))}
+      </>
+    );
   }
 
   return (

@@ -75,7 +75,13 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
         </td>
       </tr>
     )
-    return elements;
+    return (
+      <>
+        {elements.map((element, index) => (
+          <React.Fragment key={index}>{element}</React.Fragment>
+        ))}
+      </>
+    );
   };
 
   return (
