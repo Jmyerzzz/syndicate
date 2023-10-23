@@ -4,7 +4,7 @@ import React from "react";
 
 const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], isLoading: boolean}) => {
   const TableRows = () => {
-    let weeklyTotal = 0,totalCollected = 0, agentsTotal = 0, gTotal = 0, tTotal = 0;
+    let weeklyTotal = 0, totalCollected = 0, agentsTotal = 0, gTotal = 0, tTotal = 0;
     const elements: React.ReactElement[] = [];
   
     props.groupedAccounts.forEach((user, index0) => {
@@ -17,6 +17,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
         if (account.weeklyFigures.length > 0) {
           weeklyFigureAmount = account.weeklyFigures[0].amount;
           weeklyFigureTotal += account.weeklyFigures[0].amount;
+          weeklyTotal += account.weeklyFigures[0].amount;
         }
   
         let adjustmentsSum = 0;
@@ -25,6 +26,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
             adjustmentsSum += adjustment.amount;
           });
           adjustmentsTotal += adjustmentsSum;
+          totalCollected += adjustmentsSum
         }
       });
 
