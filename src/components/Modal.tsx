@@ -9,17 +9,15 @@ const Modal = (props: { isOpen: boolean, onClose: () => void, title: string, chi
 
   useEffect(() => {
     const handleOutsideClick = (e: any) => {
-      if (props.isOpen && e.target.classList.contains('modal-overlay')) {
-        props.onClose();
+      if (isOpen && e.target.classList.contains('modal-overlay')) {
+        onClose();
       }
     };
 
-    // Attach the event listener when the modal is open
-    if (props.isOpen) {
+    if (isOpen) {
       window.addEventListener('click', handleOutsideClick);
     }
 
-    // Remove the event listener when the modal is closed or the component unmounts
     return () => {
       window.removeEventListener('click', handleOutsideClick);
     };

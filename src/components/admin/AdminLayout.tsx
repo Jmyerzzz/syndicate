@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import WeekSelector from "../WeekSelector"
 import AccountsTable from "./AccountsTable"
 import AgentsTable from "./AgentsTable"
 import { startOfWeek } from "date-fns";
-import { User } from "@prisma/client";
 import TransactionsTable from "../TransactionsTable";
 import RunnersTable from "./RunnersTable";
 import NavBar from "../NavBar";
@@ -11,8 +10,10 @@ import { UserAccounts } from "@/types/types";
 import { groupAccountsByUser } from "@/util/util";
 import BookiesTable from "./BookiesTable";
 import SummarySection from "./SummarySection";
+import { HomepageContext } from "@/util/HomepageContext";
 
-const AdminLayout = (props: {baseUrl: string, user: User|undefined, isAdmin: boolean}) => {
+const AdminLayout = (props: {baseUrl: string}) => {
+  const {user, isAdmin} = useContext(HomepageContext);
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
   const [selectedDate, setSelectedDate] = useState(selectedStartOfWeek || new Date());
   const [tab, setTab] = useState<string>("accounts");
@@ -51,7 +52,7 @@ const AdminLayout = (props: {baseUrl: string, user: User|undefined, isAdmin: boo
 
   return (
     <div className="mb-6 px-1 md:px-5">
-      <NavBar baseUrl={props.baseUrl} isAdmin={props.isAdmin} tab={tab} setTab={setTab} />
+      <NavBar baseUrl={props.baseUrl} isAdmin={isAdmin} tab={tab} setTab={setTab} />
       {(tab === "accounts" || tab === "transactions" || tab === "runners") && <WeekSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />}
       {tab === "accounts" && <SummarySection baseUrl={props.baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />}
       {tab === "accounts" && <AccountsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} setWeeklyTotal={setWeeklyTotal} setTotalCollected={setTotalCollected} isLoading={isLoading} setRefreshKey={setRefreshKey} />}

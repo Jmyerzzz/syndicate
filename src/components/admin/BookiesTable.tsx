@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Oval } from "react-loader-spinner";
-import SummarySection from "./SummarySection";
-import { UserAccounts, USDollar, BookieData } from "@/types/types";
+import { UserAccounts, BookieData } from "@/types/types";
 import { groupAccountsByBookie } from "@/util/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +12,7 @@ const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolea
     const elements: React.ReactElement[] = [];
     const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
 
-    const handleRowClick = (index: number) => {
+    const handleRowClick = useCallback((index: number) => {
       const currentIndex = collapsedRows.indexOf(index);
       const newCollapsedRows = [...collapsedRows];
       if (currentIndex === -1) {
@@ -22,7 +21,7 @@ const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolea
         newCollapsedRows.splice(currentIndex, 1);
       }
       setCollapsedRows(newCollapsedRows);
-    };
+    }, [collapsedRows]);
 
     groupedByBookie.map((bookie: BookieData, index0: number) => {
       elements.push(

@@ -1,9 +1,7 @@
-import './globals.css'
+import './globals.css';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
-import NavBar from '@/components/NavBar'
-import { getPageSession } from '../../auth/lucia'
 
 const inter = Inter({ subsets: ['latin'] })
 const akiraSB = localFont({

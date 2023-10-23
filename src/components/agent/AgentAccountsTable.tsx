@@ -7,7 +7,6 @@ import EditAccount from "../EditAccount";
 import AddWeeklyFigure from "../AddWeeklyFigure";
 import EditWeeklyFigure from "../EditWeeklyFigure";
 
-
 const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefined, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], isLoading: boolean, setRefreshKey: any}) => {
   const TableRows = () => {
     return (

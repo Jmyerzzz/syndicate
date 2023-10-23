@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Modal from "../Modal";
 
 const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure: any, selectedStartOfWeek: any, setRefreshKey: any}) => {
@@ -52,7 +52,7 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
     closeModal();
   };
 
-  const zeroOut = (weeklyFigure: any) => {
+  const zeroOut = useCallback((weeklyFigure: any) => {
     let adjustmentSum = 0;
     weeklyFigure.adjustments.map((adjustment: any) => {
       adjustmentSum += adjustment.amount;
@@ -75,7 +75,7 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
     }, 1000)
 
     closeModal();
-  }
+  }, [props]);
 
   return (
     <div>

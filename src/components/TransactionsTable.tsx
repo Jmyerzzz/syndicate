@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import { USDollar, UserAccounts, dateTimeFormat } from "@/types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +8,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
   const TableRows = () => {
     const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
 
-    const handleRowClick = (index: number) => {
+    const handleRowClick = useCallback((index: number) => {
       const currentIndex = collapsedRows.indexOf(index);
       const newCollapsedRows = [...collapsedRows];
       if (currentIndex === -1) {
@@ -17,7 +17,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
         newCollapsedRows.splice(currentIndex, 1);
       }
       setCollapsedRows(newCollapsedRows);
-    };
+    }, [collapsedRows]);
 
     return(
       <>

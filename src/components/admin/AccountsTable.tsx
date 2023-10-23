@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import AddWeeklyFigure from "../AddWeeklyFigure";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,7 @@ import EditWeeklyFigure from "../EditWeeklyFigure";
 import React from "react";
 
 const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], setWeeklyTotal: any, setTotalCollected: any, isLoading: boolean, setRefreshKey: any}) => {
-  const markStiffed = (weeklyFigureId: string, stiffed: boolean) => {
+  const markStiffed = useCallback((weeklyFigureId: string, stiffed: boolean) => {
     fetch("/api/figure/stiff", {
       method: "POST",
       body: JSON.stringify({
@@ -21,14 +21,14 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
     setTimeout(() => {
       props.setRefreshKey((oldKey: number) => oldKey +1)
     }, 1000)
-  }
+  }, [props]);
 
   const TableRows = () => {
     let weeklyTotal = 0, totalCollected = 0
     const elements: React.ReactElement[] = [];
     const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
 
-    const handleRowClick = (index: number) => {
+    const handleRowClick = useCallback((index: number) => {
       const currentIndex = collapsedRows.indexOf(index);
       const newCollapsedRows = [...collapsedRows];
       if (currentIndex === -1) {
@@ -37,7 +37,7 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
         newCollapsedRows.splice(currentIndex, 1);
       }
       setCollapsedRows(newCollapsedRows);
-    };
+    }, [collapsedRows]);
 
     props.groupedAccounts.map((user, index0) => {
       let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;

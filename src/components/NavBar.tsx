@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsRotate, faBook, faListCheck, faRightFromBracket, faSackDollar, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -9,12 +9,12 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
   const router = useRouter();
   const [agentsCount, setAgentsCount] = useState<number>(0);
 
-  const logOut = async () => {
+  const logOut = useCallback(async () => {
     await fetch(props.baseUrl + "/api/logout", {
       method: "POST"
     })
       .then(() => router.refresh())
-  }
+  }, []);
 
   useEffect(() => {
     fetch(props.baseUrl + "/api/agents/count", {

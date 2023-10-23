@@ -1,9 +1,4 @@
-import { useEffect, useState } from "react"
-
-let USDollar = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
+import { USDollar } from "@/types/types"
 
 const SummarySection = (props: {baseUrl: string, weeklyTotal: number, totalCollected: number}) => {
   return (
