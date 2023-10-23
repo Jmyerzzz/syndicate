@@ -6,7 +6,7 @@ import ObjectID from 'bson-objectid';
 const prisma = new PrismaClient()
 
 async function main(account: any, figureData: any, date: Date) {
-  let newAmount;
+  let newAmount: number;
   const amount = figureData.amount;
 
   if (figureData.operation === "debit") {

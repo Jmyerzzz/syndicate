@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main(account: any, figureData: any, figureId: string, date: Date) {
-  let newAmount;
+  let newAmount: number;
   const amount = figureData.amount;
 
   if (figureData.operation === "debit") {
