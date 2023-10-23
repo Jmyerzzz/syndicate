@@ -6,7 +6,7 @@ import ObjectID from 'bson-objectid';
 const prisma = new PrismaClient()
 
 async function main(weeklyFigure: any, adjustmentData: any, date: Date) {
-  let newAmount;
+  let newAmount: number;
   const amount = adjustmentData.amount;
   // const existingWeeklyFigure = await prisma.weeklyFigure.findUnique({
   //   where: {
