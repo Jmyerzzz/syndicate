@@ -12,10 +12,7 @@ const RunnersTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupe
       let adjustmentsTotal = 0;
   
       user.accounts.forEach((account) => {
-        let weeklyFigureAmount = 0;
-  
         if (account.weeklyFigures.length > 0) {
-          weeklyFigureAmount = account.weeklyFigures[0].amount;
           weeklyFigureTotal += account.weeklyFigures[0].amount;
           weeklyTotal += account.weeklyFigures[0].amount;
         }

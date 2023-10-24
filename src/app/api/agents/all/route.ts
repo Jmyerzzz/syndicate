@@ -1,9 +1,4 @@
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { auth } from "../../../../../auth/lucia";
-import * as context from "next/headers";
 import { NextResponse } from "next/server";
-
-import type { NextRequest } from "next/server";
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
@@ -16,7 +11,7 @@ async function main() {
   })
 }
 
-export const GET = async (request: NextRequest) => {
+export const GET = async () => {
   try {
     const users = await main()
     return new Response(JSON.stringify(users), {

@@ -13,7 +13,7 @@ import SummarySection from "./SummarySection";
 import { HomepageContext } from "@/util/HomepageContext";
 
 const AdminLayout = () => {
-  const {user, isAdmin, baseUrl} = useContext(HomepageContext);
+  const {isAdmin, baseUrl} = useContext(HomepageContext);
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
   const [selectedDate, setSelectedDate] = useState(selectedStartOfWeek || new Date());
   const [tab, setTab] = useState<string>("accounts");
