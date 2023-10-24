@@ -31,7 +31,7 @@ const AgentLayout = () => {
       setGroupedAccounts(groupAccountsByUser(data));
       setIsLoading(false);
     })
-  },[selectedStartOfWeek, refreshKey, baseUrl, user.username])
+  },[selectedStartOfWeek, refreshKey, baseUrl, user])
 
   return (
     <div className="mb-6 px-1 md:px-5">
