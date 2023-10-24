@@ -30,7 +30,7 @@ const TableRows = (props: {baseUrl: string, currentUser: User|undefined, selecte
             const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
             elements.push(
               <tr key={index1} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && account.weeklyFigures[0].amount > 0 && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" :  "even:bg-white odd:bg-gray-100"} text-gray-700`}>
-                <td className="px-3 py-2 whitespace-no-wrap">{index1+1}</td>
+                <td className="px-3 py-2 whitespace-no-wrap">{account.order}</td>
                 <td className="px-3 py-2 whitespace-no-wrap">
                   <div className="flex flex-row items-center">
                     <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={props.setRefreshKey} />

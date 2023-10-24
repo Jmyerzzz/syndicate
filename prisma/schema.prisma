@@ -46,6 +46,7 @@ model Account {
   ip_location   String
   credit_line   Int
   max_win       Int
+  order         Int?
   weeklyFigures WeeklyFigure[]
 }
 

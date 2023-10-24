@@ -23,6 +23,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
     ipLocation: props.account.ip_location,
     creditLine: props.account.credit_line,
     maxWin: props.account.max_win,
+    order: props.account.order,
   });
 
   const handleChange = (e: any) => {
@@ -58,6 +59,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
       ipLocation: '',
       creditLine: 0,
       maxWin: 0,
+      order: 0,
     });
 
     closeModal();
@@ -182,6 +184,20 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
                 id="maxWin"
                 name="maxWin"
                 value={formData.maxWin}
+                onChange={handleChange}
+                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="order" className="block text-gray-700 font-semibold">
+                Table Order
+              </label>
+              <input
+                type="number"
+                id="order"
+                name="order"
+                value={formData.order}
                 onChange={handleChange}
                 className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required

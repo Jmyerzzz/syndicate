@@ -16,6 +16,7 @@ export type Account = {
   ip_location: string;
   credit_line: number;
   max_win: number;
+  order: number;
   weeklyFigures: Array<{
     id: string;
     account_id: string;
