@@ -3,14 +3,7 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useRouter } from "next/navigation";
-
-interface formValues {
-  name: string,
-  risk: number,
-  username: string,
-  password: string,
-  gabeWay: number
-}
+import { formValues } from '@/types/types';
 
 const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) => {
   const router = useRouter();

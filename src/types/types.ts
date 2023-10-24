@@ -1,4 +1,4 @@
-export interface Account {
+export type Account = {
   id: string;
   user: {
     id: string;
@@ -33,14 +33,22 @@ export interface Account {
   }>;
 }
 
-export interface UserAccounts {
+export type UserAccounts = {
   username: string;
   risk: number;
   gabe_way: number | null;
   accounts: Account[];
 }
 
-export interface BookieData {
+export type formValues = {
+  name: string,
+  risk: number,
+  username: string,
+  password: string,
+  gabeWay: number
+}
+
+export type BookieData = {
   name: string;
   websites: {
     website: string;
