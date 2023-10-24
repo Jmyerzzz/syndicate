@@ -1,11 +1,8 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { auth } from "../../../../auth/lucia";
-import * as context from "next/headers";
 import { NextResponse } from "next/server";
 
 import type { NextRequest } from "next/server";
-
-const BASE_URL = process.env.URL || "";
 
 export const POST = async (request: NextRequest) => {
   const formData = await request.json();
@@ -83,7 +80,7 @@ export const POST = async (request: NextRequest) => {
     );
   }
   try {
-    const user = await auth.createUser({
+    await auth.createUser({
       key: {
         providerId: "username", // auth method
         providerUserId: username.toLowerCase(), // unique id when using "username" auth method
@@ -96,17 +93,17 @@ export const POST = async (request: NextRequest) => {
         username
       }
     });
-    const session = await auth.createSession({
-      userId: user.userId,
-      attributes: {}
-    });
-    const authRequest = auth.handleRequest(request.method, context);
-    authRequest.setSession(session);
+    // const session = await auth.createSession({
+    //   userId: user.userId,
+    //   attributes: {}
+    // });
+    // const authRequest = auth.handleRequest(request.method, context);
+    // authRequest.setSession(session);
     return new Response(null, {
       status: 302,
-      headers: {
-        Location: BASE_URL + "/" // redirect to profile page
-      }
+      // headers: {
+      //   Location: BASE_URL + "/" // redirect to profile page
+      // }
     });
   } catch (e) {
     // this part depends on the database you're using

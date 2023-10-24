@@ -10,7 +10,6 @@ import React from "react";
 
 const TableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], setWeeklyTotal: any, setTotalCollected: any, setRefreshKey: any}) => {
   let weeklyTotal = 0, totalCollected = 0
-  const elements: React.ReactElement[] = [];
   const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
 
   const handleRowClick = useCallback((index: number) => {
@@ -39,7 +38,8 @@ const TableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAc
   }, [props]);
 
   return props.groupedAccounts.map((user, index0) => {
-    let weeklyFigureAmount: number, weeklyFigureTotal = 0, adjustmentsTotal = 0;
+    const elements: React.ReactElement[] = [];
+    let weeklyFigureTotal: number = 0, adjustmentsTotal: number = 0;
     elements.push(
       <tr key={user.username + index0} onClick={() => handleRowClick(index0)}>
         <td colSpan={12} className="px-3 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
@@ -48,13 +48,13 @@ const TableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAc
         </td>
       </tr>)
     user.accounts.forEach((account, index1) => {
-      weeklyFigureAmount = 0
+      let weeklyFigureAmount: number = 0
       if (account.weeklyFigures.length > 0) {
         weeklyFigureAmount = account.weeklyFigures[0].amount;
         weeklyFigureTotal += account.weeklyFigures[0].amount;
       }
       weeklyTotal += weeklyFigureAmount;
-      let adjustmentsSum = 0;
+      let adjustmentsSum: number = 0;
       if (account.weeklyFigures[0] && account.weeklyFigures[0].adjustments.length > 0) {
         account.weeklyFigures[0].adjustments.map((adjustment) => {
           adjustmentsSum += adjustment.amount;
@@ -65,7 +65,7 @@ const TableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAc
       const stiffed = account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
       !collapsedRows.includes(index0) && (
         elements.push(
-          <tr key={user.username + "data" + index1} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && account.weeklyFigures[0].amount > 0 && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" : "even:bg-white odd:bg-gray-100"} text-gray-700`}>
+          <tr key={user.username + "data" + index1} className={`${stiffed ? "bg-red-200" : account.weeklyFigures[0] && account.weeklyFigures[0].amount !== 0 && weeklyFigureAmount === adjustmentsSum ? "bg-green-200" : "even:bg-white odd:bg-gray-100"} text-gray-700`}>
             <td className="px-3 py-2 whitespace-no-wrap">{index1+1}</td>
             <td className="px-3 py-2 whitespace-no-wrap">
               <div className="flex flex-row items-center">
@@ -131,9 +131,7 @@ const TableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAc
     )
     props.setWeeklyTotal(weeklyTotal)
     props.setTotalCollected(totalCollected)
-    return (
-      <React.Fragment key={index0}>{elements}</React.Fragment>
-    );
+    return elements;
   })
 }
 

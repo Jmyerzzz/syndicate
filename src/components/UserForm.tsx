@@ -39,7 +39,7 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
       if (res.status === 0) {
         // redirected
         // when using `redirect: "manual"`, response status 0 is returned
-        if (props.setRefreshKey) {
+        if (props.title === "Sign Up") {
           setTimeout(() => {
             props.setRefreshKey((oldKey: number) => oldKey +1)
           }, 1000)
