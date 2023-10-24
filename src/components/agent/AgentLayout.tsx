@@ -31,14 +31,14 @@ const AgentLayout = () => {
       setGroupedAccounts(groupAccountsByUser(data));
       setIsLoading(false);
     })
-  },[selectedStartOfWeek, refreshKey])
+  },[selectedStartOfWeek, refreshKey, baseUrl, user.username])
 
   return (
     <div className="mb-6 px-1 md:px-5">
       <NavBar baseUrl={baseUrl} isAdmin={isAdmin} tab={tab} setTab={setTab} />
       <WeekSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />
       {tab === "accounts" && <AgentsAccountsTable baseUrl={baseUrl} currentUser={user} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
-      {tab === "transactions" && <TransactionsTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
+      {tab === "transactions" && <TransactionsTable groupedAccounts={groupedAccounts} isLoading={isLoading} />}
     </div>
   )
 }

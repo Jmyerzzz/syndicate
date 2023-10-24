@@ -4,70 +4,71 @@ import { USDollar, UserAccounts, dateTimeFormat } from "@/types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts?: UserAccounts[], isLoading: boolean,}) => {
-  const TableRows = () => {
-    const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
+const TableRows = (props: {groupedAccounts: UserAccounts[]}) => {
+  const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
 
-    const handleRowClick = useCallback((index: number) => {
-      const currentIndex = collapsedRows.indexOf(index);
-      const newCollapsedRows = [...collapsedRows];
-      if (currentIndex === -1) {
-        newCollapsedRows.push(index);
-      } else {
-        newCollapsedRows.splice(currentIndex, 1);
-      }
-      setCollapsedRows(newCollapsedRows);
-    }, [collapsedRows]);
+  const handleRowClick = useCallback((index: number) => {
+    const currentIndex = collapsedRows.indexOf(index);
+    const newCollapsedRows = [...collapsedRows];
+    if (currentIndex === -1) {
+      newCollapsedRows.push(index);
+    } else {
+      newCollapsedRows.splice(currentIndex, 1);
+    }
+    setCollapsedRows(newCollapsedRows);
+  }, [collapsedRows]);
 
-    return(
-      <>
-        {
-          props.groupedAccounts?.map((user, index) => {
-            const elements: React.ReactElement[] = [];
-            elements.push(
-              <tr key={"user" + index} onClick={() => handleRowClick(index)}>
-                <td colSpan={6} className="px-3 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
-                  {!collapsedRows.includes(index) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
-                  {user.username}
-                </td>
-              </tr>
-            )
-            user.accounts.map((account: any, index0: number) => {
-              account.weeklyFigures.map((figure: any, index1: number) => {
+  return(
+    <>
+      {
+        props.groupedAccounts?.map((user, index) => {
+          const elements: React.ReactElement[] = [];
+          elements.push(
+            <tr key={"user" + index} onClick={() => handleRowClick(index)}>
+              <td colSpan={6} className="px-3 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
+                {!collapsedRows.includes(index) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
+                {user.username}
+              </td>
+            </tr>
+          )
+          user.accounts.map((account: any, index0: number) => {
+            account.weeklyFigures.map((figure: any, index1: number) => {
+              !collapsedRows.includes(index) && (
+                elements.push(
+                  <tr key={"figure" + index} className="px-3 py-2 whitespace-no-wrap bg-gray-200">
+                    <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">{account.username}</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">{account.website}</td>
+                    <td className="px-3 py-2 whitespace-no-wrap">{dateTimeFormat.format(new Date(figure.transaction_date))}</td>
+                    <td className={`px-3 py-2 whitespace-no-wrap ${figure.amount > 0 ? "text-green-500" : figure.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(figure.amount)}</td>
+                    <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-br"}`}></td>
+                  </tr>
+                )
+              )
+              figure.adjustments.map((adjustment: any, index2: number) => {
                 !collapsedRows.includes(index) && (
                   elements.push(
-                    <tr key={"figure" + index} className="px-3 py-2 whitespace-no-wrap bg-gray-200">
-                      <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
-                      <td className="px-3 py-2 whitespace-no-wrap">{account.username}</td>
+                    <tr key={"adjustment" + index} className="px-3 py-2 whitespace-no-wrap bg-white">
+                      <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
+                      <td className="px-3 py-2 whitespace-no-wrap">{user.username}</td>
                       <td className="px-3 py-2 whitespace-no-wrap">{account.website}</td>
-                      <td className="px-3 py-2 whitespace-no-wrap">{dateTimeFormat.format(new Date(figure.transaction_date))}</td>
-                      <td className={`px-3 py-2 whitespace-no-wrap ${figure.amount > 0 ? "text-green-500" : figure.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(figure.amount)}</td>
-                      <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-br"}`}></td>
+                      <td className="px-3 py-2 whitespace-no-wrap">{dateTimeFormat.format(new Date(adjustment.transaction_date))}</td>
+                      <td className={`px-3 py-2 whitespace-no-wrap ${adjustment.amount > 0 ? "text-green-500" : adjustment.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(adjustment.amount)}</td>
+                      <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-br"}`}>{adjustment.zero_out ? "ZEROED" : ""}</td>
                     </tr>
                   )
                 )
-                figure.adjustments.map((adjustment: any, index2: number) => {
-                  !collapsedRows.includes(index) && (
-                    elements.push(
-                      <tr key={"adjustment" + index} className="px-3 py-2 whitespace-no-wrap bg-white">
-                        <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
-                        <td className="px-3 py-2 whitespace-no-wrap">{user.username}</td>
-                        <td className="px-3 py-2 whitespace-no-wrap">{account.website}</td>
-                        <td className="px-3 py-2 whitespace-no-wrap">{dateTimeFormat.format(new Date(adjustment.transaction_date))}</td>
-                        <td className={`px-3 py-2 whitespace-no-wrap ${adjustment.amount > 0 ? "text-green-500" : adjustment.amount < 0 ? "text-red-500" : "text-gray-700"}`}>{USDollar.format(adjustment.amount)}</td>
-                        <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-br"}`}>{adjustment.zero_out ? "ZEROED" : ""}</td>
-                      </tr>
-                    )
-                  )
-                })
               })
             })
-            return elements;
           })
-        }
-      </>
-    )
-  }
+          return elements;
+        })
+      }
+    </>
+  )
+}
+
+const TransactionsTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolean}) => {
   return (
     <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <table className="table-auto min-w-full">
@@ -112,7 +113,7 @@ const TransactionsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, g
             </td>
           </tr>
         ) : (
-          <TableRows />
+          <TableRows groupedAccounts={props.groupedAccounts} />
         )
       }
         </tbody>

@@ -5,70 +5,70 @@ import { groupAccountsByBookie } from "@/util/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolean}) => {
-  const groupedByBookie = groupAccountsByBookie(props.groupedAccounts);
+const TableRows = (props: {groupedByBookie: BookieData[]}) => {
+  const elements: React.ReactElement[] = [];
+  const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
 
-  const TableRows = () => {
-    const elements: React.ReactElement[] = [];
-    const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
+  const handleRowClick = useCallback((index: number) => {
+    const currentIndex = collapsedRows.indexOf(index);
+    const newCollapsedRows = [...collapsedRows];
+    if (currentIndex === -1) {
+      newCollapsedRows.push(index);
+    } else {
+      newCollapsedRows.splice(currentIndex, 1);
+    }
+    setCollapsedRows(newCollapsedRows);
+  }, [collapsedRows]);
 
-    const handleRowClick = useCallback((index: number) => {
-      const currentIndex = collapsedRows.indexOf(index);
-      const newCollapsedRows = [...collapsedRows];
-      if (currentIndex === -1) {
-        newCollapsedRows.push(index);
-      } else {
-        newCollapsedRows.splice(currentIndex, 1);
-      }
-      setCollapsedRows(newCollapsedRows);
-    }, [collapsedRows]);
-
-    groupedByBookie.map((bookie: BookieData, index0: number) => {
-      elements.push(
-        <tr key={bookie.name + index0} onClick={() => handleRowClick(index0)}>
-          <td colSpan={12} className="px-3 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
-            {!collapsedRows.includes(index0) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
-            {bookie.name}
-          </td>
-        </tr>
+  props.groupedByBookie.map((bookie: BookieData, index0: number) => {
+    elements.push(
+      <tr key={bookie.name + index0} onClick={() => handleRowClick(index0)}>
+        <td colSpan={12} className="px-3 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
+          {!collapsedRows.includes(index0) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
+          {bookie.name}
+        </td>
+      </tr>
+    )
+    bookie.websites.map((website, index1) => {
+      !collapsedRows.includes(index0) && (
+        elements.push(
+          <tr key={bookie.name + website.website + index1}>
+            <td colSpan={12} className="px-3 bg-blue-200 text-gray-700 text-lg hover:cursor-pointer">
+              {website.website}
+            </td>
+          </tr>
+        )
       )
-      bookie.websites.map((website, index1) => {
+      website.accounts.map((account, index2) => {
         !collapsedRows.includes(index0) && (
           elements.push(
-            <tr key={bookie.name + website.website + index1}>
-              <td colSpan={12} className="px-3 bg-blue-200 text-gray-700 text-lg hover:cursor-pointer">
-                {website.website}
-              </td>
+            <tr key={account.id + "accounts" + index2} className="bg-white text-gray-700">
+              <td className="px-3 py-2 whitespace-no-wrap">{index2+1}</td>
+              <td className="px-3 py-2 w-1/12 whitespace-no-wrap"></td>
+              <td className="px-3 py-2 whitespace-no-wrap">{account.user.name}</td>
+              <td className="px-3 py-2 whitespace-no-wrap">{account.referral}</td>
+              <td className="px-3 py-2 whitespace-no-wrap">{account.username}</td>
+              <td className="px-3 py-2 whitespace-no-wrap">{account.password}</td>
+              <td className="px-3 py-2 whitespace-no-wrap">{account.ip_location}</td>
+              <td className="px-3 py-2 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
+              <td className="px-3 py-2 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
             </tr>
           )
         )
-        website.accounts.map((account, index2) => {
-          !collapsedRows.includes(index0) && (
-            elements.push(
-              <tr key={account.id + "accounts" + index2} className="bg-white text-gray-700">
-                <td className="px-3 py-2 whitespace-no-wrap">{index2+1}</td>
-                <td className="px-3 py-2 w-1/12 whitespace-no-wrap"></td>
-                <td className="px-3 py-2 whitespace-no-wrap">{account.user.name}</td>
-                <td className="px-3 py-2 whitespace-no-wrap">{account.referral}</td>
-                <td className="px-3 py-2 whitespace-no-wrap">{account.username}</td>
-                <td className="px-3 py-2 whitespace-no-wrap">{account.password}</td>
-                <td className="px-3 py-2 whitespace-no-wrap">{account.ip_location}</td>
-                <td className="px-3 py-2 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
-                <td className="px-3 py-2 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
-              </tr>
-            )
-          )
-        })
       })
     })
-    return (
-      <>
-        {elements.map((element, index) => (
-          <React.Fragment key={index}>{element}</React.Fragment>
-        ))}
-      </>
-    );
-  }
+  })
+  return (
+    <>
+      {elements.map((element, index) => (
+        <React.Fragment key={index}>{element}</React.Fragment>
+      ))}
+    </>
+  );
+}
+
+const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolean}) => {
+  const groupedByBookie = groupAccountsByBookie(props.groupedAccounts);
 
   return (
     <>
@@ -123,7 +123,7 @@ const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolea
                   </td>
                 </tr>
               ) : (
-                <TableRows />
+                <TableRows groupedByBookie={groupedByBookie} />
               )
             }
           </tbody>

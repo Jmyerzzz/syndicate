@@ -36,7 +36,7 @@ const AdminLayout = () => {
         setGroupedAccounts(groupAccountsByUser(data))
         setIsLoading(false)
       })
-  },[selectedStartOfWeek, refreshKey])
+  },[selectedStartOfWeek, refreshKey, baseUrl])
 
   useEffect(() => {
     setIsLoading(true)
@@ -48,16 +48,20 @@ const AdminLayout = () => {
         setAgentList(data);
         setIsLoading(false)
       })
-  },[refreshKey])
+  },[baseUrl, refreshKey])
 
   return (
     <div className="mb-6 px-1 md:px-5">
       <NavBar baseUrl={baseUrl} isAdmin={isAdmin} tab={tab} setTab={setTab} />
       {(tab === "accounts" || tab === "transactions" || tab === "runners") && <WeekSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />}
-      {tab === "accounts" && <SummarySection baseUrl={baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />}
-      {tab === "accounts" && <AccountsTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} setWeeklyTotal={setWeeklyTotal} setTotalCollected={setTotalCollected} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
-      {tab === "runners" && <RunnersTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
-      {tab === "transactions" && <TransactionsTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
+      {tab === "accounts" &&
+        <>
+          <SummarySection baseUrl={baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />
+          <AccountsTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} setWeeklyTotal={setWeeklyTotal} setTotalCollected={setTotalCollected} isLoading={isLoading} setRefreshKey={setRefreshKey} />
+        </>
+      }
+      {tab === "runners" && <RunnersTable groupedAccounts={groupedAccounts} isLoading={isLoading} />}
+      {tab === "transactions" && <TransactionsTable groupedAccounts={groupedAccounts} isLoading={isLoading} />}
       {tab === "bookies" && <BookiesTable groupedAccounts={groupedAccounts} isLoading={isLoading} />}
       {tab === "agents" && <AgentsTable baseUrl={baseUrl} agentList={agentList} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
     </div>

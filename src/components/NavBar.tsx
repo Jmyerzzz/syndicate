@@ -14,7 +14,7 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
       method: "POST"
     })
       .then(() => router.refresh())
-  }, []);
+  }, [props.baseUrl, router]);
 
   useEffect(() => {
     fetch(props.baseUrl + "/api/agents/count", {
@@ -24,7 +24,7 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
       .then((data) => {
         setAgentsCount(data);
       })
-  },[])
+  },[props.baseUrl])
 
   return (
     <nav className="mt-4 bg-[17, 23, 41]">
