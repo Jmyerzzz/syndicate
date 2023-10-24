@@ -10,7 +10,7 @@ import { useOverlayScrollbars } from "overlayscrollbars-react";
 import { HomepageContext } from "@/util/HomepageContext";
 
 export default function Homepage(props: {baseUrl: string, user: User, role: string}) {
-  const [isAdmin, setIsAdmin] = useState<boolean>(props.role === "ADMIN");
+  const [isAdmin] = useState<boolean>(props.role === "ADMIN");
   const [initBodyOverlayScrollbars] =
     useOverlayScrollbars({
       defer: true,
