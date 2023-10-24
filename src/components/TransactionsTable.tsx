@@ -35,7 +35,7 @@ const TableRows = (props: {groupedAccounts: UserAccounts[]}) => {
             account.weeklyFigures.map((figure: any, index1: number) => {
               !collapsedRows.includes(index) && (
                 elements.push(
-                  <tr key={"figure" + index} className="px-3 py-2 whitespace-no-wrap bg-gray-200">
+                  <tr key={figure.id} className="px-3 py-2 whitespace-no-wrap bg-gray-200">
                     <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
                     <td className="px-3 py-2 whitespace-no-wrap">{account.username}</td>
                     <td className="px-3 py-2 whitespace-no-wrap">{account.website}</td>
@@ -48,7 +48,7 @@ const TableRows = (props: {groupedAccounts: UserAccounts[]}) => {
               figure.adjustments.map((adjustment: any, index2: number) => {
                 !collapsedRows.includes(index) && (
                   elements.push(
-                    <tr key={"adjustment" + index} className="px-3 py-2 whitespace-no-wrap bg-white">
+                    <tr key={adjustment.id} className="px-3 py-2 whitespace-no-wrap bg-white">
                       <td className={`px-3 py-2 whitespace-no-wrap text-gray-500 ${index2 === figure.adjustments.length-1 && index0 === user.accounts.length-1 && "rounded-bl"}`}>ADJUSTMENT</td>
                       <td className="px-3 py-2 whitespace-no-wrap">{user.username}</td>
                       <td className="px-3 py-2 whitespace-no-wrap">{account.website}</td>

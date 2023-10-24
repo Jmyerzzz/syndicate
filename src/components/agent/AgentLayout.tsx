@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import WeekSelector from "../WeekSelector"
-import { startOfWeek } from "date-fns";
+import { addDays, startOfWeek } from "date-fns";
 import TransactionsTable from "../TransactionsTable";
 import AgentsAccountsTable from "./AgentAccountsTable";
 import NavBar from "../NavBar";
@@ -10,8 +10,8 @@ import { HomepageContext } from "@/util/HomepageContext";
 
 const AgentLayout = () => {
   const {user, isAdmin, baseUrl} = useContext(HomepageContext);
-  const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
-  const [selectedDate, setSelectedDate] = useState(selectedStartOfWeek || new Date());
+  const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(addDays(new Date(), -7), { weekStartsOn: 1 }));
+  const [selectedDate, setSelectedDate] = useState(selectedStartOfWeek || addDays(new Date(), -7));
   const [tab, setTab] = useState<string>("accounts");
   const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import WeekSelector from "../WeekSelector"
 import AccountsTable from "./AccountsTable"
 import AgentsTable from "./AgentsTable"
-import { startOfWeek } from "date-fns";
+import { addDays, startOfWeek } from "date-fns";
 import TransactionsTable from "../TransactionsTable";
 import RunnersTable from "./RunnersTable";
 import NavBar from "../NavBar";
@@ -14,8 +14,8 @@ import { HomepageContext } from "@/util/HomepageContext";
 
 const AdminLayout = () => {
   const {isAdmin, baseUrl} = useContext(HomepageContext);
-  const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
-  const [selectedDate, setSelectedDate] = useState(selectedStartOfWeek || new Date());
+  const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(addDays(new Date(), -7), { weekStartsOn: 1 }));
+  const [selectedDate, setSelectedDate] = useState(selectedStartOfWeek || addDays(new Date(), -7));
   const [tab, setTab] = useState<string>("accounts");
   const [groupedAccounts, setGroupedAccounts] = useState<UserAccounts[]>([]);
   const [agentList, setAgentList] = useState<any[]>([]);
@@ -23,7 +23,6 @@ const AdminLayout = () => {
   const [totalCollected, setTotalCollected] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [refreshKey, setRefreshKey] = useState<number>(0);
-
 
   useEffect(() => {
     setIsLoading(true)
