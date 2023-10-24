@@ -12,8 +12,8 @@ import BookiesTable from "./BookiesTable";
 import SummarySection from "./SummarySection";
 import { HomepageContext } from "@/util/HomepageContext";
 
-const AdminLayout = (props: {baseUrl: string}) => {
-  const {user, isAdmin} = useContext(HomepageContext);
+const AdminLayout = () => {
+  const {user, isAdmin, baseUrl} = useContext(HomepageContext);
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(new Date(), { weekStartsOn: 1 }));
   const [selectedDate, setSelectedDate] = useState(selectedStartOfWeek || new Date());
   const [tab, setTab] = useState<string>("accounts");
@@ -27,7 +27,7 @@ const AdminLayout = (props: {baseUrl: string}) => {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(props.baseUrl + "/api/accounts/all", {
+    fetch(baseUrl + "/api/accounts/all", {
         method: "POST",
         body: JSON.stringify(selectedStartOfWeek)
     })
@@ -40,7 +40,7 @@ const AdminLayout = (props: {baseUrl: string}) => {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(props.baseUrl + "/api/agents/all", {
+    fetch(baseUrl + "/api/agents/all", {
         method: "GET"
       })
       .then((response) => response.json())
@@ -52,14 +52,14 @@ const AdminLayout = (props: {baseUrl: string}) => {
 
   return (
     <div className="mb-6 px-1 md:px-5">
-      <NavBar baseUrl={props.baseUrl} isAdmin={isAdmin} tab={tab} setTab={setTab} />
+      <NavBar baseUrl={baseUrl} isAdmin={isAdmin} tab={tab} setTab={setTab} />
       {(tab === "accounts" || tab === "transactions" || tab === "runners") && <WeekSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />}
-      {tab === "accounts" && <SummarySection baseUrl={props.baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />}
-      {tab === "accounts" && <AccountsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} setWeeklyTotal={setWeeklyTotal} setTotalCollected={setTotalCollected} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
-      {tab === "runners" && <RunnersTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
-      {tab === "transactions" && <TransactionsTable baseUrl={props.baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
+      {tab === "accounts" && <SummarySection baseUrl={baseUrl} weeklyTotal={weeklyTotal} totalCollected={totalCollected} />}
+      {tab === "accounts" && <AccountsTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} setWeeklyTotal={setWeeklyTotal} setTotalCollected={setTotalCollected} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
+      {tab === "runners" && <RunnersTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
+      {tab === "transactions" && <TransactionsTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} isLoading={isLoading} />}
       {tab === "bookies" && <BookiesTable groupedAccounts={groupedAccounts} isLoading={isLoading} />}
-      {tab === "agents" && <AgentsTable baseUrl={props.baseUrl} agentList={agentList} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
+      {tab === "agents" && <AgentsTable baseUrl={baseUrl} agentList={agentList} isLoading={isLoading} setRefreshKey={setRefreshKey} />}
     </div>
   )
 }

@@ -30,15 +30,16 @@ export default function Homepage(props: {baseUrl: string, user: User, role: stri
     <HomepageContext.Provider
       value={{
         user: props.user,
-        isAdmin: props.role === "ADMIN"
+        isAdmin: props.role === "ADMIN",
+        baseUrl: props.baseUrl,
       }}
     >
       <div className="flex flex-col justify-center">
         <button className="text-2xl font-bold text-gray-500" onClick={() => setIsAdmin(!isAdmin)}>{isAdmin ? 'Admin' : 'Agent'} View</button>
         {isAdmin ? (
-          <AdminLayout baseUrl={props.baseUrl} />
+          <AdminLayout />
         ) : (
-          <AgentLayout baseUrl={props.baseUrl} />
+          <AgentLayout />
         )}
       </div>
     </HomepageContext.Provider>

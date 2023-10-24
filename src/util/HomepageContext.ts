@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { User, Role } from "@prisma/client";
 
-export const HomepageContext = createContext<{user: User, isAdmin: boolean}>({
+export const HomepageContext = createContext<{user: User, isAdmin: boolean, baseUrl: string}>({
   user: {
     id: "",
     name: "",
@@ -10,5 +10,6 @@ export const HomepageContext = createContext<{user: User, isAdmin: boolean}>({
     risk_percentage: 0,
     gabe_way: 0,
   },
-  isAdmin: false
+  isAdmin: false,
+  baseUrl: "",
 });
