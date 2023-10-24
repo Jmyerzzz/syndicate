@@ -22,6 +22,7 @@ async function main(date: Date) {
       user: {
         username: "asc",
       },
+      order: "asc",
     },
   })
 }
