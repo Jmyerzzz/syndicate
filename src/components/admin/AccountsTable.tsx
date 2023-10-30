@@ -3,7 +3,7 @@ import { Oval } from "react-loader-spinner";
 import AddWeeklyFigure from "../AddWeeklyFigure";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserAccounts, USDollar } from "@/types/types";
-import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faChevronDown, faChevronRight, faX } from "@fortawesome/free-solid-svg-icons";
 import EditAccount from "../EditAccount";
 import EditWeeklyFigure from "../EditWeeklyFigure";
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
@@ -136,8 +136,8 @@ const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, 
                       <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap w-1/12 font-medium border-l-2 border-slate-200`}>
                         <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-slate-700"}`}>
                           {USDollar.format(adjustmentsSum)}
-                          <button type="button" disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className={`ml-4 px-1 w-4/12 bg-slate-300 text-slate-500 rounded ${account.weeklyFigures.length > 0 && "hover:bg-slate-400"}`}>
-                            {stiffed ? "Unstiff" : "Stiff"}
+                          <button type="button" disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="px-1 text-slate-500 rounded">
+                            {stiffed ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}
                           </button>
                         </div>
                       </td>

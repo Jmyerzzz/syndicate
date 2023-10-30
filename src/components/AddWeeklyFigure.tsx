@@ -53,7 +53,7 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
   return (
     <div>
       <button
-        className={`ml-2 px-2 text-slate-100 bg-blue-400 ${props.account.weeklyFigures.length === 0 && "hover:bg-blue-500"} rounded`}
+        className="ml-2 px-2 text-slate-100 bg-blue-400 hover:bg-blue-500 rounded"
         disabled={props.account.weeklyFigures.length > 0}
         onClick={openModal}
       >

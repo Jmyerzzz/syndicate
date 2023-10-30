@@ -54,7 +54,7 @@ const EditWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure: 
   return (
     <div>
       <button
-        className={`ml-2 px-2 w-[47px] text-slate-100 bg-blue-400 ${props.account.weeklyFigures.length === 0 && "hover:bg-blue-500"} rounded`}
+        className="ml-2 px-2 w-[47px] text-slate-100 bg-blue-400 hover:bg-blue-500 rounded"
         onClick={openModal}
       >
         Edit
