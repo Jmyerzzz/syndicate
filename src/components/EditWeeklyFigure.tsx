@@ -54,7 +54,7 @@ const EditWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure: 
   return (
     <div>
       <button
-        className={`ml-2 px-2 w-[47px] text-gray-100 bg-blue-400 ${props.account.weeklyFigures.length === 0 && "hover:bg-blue-500"} rounded`}
+        className={`ml-2 px-2 w-[47px] text-slate-100 bg-blue-400 ${props.account.weeklyFigures.length === 0 && "hover:bg-blue-500"} rounded`}
         onClick={openModal}
       >
         Edit
@@ -64,7 +64,7 @@ const EditWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure: 
         <div className="max-w-md mx-auto">
           <form onSubmit={handleAddAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
-              <label htmlFor="amount" className="block text-gray-700 font-semibold">
+              <label htmlFor="amount" className="block text-slate-700 font-semibold">
                 Amount
               </label>
               <input
@@ -78,12 +78,12 @@ const EditWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure: 
                       event.preventDefault();
                   }
                 }}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="mb-2 block text-xl text-gray-700 font-semibold">
+              <label htmlFor="website" className="mb-2 block text-xl text-slate-700 font-semibold">
                 Operation
               </label>
               <div className="flex flex-row items-center">
@@ -93,9 +93,9 @@ const EditWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure: 
                   name="operation"
                   value="credit"
                   onChange={handleChange}
-                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
+                  className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="creditOperation" className="block text-gray-700 font-semibold hover:cursor-pointer">
+                <label htmlFor="creditOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
                   Credit (+)
                 </label>
               </div>
@@ -106,9 +106,9 @@ const EditWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure: 
                   name="operation"
                   value="debit"
                   onChange={handleChange}
-                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
+                  className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="debitOperation" className="block text-gray-700 font-semibold hover:cursor-pointer">
+                <label htmlFor="debitOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
                   Debit (-)
                 </label>
               </div>
@@ -116,7 +116,7 @@ const EditWeeklyFigure = (props: {baseUrl: string, account?: any, weeklyFigure: 
             <div className="mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-gray-100 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-slate-100 rounded hover:bg-blue-600"
               >
                 Update
               </button>

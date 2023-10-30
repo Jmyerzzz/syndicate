@@ -23,9 +23,6 @@ async function main(date: Date, username: string) {
         },
       },
     },
-    orderBy: {
-      order: "asc"
-    }
   })
 }
 

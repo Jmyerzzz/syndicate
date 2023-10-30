@@ -18,7 +18,7 @@ const AddUser = (props: {setRefreshKey: any}) => {
   return (
     <div className="flex items-center justify-center w-full">
       <button
-        className="w-full py-1 text-gray-100"
+        className="w-full py-1 text-slate-100"
         onClick={openModal}
       >
         <FontAwesomeIcon icon={faPlus} size={"lg"} />

@@ -19,7 +19,7 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
     name: props.user.name,
     username: props.user.username,
     risk: props.user.risk_percentage,
-    gabeWay: props.user.gabe_way || ''
+    gabeWay: props.user.gabe_way
   });
 
   const handleChange = (e: any) => {
@@ -69,7 +69,7 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
         <div className="max-w-md mx-auto p-4">
           <form onSubmit={handleEditAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
-              <label htmlFor="name" className="block text-gray-700 font-semibold">
+              <label htmlFor="name" className="block text-slate-700 font-semibold">
                 Name
               </label>
               <input
@@ -78,12 +78,12 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="username" className="block text-gray-700 font-semibold">
+              <label htmlFor="username" className="block text-slate-700 font-semibold">
                 Username
               </label>
               <input
@@ -92,12 +92,12 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="risk" className="block text-gray-700 font-semibold">
+              <label htmlFor="risk" className="block text-slate-700 font-semibold">
                 Risk
               </label>
               <input
@@ -106,12 +106,12 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
                 name="risk"
                 value={formData.risk}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="gabeWay" className="block text-gray-700 font-semibold">
+              <label htmlFor="gabeWay" className="block text-slate-700 font-semibold">
                 Gabe Way
               </label>
               <input
@@ -120,14 +120,14 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
                 name="gabeWay"
                 value={formData.gabeWay}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-gray-100 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-slate-100 rounded hover:bg-blue-600"
               >
                 Update User
               </button>

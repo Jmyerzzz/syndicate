@@ -55,13 +55,13 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
   return (
     <div className={`flex flex-grow items-center justify-center bg-[17,23,41] ${props.title === "Log In" && "h-screen"}`}>
       <div className="bg-white p-8 rounded w-80">
-        <h2 className="text-2xl text-gray-600 font-bold mb-4">{props.title}</h2>
+        <h2 className="text-2xl text-slate-600 font-bold mb-4">{props.title}</h2>
         <Formik initialValues={initialValues} onSubmit={(values, actions) => handleSubmit(values, actions)}>
           {({ isSubmitting }) => (
             <Form>
               {props.title === "Sign Up" &&
                 <>
-                  <div className="mb-4 text-gray-500">
+                  <div className="mb-4 text-slate-500">
                     <label htmlFor="name" className="block font-medium">
                       Name
                     </label>
@@ -69,13 +69,13 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
                       type="name"
                       id="name"
                       name="name"
-                      className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
+                      className="form-input w-full mt-1 px-1 text-slate-600 border border-solid border-slate-600 rounded"
                     />
                     {error && error.toLowerCase().includes("name required") &&
                       <div className="text-red-500">{error}</div>
                     }
                   </div>
-                  <div className="mb-4 text-gray-500">
+                  <div className="mb-4 text-slate-500">
                     <label htmlFor="risk" className="block font-medium">
                       Risk %
                     </label>
@@ -83,13 +83,13 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
                       type="number"
                       id="risk"
                       name="risk"
-                      className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
+                      className="form-input w-full mt-1 px-1 text-slate-600 border border-solid border-slate-600 rounded"
                     />
                     {error && error.toLowerCase().includes("risk") &&
                       <div className="text-red-500">{error}</div>
                     }
                   </div>
-                  <div className="mb-4 text-gray-500">
+                  <div className="mb-4 text-slate-500">
                     <label htmlFor="gabeWay" className="block font-medium">
                       G Way %
                     </label>
@@ -97,7 +97,7 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
                       type="number"
                       id="gabeWay"
                       name="gabeWay"
-                      className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
+                      className="form-input w-full mt-1 px-1 text-slate-600 border border-solid border-slate-600 rounded"
                     />
                     {error && error.toLowerCase().includes("risk") &&
                       <div className="text-red-500">{error}</div>
@@ -106,7 +106,7 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
                 </>
               }
 
-              <div className="mb-4 text-gray-500">
+              <div className="mb-4 text-slate-500">
                 <label htmlFor="username" className="block font-medium">
                   Username
                 </label>
@@ -114,14 +114,14 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
                   type="username"
                   id="username"
                   name="username"
-                  className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
+                  className="form-input w-full mt-1 px-1 text-slate-600 border border-solid border-slate-600 rounded"
                 />
                 {error && error.toLowerCase().includes("username") &&
                   <div className="text-red-500">{error}</div>
                 }
               </div>
 
-              <div className="mb-4 text-gray-500">
+              <div className="mb-4 text-slate-500">
                 <label htmlFor="password" className="block font-medium">
                   Password
                 </label>
@@ -129,7 +129,7 @@ const UserForm = (props: {title: string, action: string, setRefreshKey?: any}) =
                   type="password"
                   id="password"
                   name="password"
-                  className="form-input w-full mt-1 px-1 text-gray-600 border border-solid border-gray-600 rounded"
+                  className="form-input w-full mt-1 px-1 text-slate-600 border border-solid border-slate-600 rounded"
                 />
                 {error && error.toLowerCase().includes("password") &&
                   <div className="text-red-500">{error}</div>

@@ -18,7 +18,6 @@ async function main(accountData: any, accountId: any) {
       ip_location: accountData.ipLocation,
       credit_line: parseInt(accountData.creditLine),
       max_win: parseInt(accountData.maxWin),
-      order: parseInt(accountData.order),
     },
   })
 }

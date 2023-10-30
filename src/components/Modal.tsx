@@ -28,15 +28,15 @@ const Modal = (props: { isOpen: boolean, onClose: () => void, title: string, chi
       <div className="fixed inset-0 bg-black opacity-50 modal-overlay"></div>
       <div className="bg-white rounded-lg w-80 z-50">
         <div className="flex justify-between items-center px-4 py-2 border-b">
-          <h2 className="text-xl font-semibold text-gray-700">{props.title}</h2>
+          <h2 className="text-xl font-semibold text-slate-700">{props.title}</h2>
           <button
-            className="text-gray-700"
+            className="text-slate-700"
             onClick={props.onClose}
           >
             <FontAwesomeIcon icon={faX} size={"lg"} />
           </button>
         </div>
-        <div className="p-4">{props.children}</div>
+        {isOpen && <div className="p-4">{props.children}</div>}
       </div>
     </div>
   );

@@ -53,7 +53,7 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
   return (
     <div>
       <button
-        className={`ml-2 px-2 text-gray-100 bg-blue-400 ${props.account.weeklyFigures.length === 0 && "hover:bg-blue-500"} rounded`}
+        className={`ml-2 px-2 text-slate-100 bg-blue-400 ${props.account.weeklyFigures.length === 0 && "hover:bg-blue-500"} rounded`}
         disabled={props.account.weeklyFigures.length > 0}
         onClick={openModal}
       >
@@ -62,12 +62,12 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
 
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Add Weekly Figure">
         <div className="max-w-md mx-auto">
-          <div className="px-4 text-xl text-gray-700 font-semibold">
+          <div className="px-4 text-xl text-slate-700 font-semibold">
             {props.account.website}
           </div>
           <form onSubmit={handleAddAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
-              <label htmlFor="amount" className="block text-gray-700 font-semibold">
+              <label htmlFor="amount" className="block text-slate-700 font-semibold">
                 Amount
               </label>
               <input
@@ -81,12 +81,12 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                       event.preventDefault();
                   }
                 }}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="mb-2 block text-xl text-gray-700 font-semibold">
+              <label htmlFor="website" className="mb-2 block text-xl text-slate-700 font-semibold">
                 Operation
               </label>
               <div className="flex flex-row items-center">
@@ -96,9 +96,9 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                   name="operation"
                   value="credit"
                   onChange={handleChange}
-                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
+                  className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="creditOperation" className="block text-gray-700 font-semibold hover:cursor-pointer">
+                <label htmlFor="creditOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
                   Credit (+)
                 </label>
               </div>
@@ -109,9 +109,9 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                   name="operation"
                   value="debit"
                   onChange={handleChange}
-                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
+                  className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="debitOperation" className="block text-gray-700 font-semibold hover:cursor-pointer">
+                <label htmlFor="debitOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
                   Debit (-)
                 </label>
               </div>
@@ -119,7 +119,7 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
             <div className="mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-gray-100 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-slate-100 rounded hover:bg-blue-600"
               >
                 Add
               </button>

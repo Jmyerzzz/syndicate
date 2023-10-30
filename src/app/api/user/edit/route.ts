@@ -6,17 +6,32 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main(userId: string, userData: any) {
-  return await prisma.user.update({
-    where: {
-      id: userId
-    },
-    data: {
-      name: userData.name,
-      username: userData.username,
-      risk_percentage: userData.risk,
-      gabe_way: parseInt(userData.gabeWay)
-    }
-  })
+  if (userData.order) {
+    return await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        name: userData.name,
+        username: userData.username,
+        risk_percentage: userData.risk,
+        gabe_way: parseInt(userData.gabeWay),
+        order: userData.order
+      }
+    })
+  } else {
+    return await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        name: userData.name,
+        username: userData.username,
+        risk_percentage: userData.risk,
+        gabe_way: parseInt(userData.gabeWay)
+      }
+    })
+  }
 }
 
 export const POST = async (request: NextRequest) => {

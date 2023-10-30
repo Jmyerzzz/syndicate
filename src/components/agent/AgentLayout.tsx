@@ -5,7 +5,7 @@ import TransactionsTable from "../TransactionsTable";
 import AgentsAccountsTable from "./AgentAccountsTable";
 import NavBar from "../NavBar";
 import { UserAccounts } from "@/types/types";
-import { groupAccountsByUser } from "@/util/util";
+import { groupAccountsByUser, sortUserAccountsByIds } from "@/util/util";
 import { HomepageContext } from "@/util/HomepageContext";
 
 const AgentLayout = () => {
@@ -28,7 +28,7 @@ const AgentLayout = () => {
     })
     .then((response) => response.json())
     .then((data) => {
-      setGroupedAccounts(groupAccountsByUser(data));
+      setGroupedAccounts(sortUserAccountsByIds(groupAccountsByUser(data), user.order));
       setIsLoading(false);
     })
   },[selectedStartOfWeek, refreshKey, baseUrl, user])

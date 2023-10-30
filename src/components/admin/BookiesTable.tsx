@@ -23,7 +23,7 @@ const TableRows = (props: {groupedByBookie: BookieData[]}) => {
   props.groupedByBookie.map((bookie: BookieData, index0: number) => {
     elements.push(
       <tr key={bookie.name + index0} onClick={() => handleRowClick(index0)}>
-        <td colSpan={12} className="px-3 bg-gray-500 text-gray-100 text-lg hover:cursor-pointer">
+        <td colSpan={12} className="px-3 bg-slate-500 text-slate-100 text-lg hover:cursor-pointer">
           {!collapsedRows.includes(index0) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
           {bookie.name}
         </td>
@@ -33,7 +33,7 @@ const TableRows = (props: {groupedByBookie: BookieData[]}) => {
       !collapsedRows.includes(index0) && (
         elements.push(
           <tr key={bookie.name + website.website + index1}>
-            <td colSpan={12} className="px-3 bg-blue-200 text-gray-700 text-lg hover:cursor-pointer">
+            <td colSpan={12} className="px-3 bg-blue-200 text-slate-700 text-lg hover:cursor-pointer">
               {website.website}
             </td>
           </tr>
@@ -42,7 +42,7 @@ const TableRows = (props: {groupedByBookie: BookieData[]}) => {
       website.accounts.map((account, index2) => {
         !collapsedRows.includes(index0) && (
           elements.push(
-            <tr key={account.id + "accounts" + index2} className="bg-white text-gray-700">
+            <tr key={account.id + "accounts" + index2} className="bg-white text-slate-700">
               <td className="px-3 py-2 whitespace-no-wrap">{index2+1}</td>
               <td className="px-3 py-2 w-1/12 whitespace-no-wrap"></td>
               <td className="px-3 py-2 whitespace-no-wrap">{account.user.name}</td>
@@ -74,37 +74,37 @@ const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolea
     <>
       <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
         <table className="table-auto min-w-full">
-          <thead className="text-gray-100">
+          <thead className="text-slate-100">
             <tr>
-              <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 #
               </th>
-              <th className="px-3 py-3 w-1/12 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider"></th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 w-1/12 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider"></th>
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 Agent
               </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 Referral
               </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 Username
               </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 Password
               </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 IP Address
               </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 Credit Line
               </th>
-              <th className="px-3 py-3 bg-gray-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 Max Win
               </th>
             </tr>
           </thead>
           {/* <DraggableTableRows /> */}
-          <tbody className="text-gray-700">
+          <tbody className="text-slate-700">
             {
               props.isLoading ? (
                 <tr>

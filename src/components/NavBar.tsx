@@ -33,14 +33,14 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
           WAGERS
         </div>
         <div className="2xl:hidden mb-3">
-          <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
+          <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-slate-100">
             Log Out
             <div>
               <FontAwesomeIcon icon={faRightFromBracket} className="ml-2" />
             </div>
           </button>
         </div>
-        <div className="flex flex-col 2xl:flex-row 2xl:w-2/3 items-center justify-center text-gray-100">
+        <div className="flex flex-col 2xl:flex-row 2xl:w-2/3 items-center justify-center text-slate-100">
           <button className={`flex flex-row items-center mb-3 2xl:mb-0 px-3 text-2xl uppercase ${props.tab === "accounts" && "text-blue-400 border-b border-solid border-blue-400"}`} onClick={() => props.setTab("accounts")}>
             <FontAwesomeIcon icon={faSackDollar} width={20} className="mr-2" />
             <div>
@@ -79,7 +79,7 @@ const NavBar = (props: {baseUrl: string, isAdmin: boolean, tab: string, setTab: 
           )}
         </div>
         <div className="hidden 2xl:flex 2xl:justify-end 2xl:w-1/6">
-          <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-gray-100">
+          <button onClick={() => logOut()} className="flex flex-row items-center px-2 text-slate-100">
             Log Out
             <div>
               <FontAwesomeIcon icon={faRightFromBracket} className="ml-2" />

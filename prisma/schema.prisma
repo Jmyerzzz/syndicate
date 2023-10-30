@@ -28,7 +28,8 @@ model User {
   username        String
   role            Role      @default(AGENT)
   risk_percentage Int
-  gabe_way        Int?
+  gabe_way        Int
+  order           String[]
   Session         Session[]
   Key             Key[]
   Account         Account[]
@@ -46,7 +47,6 @@ model Account {
   ip_location   String
   credit_line   Int
   max_win       Int
-  order         Int?
   weeklyFigures WeeklyFigure[]
 }
 

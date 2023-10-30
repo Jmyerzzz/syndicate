@@ -18,16 +18,11 @@ async function main(date: Date) {
         },
       },
     },
-    orderBy: [
-      {
-        order: "asc",
+    orderBy: {
+      user: {
+        username: "asc",
       },
-      {
-        user: {
-          username: "asc",
-        },
-      }
-    ],
+    }
   })
 }
 

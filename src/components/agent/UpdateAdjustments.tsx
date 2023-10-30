@@ -80,7 +80,7 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
   return (
     <div>
       <button
-        className={`ml-5 px-2 text-gray-100 bg-blue-400 ${props.weeklyFigure && "hover:bg-blue-600"} rounded`}
+        className={`ml-5 px-2 text-slate-100 bg-blue-400 ${props.weeklyFigure && "hover:bg-blue-600"} rounded`}
         disabled={!props.weeklyFigure}
         onClick={openModal}
       >
@@ -91,7 +91,7 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
         <div className="max-w-md mx-auto p-4">
           <form onSubmit={handleAddAccount} className="bg-white">
             <div className="mb-4">
-              <label htmlFor="amount" className="block text-gray-700 font-semibold">
+              <label htmlFor="amount" className="block text-slate-700 font-semibold">
                 Amount
               </label>
               <input
@@ -105,12 +105,12 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
                       event.preventDefault();
                   }
                 }}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="mb-2 block text-xl text-gray-700 font-semibold">
+              <label htmlFor="website" className="mb-2 block text-xl text-slate-700 font-semibold">
                 Operation
               </label>
               <div className="flex flex-row items-center">
@@ -120,9 +120,9 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
                   name="operation"
                   value="credit"
                   onChange={handleChange}
-                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
+                  className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="creditOperation" className="block text-gray-700 font-semibold hover:cursor-pointer">
+                <label htmlFor="creditOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
                   Credit (+)
                 </label>
               </div>
@@ -133,9 +133,9 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
                   name="operation"
                   value="debit"
                   onChange={handleChange}
-                  className="mr-3 text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
+                  className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="debitOperation" className="block text-gray-700 font-semibold hover:cursor-pointer">
+                <label htmlFor="debitOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
                   Debit (-)
                 </label>
               </div>
@@ -143,11 +143,11 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
             <div className="flex flex-row justify-between mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-gray-100 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-slate-100 rounded hover:bg-blue-600"
               >
                 Update
               </button>
-              <button type="button" onClick={() => zeroOut(props.weeklyFigure)} className="px-4 py-2 bg-red-500 text-gray-100 rounded hover:bg-red-600">
+              <button type="button" onClick={() => zeroOut(props.weeklyFigure)} className="px-4 py-2 bg-red-500 text-slate-100 rounded hover:bg-red-600">
                 Zero Out
               </button>
             </div>

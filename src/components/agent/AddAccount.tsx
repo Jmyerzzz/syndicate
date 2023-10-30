@@ -67,7 +67,7 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
   return (
     <div className="flex items-center justify-center w-full">
       <button
-        className="w-full py-1 text-gray-100"
+        className="w-full py-1 text-slate-100"
         onClick={openModal}
       >
         <FontAwesomeIcon icon={faPlus} size={"lg"} />
@@ -77,7 +77,7 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
         <div className="max-w-md mx-auto p-4">
           <form onSubmit={handleAddAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="website" className="block text-slate-700 font-semibold">
                 Website
               </label>
               <input
@@ -86,12 +86,12 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
                 name="website"
                 value={formData.website}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="bookie" className="block text-gray-700 font-semibold">
+              <label htmlFor="bookie" className="block text-slate-700 font-semibold">
                 Bookie
               </label>
               <input
@@ -100,12 +100,12 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
                 name="bookie"
                 value={formData.bookie}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="referral" className="block text-gray-700 font-semibold">
+              <label htmlFor="referral" className="block text-slate-700 font-semibold">
                 Referral
               </label>
               <input
@@ -114,12 +114,12 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
                 name="referral"
                 value={formData.referral}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="website" className="block text-slate-700 font-semibold">
                 UserName
               </label>
               <input
@@ -128,12 +128,12 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="website" className="block text-slate-700 font-semibold">
                 Password
               </label>
               <input
@@ -142,12 +142,12 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="website" className="block text-slate-700 font-semibold">
                 IP Address
               </label>
               <input
@@ -156,12 +156,12 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
                 name="ipLocation"
                 value={formData.ipLocation}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="website" className="block text-slate-700 font-semibold">
                 Credit Line
               </label>
               <input
@@ -170,12 +170,12 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
                 name="creditLine"
                 value={formData.creditLine}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-gray-700 font-semibold">
+              <label htmlFor="website" className="block text-slate-700 font-semibold">
                 Max Win
               </label>
               <input
@@ -184,14 +184,14 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
                 name="maxWin"
                 value={formData.maxWin}
                 onChange={handleChange}
-                className="w-full text-gray-500 border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-gray-100 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-slate-100 rounded hover:bg-blue-600"
               >
                 Add Account
               </button>
