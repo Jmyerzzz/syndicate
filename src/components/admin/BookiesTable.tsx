@@ -43,7 +43,7 @@ const TableRows = (props: {groupedByBookie: BookieData[]}) => {
         !collapsedRows.includes(index0) && (
           elements.push(
             <tr key={account.id + "accounts" + index2} className="bg-white text-slate-700">
-              <td className="px-3 py-2 whitespace-no-wrap">{index2+1}</td>
+              <td className={`px-3 py-2 whitespace-no-wrap ${index0 === props.groupedByBookie.length-1 && index2 === website.accounts.length-1 && "rounded-bl"}`}>{index2+1}</td>
               <td className="px-3 py-2 w-1/12 whitespace-no-wrap"></td>
               <td className="px-3 py-2 whitespace-no-wrap">{account.user.name}</td>
               <td className="px-3 py-2 whitespace-no-wrap">{account.referral}</td>
@@ -51,7 +51,7 @@ const TableRows = (props: {groupedByBookie: BookieData[]}) => {
               <td className="px-3 py-2 whitespace-no-wrap">{account.password}</td>
               <td className="px-3 py-2 whitespace-no-wrap">{account.ip_location}</td>
               <td className="px-3 py-2 whitespace-no-wrap">${account.credit_line.toLocaleString()}</td>
-              <td className="px-3 py-2 whitespace-no-wrap">${account.max_win.toLocaleString()}</td>
+              <td className={`px-3 py-2 whitespace-no-wrap ${index0 === props.groupedByBookie.length-1 && index2 === website.accounts.length-1 && "rounded-br"}`}>${account.max_win.toLocaleString()}</td>
             </tr>
           )
         )
@@ -76,7 +76,7 @@ const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolea
         <table className="table-auto min-w-full">
           <thead className="text-slate-100">
             <tr>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
                 #
               </th>
               <th className="px-3 py-3 w-1/12 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider"></th>
@@ -98,7 +98,7 @@ const BookiesTable = (props: {groupedAccounts: UserAccounts[], isLoading: boolea
               <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
                 Credit Line
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
                 Max Win
               </th>
             </tr>
