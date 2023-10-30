@@ -2,36 +2,13 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { PrismaClient } from '@prisma/client'
 import ObjectID from 'bson-objectid';
+import { getPageSession } from "auth/lucia";
 
 const prisma = new PrismaClient()
 
 async function main(weeklyFigure: any, adjustmentData: any, date: Date) {
   let newAmount: number;
   const amount = adjustmentData.amount;
-  // const existingWeeklyFigure = await prisma.weeklyFigure.findUnique({
-  //   where: {
-  //     id: weeklyFigureId,
-  //   },
-  // });
-
-  // if(existingWeeklyFigure) {
-  //   if (figureData.operation === "debit") {
-  //     newAmount = currentAmount - parseFloat(figureData.amount);
-  //   } else if (figureData.operation === "credit") {
-  //     newAmount = currentAmount + parseFloat(figureData.amount);
-  //   }
-
-  //   return await prisma.weeklyFigure.update({
-  //     where: {
-  //       id: existingWeeklyFigure.id
-  //     },
-  //     data: {
-  //       account_id: account.id,
-  //       amount: newAmount,
-  //       date: date,
-  //     },
-  //   })
-  // }
 
   if (adjustmentData.zero_out) {
     newAmount = parseFloat(weeklyFigure.amount) - parseFloat(amount);
@@ -57,6 +34,13 @@ async function main(weeklyFigure: any, adjustmentData: any, date: Date) {
 }
 
 export const POST = async (request: NextRequest) => {
+  const session = await getPageSession();
+  if (!session) {
+    return new Response(null, {
+      status: 401,
+    });
+  }
+
   const data = await request.json();
   const weeklyFigure = data.weeklyFigure;
   const adjustmentData = data.adjustmentData;

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import type { NextRequest } from "next/server";
 import { PrismaClient } from '@prisma/client'
+import { getPageSession } from "auth/lucia";
 
 const prisma = new PrismaClient()
 
@@ -27,6 +28,13 @@ async function main(date: Date, username: string) {
 }
 
 export const POST = async (request: NextRequest) => {
+  const session = await getPageSession();
+  if (!session) {
+    return new Response(null, {
+      status: 401,
+    });
+  }
+
   const data = await request.json();
   const date = data.date;
   const username = data.username;

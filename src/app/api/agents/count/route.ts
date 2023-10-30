@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from '@prisma/client'
+import { getPageSession } from "auth/lucia";
 
 const prisma = new PrismaClient()
 
@@ -12,6 +13,13 @@ async function main() {
 }
 
 export const GET = async () => {
+  const session = await getPageSession();
+  if (!session) {
+    return new Response(null, {
+      status: 401,
+    });
+  }
+
   try {
     const count = await main()
     return new Response(JSON.stringify(count), {

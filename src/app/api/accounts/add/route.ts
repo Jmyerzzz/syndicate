@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { PrismaClient } from '@prisma/client'
 import ObjectID from 'bson-objectid';
+import { getPageSession } from "auth/lucia";
 
 const prisma = new PrismaClient()
 
@@ -28,6 +29,13 @@ export const POST = async (request: NextRequest) => {
   const accountData = data.accountData
 
   try {
+    const session = await getPageSession();
+    if (!session) {
+      return new Response(null, {
+        status: 401,
+      });
+    }
+
     await main(user, accountData)
     return new Response(null, {
       status: 200,
