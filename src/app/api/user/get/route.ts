@@ -15,13 +15,6 @@ async function main(userId: string) {
 }
 
 export const POST = async (request: NextRequest) => {
-  const session = await getPageSession();
-  if (!session) {
-    return new Response(null, {
-      status: 401,
-    });
-  }
-
   const data = await request.json();
   const userId = data.userId;
   try {
