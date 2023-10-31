@@ -1,4 +1,5 @@
 import './globals.css';
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
@@ -24,6 +25,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.className} ${akiraSB.variable}`}>
         {children}
+        <Analytics />
       </body>
     </html>
   )
