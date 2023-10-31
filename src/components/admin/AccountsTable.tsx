@@ -7,6 +7,7 @@ import { faCheck, faChevronDown, faChevronRight, faX } from "@fortawesome/free-s
 import EditAccount from "../EditAccount";
 import EditWeeklyFigure from "../EditWeeklyFigure";
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import { Tooltip } from "@material-tailwind/react";
 
 const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], setWeeklyTotal: any, setTotalCollected: any, setRefreshKey: any}) => {
   let weeklyTotal = 0, totalCollected = 0
@@ -57,7 +58,7 @@ const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, 
         <tr key={user.username} onClick={() => handleRowClick(index0)}>
           <td colSpan={12} className="px-3 bg-slate-500 text-slate-100 text-lg hover:cursor-pointer">
             {!collapsedRows.includes(index0) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
-            {user.username} - {user.risk}%
+            {user.username} - {user.risk}% Risk
           </td>
         </tr>
       </tbody>
@@ -136,8 +137,10 @@ const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, 
                       <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap w-1/12 font-medium border-l-2 border-slate-200`}>
                         <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-slate-700"}`}>
                           {USDollar.format(adjustmentsSum)}
-                          <button type="button" disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="px-1 text-slate-500 rounded">
-                            {stiffed ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}
+                          <button type="button" id={`tooltip-${account.id}`} disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="px-1 text-slate-500 rounded">
+                            <Tooltip placement="right" content={stiffed ? "UNSTIFF" : "STIFF"} className={`text-gray-700 font-medium ${stiffed ? "bg-green-300/40" : "bg-red-300/40"} backdrop-blur-md shadow-xl shadow-black/30`}>
+                              {stiffed ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}
+                            </Tooltip>
                           </button>
                         </div>
                       </td>
