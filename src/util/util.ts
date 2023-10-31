@@ -1,4 +1,5 @@
 import { Account, UserAccounts, BookieData } from "@/types/types";
+import { User } from "@prisma/client";
 
 export const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
   const grouped: { [userId: string]: Account[] } = {};
@@ -115,3 +116,22 @@ export const sortAccountsByIds = (userAccounts: UserAccounts, accountIds: string
 
   return { ...userAccounts, accounts: sortedAccounts };
 }
+
+export const sortAgentsById = (agents: any[], agentIds: string[]) => {
+  const sortedObjects: User[] = [];
+  const objectMap: { [key: string]: User } = {};
+
+  // Create a map of objects using their IDs
+  for (const obj of agents) {
+    objectMap[obj.id] = obj;
+  }
+
+  // Push the objects in the order specified by idOrder
+  for (const id of agentIds) {
+    if (objectMap.hasOwnProperty(id)) {
+      sortedObjects.push(objectMap[id]);
+    }
+  }
+
+  return sortedObjects;
+};

@@ -30,6 +30,7 @@ model User {
   risk_percentage Int
   gabe_way        Int
   order           String[]
+  agent_order     String[]
   Session         Session[]
   Key             Key[]
   Account         Account[]

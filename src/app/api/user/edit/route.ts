@@ -20,6 +20,15 @@ async function main(userId: string, userData: any) {
         order: userData.order
       }
     })
+  } else if (userData.agentOrder) {
+    return await prisma.user.update({
+      where: {
+        id: userId
+      },
+      data: {
+        agent_order: userData.agentOrder
+      }
+    })
   } else {
     return await prisma.user.update({
       where: {

@@ -7,13 +7,13 @@ import TransactionsTable from "../TransactionsTable";
 import RunnersTable from "./RunnersTable";
 import NavBar from "../NavBar";
 import { UserAccounts } from "@/types/types";
-import { groupAccountsByUser, sortAccountsByIds } from "@/util/util";
+import { groupAccountsByUser, sortAccountsByIds, sortAgentsById } from "@/util/util";
 import BookiesTable from "./BookiesTable";
 import SummarySection from "./SummarySection";
 import { HomepageContext } from "@/util/HomepageContext";
 
 const AdminLayout = () => {
-  const {isAdmin, baseUrl} = useContext(HomepageContext);
+  const {user, isAdmin, baseUrl} = useContext(HomepageContext);
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(startOfWeek(addDays(new Date(), -7), { weekStartsOn: 1 }));
   const [selectedDate, setSelectedDate] = useState(selectedStartOfWeek || addDays(new Date(), -7));
   const [tab, setTab] = useState<string>("accounts");
@@ -47,7 +47,7 @@ const AdminLayout = () => {
       })
       .then((response) => response.json())
       .then((data) => {
-        setAgentList(data);
+        setAgentList(sortAgentsById(data, user.agent_order));
         setIsLoading(false);
       })
   },[baseUrl, refreshKey])

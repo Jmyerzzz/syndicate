@@ -177,7 +177,7 @@ const AgentsAccountsTable = (props: {baseUrl: string, currentUser: User|undefine
           <thead className="text-slate-100">
             <tr>
               <th colSpan={9} className="mx-auto px-3 py-3 bg-slate-700 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-slate-500 rounded-tl">
-                Accounts ({props.currentUser?.username} - {props.currentUser?.risk_percentage}% Risk)
+                Accounts ({props.currentUser?.username} - {props.currentUser?.risk_percentage}%)
               </th>
               <th rowSpan={2} className="mx-auto px-3 py-3 bg-slate-800 text-md font-bold uppercase tracking-wider text-center">
                 Weekly Figure

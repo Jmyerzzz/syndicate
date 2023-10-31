@@ -8,6 +8,7 @@ export type Account = {
     risk_percentage: number;
     gabe_way: number | null;
     order: Array<string>;
+    agent_order: Array<string> | null;
   };
   website: string;
   bookie: string;
