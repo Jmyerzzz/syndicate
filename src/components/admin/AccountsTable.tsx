@@ -58,7 +58,7 @@ const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, 
         <tr key={user.username} onClick={() => handleRowClick(index0)}>
           <td colSpan={12} className="px-3 bg-slate-500 text-slate-100 text-lg hover:cursor-pointer">
             {!collapsedRows.includes(index0) ? <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} /> : <FontAwesomeIcon icon={faChevronRight} className="mr-3" width={20} />}
-            {user.username} - {user.risk}% Risk
+            {user.username} - {user.risk}%
           </td>
         </tr>
       </tbody>
