@@ -7,7 +7,7 @@ import { faCheck, faChevronDown, faChevronRight, faX } from "@fortawesome/free-s
 import EditAccount from "../EditAccount";
 import EditWeeklyFigure from "../EditWeeklyFigure";
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { Tooltip } from "@material-tailwind/react";
+// import { Tooltip } from "@material-tailwind/react";
 
 const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, groupedAccounts: UserAccounts[], setWeeklyTotal: any, setTotalCollected: any, setRefreshKey: any}) => {
   let weeklyTotal = 0, totalCollected = 0
@@ -138,9 +138,10 @@ const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, 
                         <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-slate-700"}`}>
                           {USDollar.format(adjustmentsSum)}
                           <button type="button" id={`tooltip-${account.id}`} disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="px-1 text-slate-500 rounded">
-                            <Tooltip placement="right" content={stiffed ? "UNSTIFF" : "STIFF"} className={`text-gray-700 font-medium ${stiffed ? "bg-green-300/40" : "bg-red-300/40"} backdrop-blur-md shadow-xl shadow-black/30`}>
+                            {/* <Tooltip placement="right" content={stiffed ? "UNSTIFF" : "STIFF"} className={`text-gray-700 font-medium ${stiffed ? "bg-green-300/40" : "bg-red-300/40"} backdrop-blur-md shadow-xl shadow-black/30`}>
                               {stiffed ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}
-                            </Tooltip>
+                            </Tooltip> */}
+                            {stiffed ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}
                           </button>
                         </div>
                       </td>
