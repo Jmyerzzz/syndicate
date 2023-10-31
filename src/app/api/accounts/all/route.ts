@@ -9,7 +9,7 @@ const prisma = new PrismaClient()
 async function main(date: Date) {
   return await prisma.account.findMany({
     include: {
-      user:true,
+      user: true,
       weeklyFigures: {
         where: {
           week_start: date,
@@ -18,6 +18,11 @@ async function main(date: Date) {
           adjustments: true,
         },
       },
+    },
+    where: {
+      user: {
+        role: "AGENT"
+      }
     },
     orderBy: {
       user: {

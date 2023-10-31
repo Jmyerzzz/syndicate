@@ -33,7 +33,7 @@ const TableRows = (props: {groupedAccounts: UserAccounts[]}) => {
           )
           user.accounts.map((account: any, index0: number) => {
             account.weeklyFigures.map((figure: any, index1: number) => {
-              !collapsedRows.includes(index) && (
+              !collapsedRows.includes(index) && figure.amount !== 0 && (
                 elements.push(
                   <tr key={figure.id} className="px-3 py-2 whitespace-no-wrap bg-slate-200">
                     <td className={`px-3 py-2 whitespace-no-wrap text-slate-500 ${((index1 === account.weeklyFigures.length-1 || figure.adjustments.length === 0) && (index0 === user.accounts.length-1 && figure.adjustments.length === 0)) && "rounded-bl"}`}>FIGURE</td>
