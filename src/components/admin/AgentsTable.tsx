@@ -7,7 +7,6 @@ import { useState } from "react";
 const DraggableTableRows = (props: {baseUrl: string, agentList: any[], setRefreshKey: any}) => {
   const elements: JSX.Element[] = [];
   let agentList = props.agentList;
-  console.log("ROWS",agentList);
 
   const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
     userSelect: "none",
