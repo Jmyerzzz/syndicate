@@ -50,7 +50,7 @@ const AdminLayout = () => {
         setAgentList(sortAgentsById(data, user.agent_order));
         setIsLoading(false);
       })
-  },[baseUrl, refreshKey])
+  },[baseUrl, refreshKey, user.agent_order])
 
   return (
     <div className="mb-6 px-1 md:px-5">

@@ -10,6 +10,7 @@ export const HomepageContext = createContext<{user: User, isAdmin: boolean, base
     risk_percentage: 0,
     gabe_way: 0,
     order: [],
+    agent_order: [],
   },
   isAdmin: false,
   baseUrl: "",
