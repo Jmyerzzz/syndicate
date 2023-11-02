@@ -112,9 +112,9 @@ const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, 
                     >
                       <td className="px-3 py-2 whitespace-no-wrap w-1/24">{index1+1}</td>
                       <td className="px-3 py-2 whitespace-no-wrap w-3/24">
-                        <div className="flex flex-row items-center">
-                          <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={props.setRefreshKey} />
+                        <div className="group flex flex-row items-center">
                           {account.website}
+                          <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={props.setRefreshKey} />
                         </div>
                       </td>
                       <td className="px-3 py-2 whitespace-no-wrap w-3/24">{account.bookie}</td>
@@ -135,9 +135,9 @@ const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, 
                         </div>
                       </td>
                       <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap w-1/12 font-medium border-l-2 border-slate-200`}>
-                        <div className={`flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-slate-700"}`}>
+                        <div className={`group flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-slate-700"}`}>
                           {USDollar.format(adjustmentsSum)}
-                          <button type="button" id={`tooltip-${account.id}`} disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="px-1 text-slate-500 rounded">
+                          <button type="button" id={`tooltip-${account.id}`} disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="invisible group-hover:visible px-1 text-slate-500 rounded">
                             <Tooltip placement="right" content={stiffed ? "UNSTIFF" : "STIFF"} className={`text-gray-700 font-medium ${stiffed ? "bg-green-300/40" : "bg-red-300/40"} backdrop-blur-md shadow-xl shadow-black/30`}>
                               {stiffed ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}
                             </Tooltip>
@@ -244,13 +244,13 @@ const AccountsTable = (props: {baseUrl: string, selectedStartOfWeek: Date, group
               <th colSpan={9} className="mx-auto px-3 py-3 bg-slate-700 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-slate-500 rounded-tl">
                 Accounts
               </th>
-              <th rowSpan={2} className="mx-auto px-3 py-3 bg-slate-800 text-md font-bold uppercase tracking-wider text-center">
+              <th rowSpan={2} className="mx-auto px-3 py-3 bg-slate-800 text-sm font-bold uppercase tracking-wider text-center">
                 Weekly Figure
               </th>
-              <th rowSpan={2} className="px-3 py-3 bg-slate-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-slate-700">
+              <th rowSpan={2} className="px-3 py-3 bg-slate-800 text-sm font-bold uppercase tracking-wider text-center border-l-2 border-slate-700">
                 Adjustments
               </th>
-              <th rowSpan={2} className="px-3 py-3 bg-slate-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-slate-700 rounded-tr">
+              <th rowSpan={2} className="px-3 py-3 bg-slate-800 text-sm font-bold uppercase tracking-wider text-center border-l-2 border-slate-700 rounded-tr">
                 Balance
               </th>
             </tr>

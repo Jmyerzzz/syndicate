@@ -64,7 +64,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
   };
 
   return (
-    <div className="flex items-center pr-2">
+    <div className="invisible group-hover:visible flex items-center ml-2">
       <button
         className="text-blue-300"
         onClick={openModal}

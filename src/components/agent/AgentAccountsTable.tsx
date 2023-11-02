@@ -55,9 +55,9 @@ const DraggableTableRows = (props: {baseUrl: string, currentUser: User|undefined
                   >
                     <td className="px-3 py-2 whitespace-no-wrap w-1/24">{index1+1}</td>
                     <td className="px-3 py-2 whitespace-no-wrap w-3/24">
-                      <div className="flex flex-row items-center">
-                        <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={props.setRefreshKey} />
+                      <div className="group flex flex-row items-center">
                         {account.website}
+                        <EditAccount baseUrl={props.baseUrl} account={account} setRefreshKey={props.setRefreshKey} />
                       </div>
                     </td>
                     <td className="px-3 py-2 whitespace-no-wrap w-1/24">{account.bookie}</td>

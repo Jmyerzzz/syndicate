@@ -6,7 +6,7 @@ import localFont from 'next/font/local'
 
 const inter = Inter({ subsets: ['latin'] })
 const akiraSB = localFont({
-  src: '../../public/fonts/AkiraSuperBold.ttf',
+  src: '../../public/fonts/AkiraSuperBold.woff2',
   variable: '--font-asb',
 })
 
