@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Modal from "./Modal";
 
-const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOfWeek: Date, setRefreshKey: any}) => {
+const AddWeeklyFigure = (props: {
+  baseUrl: string;
+  account?: any;
+  selectedStartOfWeek: Date;
+  setRefreshKey: any;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -14,7 +19,7 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
 
   const [formData, setFormData] = useState({
     amount: 0,
-    operation: ''
+    operation: "",
   });
 
   const handleChange = (e: any) => {
@@ -33,18 +38,18 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
       body: JSON.stringify({
         account: props.account,
         figureData: formData,
-        date: props.selectedStartOfWeek
-      })
-    })
+        date: props.selectedStartOfWeek,
+      }),
+    });
 
     setTimeout(() => {
-      props.setRefreshKey((oldKey: number) => oldKey +1)
-    }, 1000)
+      props.setRefreshKey((oldKey: number) => oldKey + 1);
+    }, 1000);
 
     // Clear the form
     setFormData({
       amount: 0,
-      operation: ''
+      operation: "",
     });
 
     closeModal();
@@ -60,14 +65,21 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
         Add
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="Add Weekly Figure">
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Add Weekly Figure"
+      >
         <div className="max-w-md mx-auto">
           <div className="px-4 text-xl text-slate-700 font-semibold">
             {props.account.website}
           </div>
           <form onSubmit={handleAddAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
-              <label htmlFor="amount" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="amount"
+                className="block text-slate-700 font-semibold"
+              >
                 Amount
               </label>
               <input
@@ -78,7 +90,7 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                 onChange={handleChange}
                 onKeyDown={(event) => {
                   if (/\+|-/.test(event.key)) {
-                      event.preventDefault();
+                    event.preventDefault();
                   }
                 }}
                 className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
@@ -86,7 +98,10 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="mb-2 block text-xl text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="mb-2 block text-xl text-slate-700 font-semibold"
+              >
                 Operation
               </label>
               <div className="flex flex-row items-center">
@@ -98,7 +113,10 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                   onChange={handleChange}
                   className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="creditOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
+                <label
+                  htmlFor="creditOperation"
+                  className="block text-slate-700 font-semibold hover:cursor-pointer"
+                >
                   Credit (+)
                 </label>
               </div>
@@ -111,7 +129,10 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
                   onChange={handleChange}
                   className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="debitOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
+                <label
+                  htmlFor="debitOperation"
+                  className="block text-slate-700 font-semibold hover:cursor-pointer"
+                >
                   Debit (-)
                 </label>
               </div>
@@ -128,7 +149,7 @@ const AddWeeklyFigure = (props: {baseUrl: string, account?: any, selectedStartOf
         </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 export default AddWeeklyFigure;

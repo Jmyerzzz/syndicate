@@ -4,7 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { User } from "@prisma/client";
 
-const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
+const EditUser = (props: {
+  baseUrl: string;
+  user: User;
+  setRefreshKey: any;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -19,7 +23,7 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
     name: props.user.name,
     username: props.user.username,
     risk: props.user.risk_percentage,
-    gabeWay: props.user.gabe_way
+    gabeWay: props.user.gabe_way,
   });
 
   const handleChange = (e: any) => {
@@ -38,30 +42,27 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
       body: JSON.stringify({
         userId: props.user.id,
         userData: formData,
-      })
-    })
+      }),
+    });
 
     setTimeout(() => {
-      props.setRefreshKey((oldKey: number) => oldKey +1)
-    }, 1000)
+      props.setRefreshKey((oldKey: number) => oldKey + 1);
+    }, 1000);
 
     // Clear the form
     setFormData({
-      name: '',
-      username: '',
+      name: "",
+      username: "",
       risk: 0,
       gabeWay: 0,
-    })
+    });
 
     closeModal();
   };
 
   return (
     <div className="flex items-center pr-2">
-      <button
-        className="text-blue-200"
-        onClick={openModal}
-      >
+      <button className="text-blue-200" onClick={openModal}>
         <FontAwesomeIcon icon={faPenToSquare} size={"lg"} />
       </button>
 
@@ -69,7 +70,10 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
         <div className="max-w-md mx-auto p-4">
           <form onSubmit={handleEditAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
-              <label htmlFor="name" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="name"
+                className="block text-slate-700 font-semibold"
+              >
                 Name
               </label>
               <input
@@ -83,7 +87,10 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="username" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="username"
+                className="block text-slate-700 font-semibold"
+              >
                 Username
               </label>
               <input
@@ -97,7 +104,10 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="risk" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="risk"
+                className="block text-slate-700 font-semibold"
+              >
                 Risk
               </label>
               <input
@@ -111,7 +121,10 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="gabeWay" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="gabeWay"
+                className="block text-slate-700 font-semibold"
+              >
                 Gabe Way
               </label>
               <input
@@ -136,7 +149,7 @@ const EditUser = (props: {baseUrl: string, user: User, setRefreshKey: any}) => {
         </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 export default EditUser;

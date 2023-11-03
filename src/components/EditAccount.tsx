@@ -3,7 +3,11 @@ import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any}) => {
+const EditAccount = (props: {
+  baseUrl: string;
+  account: any;
+  setRefreshKey: any;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -41,21 +45,21 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
       body: JSON.stringify({
         accountId: props.account.id,
         accountData: formData,
-      })
-    })
+      }),
+    });
 
     setTimeout(() => {
-      props.setRefreshKey((oldKey: number) => oldKey +1)
-    }, 1000)
+      props.setRefreshKey((oldKey: number) => oldKey + 1);
+    }, 1000);
 
     // Clear the form
     setFormData({
-      website: '',
-      bookie: '',
-      referral: '',
-      username: '',
-      password: '',
-      ipLocation: '',
+      website: "",
+      bookie: "",
+      referral: "",
+      username: "",
+      password: "",
+      ipLocation: "",
       creditLine: 0,
       maxWin: 0,
     });
@@ -76,7 +80,10 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
         <div className="max-w-md mx-auto p-4">
           <form onSubmit={handleEditAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
-              <label htmlFor="website" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="block text-slate-700 font-semibold"
+              >
                 Website
               </label>
               <input
@@ -90,7 +97,10 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="bookie" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="bookie"
+                className="block text-slate-700 font-semibold"
+              >
                 Bookie
               </label>
               <input
@@ -104,7 +114,10 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="referral" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="referral"
+                className="block text-slate-700 font-semibold"
+              >
                 Referral
               </label>
               <input
@@ -118,7 +131,10 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="username" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="username"
+                className="block text-slate-700 font-semibold"
+              >
                 Username
               </label>
               <input
@@ -132,7 +148,10 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="password"
+                className="block text-slate-700 font-semibold"
+              >
                 Password
               </label>
               <input
@@ -146,7 +165,10 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="ipLocation" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="ipLocation"
+                className="block text-slate-700 font-semibold"
+              >
                 IP Address
               </label>
               <input
@@ -160,7 +182,10 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="creditLine" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="creditLine"
+                className="block text-slate-700 font-semibold"
+              >
                 Credit Line
               </label>
               <input
@@ -174,7 +199,10 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="maxWin" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="maxWin"
+                className="block text-slate-700 font-semibold"
+              >
                 Max Win
               </label>
               <input
@@ -199,7 +227,7 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
         </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 export default EditAccount;

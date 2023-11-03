@@ -1,78 +1,110 @@
 import { Oval } from "react-loader-spinner";
 import EditUser from "./EditUser";
 import AddUser from "./AddUser";
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useState } from "react";
 
-const DraggableTableRows = (props: {baseUrl: string, agentList: any[], setRefreshKey: any}) => {
+const DraggableTableRows = (props: {
+  baseUrl: string;
+  agentList: any[];
+  setRefreshKey: any;
+}) => {
   const elements: JSX.Element[] = [];
   let agentList = props.agentList;
 
   const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
     userSelect: "none",
-  
+
     background: isDragging && "#e9d5ff",
 
     display: isDragging && "table",
 
-    ...draggableStyle
+    ...draggableStyle,
   });
 
   elements.push(
     <Droppable key={"agentDroppable"} droppableId={"agentDroppable"}>
       {(provided) => (
-        <tbody ref={provided.innerRef} {...provided.droppableProps} className="text-slate-700">
+        <tbody
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+          className="text-slate-700"
+        >
           {agentList.map((agent, index) => {
-            return <Draggable key={agent.id + "draggable"} draggableId={agent.id.toString()} index={index}>
-              {(provided, snapshot) => (
-                <tr
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                  key={agent.id}
-                  className="even:bg-white odd:bg-slate-100"
-                  style={getItemStyle(
-                    snapshot.isDragging,
-                    provided.draggableProps.style
-                  )}
-                >
-                  <td className="px-3 py-2 whitespace-no-wrap text-slate-500">{index+1}</td>
-                  <td className="px-3 py-2 whitespace-no-wrap text-slate-500">
-                    <div className="flex flex-row items-center">
-                      <EditUser baseUrl={props.baseUrl} user={agent} setRefreshKey={props.setRefreshKey} />
-                      {agent.name}
-                    </div>
-                  </td>
-                  <td className="px-3 py-2 whitespace-no-wrap text-slate-500">{agent.username}</td>
-                  <td className="px-3 py-2 whitespace-no-wrap text-slate-500">{agent.role}</td>
-                  <td className="px-3 py-2 whitespace-no-wrap text-slate-500">{agent.risk_percentage}%</td>
-                  <td className="px-3 py-2 whitespace-no-wrap text-slate-500">{agent.gabe_way}%</td>
-                  <td className="px-3 py-2 whitespace-no-wrap text-slate-500">{100 - (agent.risk_percentage + (agent.gabe_way || 0))}%</td>
-                </tr>
-              )}
-            </Draggable>
+            return (
+              <Draggable
+                key={agent.id + "draggable"}
+                draggableId={agent.id.toString()}
+                index={index}
+              >
+                {(provided, snapshot) => (
+                  <tr
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    key={agent.id}
+                    className="even:bg-white odd:bg-slate-100"
+                    style={getItemStyle(
+                      snapshot.isDragging,
+                      provided.draggableProps.style
+                    )}
+                  >
+                    <td className="td-base text-slate-500">{index + 1}</td>
+                    <td className="td-base text-slate-500">
+                      <div className="flex flex-row items-center">
+                        <EditUser
+                          baseUrl={props.baseUrl}
+                          user={agent}
+                          setRefreshKey={props.setRefreshKey}
+                        />
+                        {agent.name}
+                      </div>
+                    </td>
+                    <td className="td-base text-slate-500">{agent.username}</td>
+                    <td className="td-base text-slate-500">{agent.role}</td>
+                    <td className="td-base text-slate-500">
+                      {agent.risk_percentage}%
+                    </td>
+                    <td className="td-base text-slate-500">
+                      {agent.gabe_way}%
+                    </td>
+                    <td className="td-base text-slate-500">
+                      {100 - (agent.risk_percentage + (agent.gabe_way || 0))}%
+                    </td>
+                  </tr>
+                )}
+              </Draggable>
+            );
           })}
           {provided.placeholder}
           <tr key={"addUser"}>
-            <td colSpan={7} className="bg-slate-400 hover:bg-slate-500 text-slate-100 rounded-b">
+            <td
+              colSpan={7}
+              className="bg-slate-400 hover:bg-slate-500 text-slate-100 rounded-b"
+            >
               <AddUser setRefreshKey={props.setRefreshKey} />
             </td>
           </tr>
         </tbody>
       )}
     </Droppable>
-  )
-  return elements
-}
+  );
+  return elements;
+};
 
-const AgentsTable = (props: {baseUrl: string, agentList: any[], isLoading: boolean, setRefreshKey: any}) => {
+const AgentsTable = (props: {
+  baseUrl: string;
+  agentList: any[];
+  isLoading: boolean;
+  setRefreshKey: any;
+}) => {
   const [agents, setAgents] = useState<any[]>(props.agentList);
 
   const reorder = (list: any[], startIndex: number, endIndex: number) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
-  
+
     return result;
   };
 
@@ -93,8 +125,8 @@ const AgentsTable = (props: {baseUrl: string, agentList: any[], isLoading: boole
         userData: {
           agentOrder: agentIdsOrder,
         },
-      })
-    })
+      }),
+    });
     setAgents(items);
   };
 
@@ -130,28 +162,35 @@ const AgentsTable = (props: {baseUrl: string, agentList: any[], isLoading: boole
           {props.isLoading ? (
             <tbody>
               <tr>
-                  <td colSpan={12} className="mx-auto py-3 text-center bg-[17, 23, 41]">
-                    <Oval
-                      height={60}
-                      width={60}
-                      color="#4287f5"
-                      wrapperStyle={{display: "flex", "justifyContent": "center"}}
-                      visible={true}
-                      ariaLabel='oval-loading'
-                      secondaryColor="#4d64ab"
-                      strokeWidth={2}
-                      strokeWidthSecondary={2}
-                    />
-                  </td>
-                </tr>
+                <td
+                  colSpan={12}
+                  className="mx-auto py-3 text-center bg-[17, 23, 41]"
+                >
+                  <Oval
+                    height={60}
+                    width={60}
+                    color="#4287f5"
+                    wrapperStyle={{ display: "flex", justifyContent: "center" }}
+                    visible={true}
+                    ariaLabel="oval-loading"
+                    secondaryColor="#4d64ab"
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                  />
+                </td>
+              </tr>
             </tbody>
           ) : (
-            <DraggableTableRows baseUrl={props.baseUrl} agentList={agents} setRefreshKey={props.setRefreshKey} />
+            <DraggableTableRows
+              baseUrl={props.baseUrl}
+              agentList={agents}
+              setRefreshKey={props.setRefreshKey}
+            />
           )}
         </table>
       </DragDropContext>
-  </div>
-  )
-}
+    </div>
+  );
+};
 
-export default AgentsTable
+export default AgentsTable;

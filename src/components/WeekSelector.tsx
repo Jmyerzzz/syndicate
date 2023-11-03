@@ -1,10 +1,18 @@
-import React, { useCallback } from 'react';
-import { startOfWeek, addDays, format } from 'date-fns';
+import React, { useCallback } from "react";
+import { startOfWeek, addDays, format } from "date-fns";
 import { Dispatch, SetStateAction } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronRight,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
-const WeekSelector = ( props: {selectedDate: Date, setSelectedDate: Dispatch<SetStateAction<Date>>, selectedStartOfWeek: Date, setSelectedStartOfWeek: Dispatch<SetStateAction<Date>>} ) => {
+const WeekSelector = (props: {
+  selectedDate: Date;
+  setSelectedDate: Dispatch<SetStateAction<Date>>;
+  selectedStartOfWeek: Date;
+  setSelectedStartOfWeek: Dispatch<SetStateAction<Date>>;
+}) => {
   const goToPreviousWeek = useCallback(() => {
     props.setSelectedDate((prevDate) => {
       const date = addDays(prevDate, -7);
@@ -33,8 +41,8 @@ const WeekSelector = ( props: {selectedDate: Date, setSelectedDate: Dispatch<Set
         <FontAwesomeIcon icon={faChevronLeft} size={"lg"} />
       </button>
       <div className="text-xs sm:text-xl font-bold text-slate-100 rounded">
-        Week of {format(startOfWeekDate, 'MMMM d, yyyy')} -{' '}
-        {format(endOfWeekDate, 'MMMM d, yyyy')}
+        Week of {format(startOfWeekDate, "MMMM d, yyyy")} -{" "}
+        {format(endOfWeekDate, "MMMM d, yyyy")}
       </div>
       <button
         className="px-3 ml-1 rounded text-slate-100 hover:text-blue-400"

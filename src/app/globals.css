@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer components {
+  .td-base {
+    @apply px-3 py-2;
+  }
+}

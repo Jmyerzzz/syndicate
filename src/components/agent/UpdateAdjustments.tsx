@@ -1,7 +1,13 @@
 import { useCallback, useState } from "react";
 import Modal from "../Modal";
 
-const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure: any, selectedStartOfWeek: any, setRefreshKey: any}) => {
+const UpdateAdjustments = (props: {
+  baseUrl: string;
+  account?: any;
+  weeklyFigure: any;
+  selectedStartOfWeek: any;
+  setRefreshKey: any;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -14,8 +20,8 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
 
   const [formData, setFormData] = useState({
     amount: undefined,
-    operation: '',
-    zero_out: false
+    operation: "",
+    zero_out: false,
   });
 
   const handleChange = (e: any) => {
@@ -35,63 +41,75 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
         weeklyFigure: props.weeklyFigure,
         adjustmentData: formData,
         date: props.selectedStartOfWeek,
-      })
-    })
+      }),
+    });
 
     setTimeout(() => {
-      props.setRefreshKey((oldKey: number) => oldKey +1)
-    }, 1000)
+      props.setRefreshKey((oldKey: number) => oldKey + 1);
+    }, 1000);
 
     // Clear the form
     setFormData({
       amount: undefined,
-      operation: '',
-      zero_out: false
+      operation: "",
+      zero_out: false,
     });
 
     closeModal();
   };
 
-  const zeroOut = useCallback((weeklyFigure: any) => {
-    let adjustmentSum = 0;
-    weeklyFigure.adjustments.map((adjustment: any) => {
-      adjustmentSum += adjustment.amount;
-    })
-    fetch(props.baseUrl + "/api/adjustment", {
-      method: "POST",
-      body: JSON.stringify({
-        weeklyFigure: weeklyFigure,
-        adjustmentData: {
-          amount: adjustmentSum,
-          operation: weeklyFigure.amount > 0 ? "credit" : "debit",
-          zero_out: true,
-        },
-        date: props.selectedStartOfWeek,
-      })
-    })
+  const zeroOut = useCallback(
+    (weeklyFigure: any) => {
+      let adjustmentSum = 0;
+      weeklyFigure.adjustments.map((adjustment: any) => {
+        adjustmentSum += adjustment.amount;
+      });
+      fetch(props.baseUrl + "/api/adjustment", {
+        method: "POST",
+        body: JSON.stringify({
+          weeklyFigure: weeklyFigure,
+          adjustmentData: {
+            amount: adjustmentSum,
+            operation: weeklyFigure.amount > 0 ? "credit" : "debit",
+            zero_out: true,
+          },
+          date: props.selectedStartOfWeek,
+        }),
+      });
 
-    setTimeout(() => {
-      props.setRefreshKey((oldKey: number) => oldKey +1)
-    }, 1000)
+      setTimeout(() => {
+        props.setRefreshKey((oldKey: number) => oldKey + 1);
+      }, 1000);
 
-    closeModal();
-  }, [props]);
+      closeModal();
+    },
+    [props]
+  );
 
   return (
     <div>
       <button
-        className={`ml-5 px-2 text-slate-100 bg-blue-400 ${props.weeklyFigure && "hover:bg-blue-600"} rounded`}
+        className={`ml-5 px-2 text-slate-100 bg-blue-400 ${
+          props.weeklyFigure && "hover:bg-blue-600"
+        } rounded`}
         disabled={!props.weeklyFigure}
         onClick={openModal}
       >
         Update
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="Update Adjustments">
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Update Adjustments"
+      >
         <div className="max-w-md mx-auto p-4">
           <form onSubmit={handleAddAccount} className="bg-white">
             <div className="mb-4">
-              <label htmlFor="amount" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="amount"
+                className="block text-slate-700 font-semibold"
+              >
                 Amount
               </label>
               <input
@@ -102,7 +120,7 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
                 onChange={handleChange}
                 onKeyDown={(event) => {
                   if (/\+|-/.test(event.key)) {
-                      event.preventDefault();
+                    event.preventDefault();
                   }
                 }}
                 className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
@@ -110,7 +128,10 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="mb-2 block text-xl text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="mb-2 block text-xl text-slate-700 font-semibold"
+              >
                 Operation
               </label>
               <div className="flex flex-row items-center">
@@ -122,7 +143,10 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
                   onChange={handleChange}
                   className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="creditOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
+                <label
+                  htmlFor="creditOperation"
+                  className="block text-slate-700 font-semibold hover:cursor-pointer"
+                >
                   Credit (+)
                 </label>
               </div>
@@ -135,7 +159,10 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
                   onChange={handleChange}
                   className="mr-3 text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500 hover:cursor-pointer"
                 />
-                <label htmlFor="debitOperation" className="block text-slate-700 font-semibold hover:cursor-pointer">
+                <label
+                  htmlFor="debitOperation"
+                  className="block text-slate-700 font-semibold hover:cursor-pointer"
+                >
                   Debit (-)
                 </label>
               </div>
@@ -147,7 +174,11 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
               >
                 Update
               </button>
-              <button type="button" onClick={() => zeroOut(props.weeklyFigure)} className="px-4 py-2 bg-red-500 text-slate-100 rounded hover:bg-red-600">
+              <button
+                type="button"
+                onClick={() => zeroOut(props.weeklyFigure)}
+                className="px-4 py-2 bg-red-500 text-slate-100 rounded hover:bg-red-600"
+              >
                 Zero Out
               </button>
             </div>
@@ -155,7 +186,7 @@ const UpdateAdjustments = (props: {baseUrl: string, account?: any, weeklyFigure:
         </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 export default UpdateAdjustments;

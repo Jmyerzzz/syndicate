@@ -4,7 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { User } from "@prisma/client";
 
-const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) => {
+const AddAccount = (props: {
+  baseUrl: string;
+  user?: User;
+  setRefreshKey: any;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -16,12 +20,12 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
   };
 
   const [formData, setFormData] = useState({
-    website: '',
-    bookie: '',
-    referral: '',
-    username: '',
-    password: '',
-    ipLocation: '',
+    website: "",
+    bookie: "",
+    referral: "",
+    username: "",
+    password: "",
+    ipLocation: "",
     creditLine: 0,
     maxWin: 0,
   });
@@ -41,22 +45,22 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
       method: "POST",
       body: JSON.stringify({
         accountData: formData,
-        user: props.user
-      })
-    })
+        user: props.user,
+      }),
+    });
 
     setTimeout(() => {
-      props.setRefreshKey((oldKey: number) => oldKey +1)
-    }, 1000)
+      props.setRefreshKey((oldKey: number) => oldKey + 1);
+    }, 1000);
 
     // Clear the form
     setFormData({
-      website: '',
-      bookie: '',
-      referral: '',
-      username: '',
-      password: '',
-      ipLocation: '',
+      website: "",
+      bookie: "",
+      referral: "",
+      username: "",
+      password: "",
+      ipLocation: "",
       creditLine: 0,
       maxWin: 0,
     });
@@ -66,10 +70,7 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
 
   return (
     <div className="flex items-center justify-center w-full">
-      <button
-        className="w-full py-1 text-slate-100"
-        onClick={openModal}
-      >
+      <button className="w-full py-1 text-slate-100" onClick={openModal}>
         <FontAwesomeIcon icon={faPlus} size={"lg"} />
       </button>
 
@@ -77,7 +78,10 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
         <div className="max-w-md mx-auto p-4">
           <form onSubmit={handleAddAccount} className="bg-white p-4 rounded">
             <div className="mb-4">
-              <label htmlFor="website" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="block text-slate-700 font-semibold"
+              >
                 Website
               </label>
               <input
@@ -91,7 +95,10 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="bookie" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="bookie"
+                className="block text-slate-700 font-semibold"
+              >
                 Bookie
               </label>
               <input
@@ -105,7 +112,10 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="referral" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="referral"
+                className="block text-slate-700 font-semibold"
+              >
                 Referral
               </label>
               <input
@@ -119,7 +129,10 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="block text-slate-700 font-semibold"
+              >
                 UserName
               </label>
               <input
@@ -133,7 +146,10 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="block text-slate-700 font-semibold"
+              >
                 Password
               </label>
               <input
@@ -147,7 +163,10 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="block text-slate-700 font-semibold"
+              >
                 IP Address
               </label>
               <input
@@ -161,7 +180,10 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="block text-slate-700 font-semibold"
+              >
                 Credit Line
               </label>
               <input
@@ -175,7 +197,10 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="website" className="block text-slate-700 font-semibold">
+              <label
+                htmlFor="website"
+                className="block text-slate-700 font-semibold"
+              >
                 Max Win
               </label>
               <input
@@ -200,7 +225,7 @@ const AddAccount = (props: {baseUrl: string, user?: User, setRefreshKey: any}) =
         </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 export default AddAccount;
