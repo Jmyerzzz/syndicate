@@ -64,9 +64,9 @@ const EditAccount = (props: {baseUrl: string, account: any, setRefreshKey: any})
   };
 
   return (
-    <div className="invisible group-hover:visible flex items-center ml-2">
+    <div className="flex items-center ml-2">
       <button
-        className="text-blue-300"
+        className="invisible group-hover:visible transition ease-in-out opacity-0 group-hover:opacity-100 duration-400 text-blue-300"
         onClick={openModal}
       >
         <FontAwesomeIcon icon={faPenToSquare} size={"lg"} />
