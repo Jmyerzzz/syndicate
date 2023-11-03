@@ -58,7 +58,7 @@ const AdminLayout = () => {
       {(tab === "accounts" || tab === "transactions" || tab === "runners") && <WeekSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} selectedStartOfWeek={selectedStartOfWeek} setSelectedStartOfWeek={setSelectedStartOfWeek} />}
       {tab === "accounts" &&
         <>
-          <SummarySection weeklyTotal={weeklyTotal} totalCollected={totalCollected} />
+          <SummarySection weeklyTotal={weeklyTotal} totalCollected={totalCollected} isLoading={isLoading} />
           <AccountsTable baseUrl={baseUrl} selectedStartOfWeek={selectedStartOfWeek} groupedAccounts={groupedAccounts} setWeeklyTotal={setWeeklyTotal} setTotalCollected={setTotalCollected} isLoading={isLoading} setRefreshKey={setRefreshKey} />
         </>
       }

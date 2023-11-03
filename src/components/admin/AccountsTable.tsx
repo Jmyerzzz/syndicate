@@ -135,9 +135,9 @@ const DraggableTableRows = (props: {baseUrl: string, selectedStartOfWeek: Date, 
                         </div>
                       </td>
                       <td className={`${account.weeklyFigures[0] && account.weeklyFigures[0].stiffed ? "bg-red-200" : ""} px-3 py-2 whitespace-no-wrap w-1/12 font-medium border-l-2 border-slate-200`}>
-                        <div className={`group flex flex-row justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-slate-700"}`}>
+                        <div className={`group flex flex-row justify-center hover:justify-between items-center ${adjustmentsSum > 0 ? "text-green-500" : adjustmentsSum < 0 ? "text-red-500" : "text-slate-700"}`}>
                           {USDollar.format(adjustmentsSum)}
-                          <button type="button" id={`tooltip-${account.id}`} disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="invisible group-hover:visible px-1 text-slate-500 rounded">
+                          <button type="button" id={`tooltip-${account.id}`} disabled={account.weeklyFigures.length === 0} onClick={() => markStiffed(account.weeklyFigures[0].id, !account.weeklyFigures[0].stiffed)} className="invisible group-hover:visible transition ease-in-out opacity-0 group-hover:opacity-100 duration-400 text-slate-500 rounded">
                             <Tooltip placement="right" content={stiffed ? "UNSTIFF" : "STIFF"} className={`text-gray-700 font-medium ${stiffed ? "bg-green-300/40" : "bg-red-300/40"} backdrop-blur-md shadow-xl shadow-black/30`}>
                               {stiffed ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}
                             </Tooltip>

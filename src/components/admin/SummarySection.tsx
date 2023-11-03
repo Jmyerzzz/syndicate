@@ -1,8 +1,8 @@
 import { USDollar } from "@/types/types"
 
-const SummarySection = (props: {weeklyTotal: number, totalCollected: number}) => {
+const SummarySection = (props: {weeklyTotal: number, totalCollected: number, isLoading: boolean}) => {
   return (
-    <div className="flex flex-col sm:flex-row 2xl:items-start 2xl:justify-center min-w-full mt-3 text-slate-100 bg-slate-700 rounded">
+    <div className={`${props.isLoading && "animate-pulse"} flex flex-col sm:flex-row 2xl:items-start 2xl:justify-center min-w-full mt-3 text-slate-100 bg-slate-700 rounded`}>
       <div className="flex flex-row flex-grow">
         <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-slate-700 rounded-tl sm:rounded-l">
           <div className="text-sm md:text-md">Weekly Total</div>
