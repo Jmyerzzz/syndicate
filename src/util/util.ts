@@ -14,26 +14,32 @@ export const groupAccountsByUser = (accounts: Account[]): UserAccounts[] => {
     grouped[username].push(account);
   });
 
-  const userAccountsArray: UserAccounts[] = Object.keys(grouped).map((username) => ({
-    username,
-    risk: grouped[username][0].user.risk_percentage!,
-    gabe_way: grouped[username][0].user.gabe_way!,
-    order: grouped[username][0].user.order!,
-    accounts: grouped[username],
-  }));
+  const userAccountsArray: UserAccounts[] = Object.keys(grouped).map(
+    (username) => ({
+      username,
+      risk: grouped[username][0].user.risk_percentage!,
+      gabe_way: grouped[username][0].user.gabe_way!,
+      order: grouped[username][0].user.order!,
+      accounts: grouped[username],
+    })
+  );
 
   return userAccountsArray;
-}
+};
 
-export const groupAccountsByBookie = (userAccounts: UserAccounts[]): BookieData[] => {
+export const groupAccountsByBookie = (
+  userAccounts: UserAccounts[]
+): BookieData[] => {
   const groupedData: { [key: string]: BookieData } = {};
 
   userAccounts.forEach((userAccount) => {
     userAccount.accounts.forEach((account) => {
       const compositeKey = `${account.bookie}_${account.website}`;
-      const [name, website] = compositeKey.split('_');
+      const [name, website] = compositeKey.split("_");
       if (groupedData[name]) {
-        const websiteExists = groupedData[name].websites.find((w) => w.website === website);
+        const websiteExists = groupedData[name].websites.find(
+          (w) => w.website === website
+        );
         if (websiteExists) {
           websiteExists.accounts.push(account);
         } else {
@@ -51,7 +57,10 @@ export const groupAccountsByBookie = (userAccounts: UserAccounts[]): BookieData[
   return Object.values(groupedData);
 };
 
-export const sortUserAccountsByIds = (userAccounts: UserAccounts[], accountIds: string[]): UserAccounts[] => {
+export const sortUserAccountsByIds = (
+  userAccounts: UserAccounts[],
+  accountIds: string[]
+): UserAccounts[] => {
   const sortedUserAccounts: UserAccounts[] = [];
 
   if (!accountIds || accountIds.length === 0) {
@@ -75,9 +84,9 @@ export const sortUserAccountsByIds = (userAccounts: UserAccounts[], accountIds: 
       }
     }
 
-    for (const id of accountIdsSet) {
-      if (userAccountsMap.has(id)) {
-        sortedAccounts.push(userAccountsMap.get(id)!);
+    for (const [id, account] of userAccountsMap) {
+      if (accountIdsSet.has(id)) {
+        sortedAccounts.push(account);
       }
     }
 
@@ -87,7 +96,10 @@ export const sortUserAccountsByIds = (userAccounts: UserAccounts[], accountIds: 
   return sortedUserAccounts;
 };
 
-export const sortAccountsByIds = (userAccounts: UserAccounts, accountIds: string[]): UserAccounts => {
+export const sortAccountsByIds = (
+  userAccounts: UserAccounts,
+  accountIds: string[]
+): UserAccounts => {
   if (!accountIds || accountIds.length === 0) {
     return userAccounts;
   }
@@ -108,29 +120,33 @@ export const sortAccountsByIds = (userAccounts: UserAccounts, accountIds: string
     }
   }
 
-  for (const id of accountIdsSet) {
-    if (userAccountsMap.has(id)) {
-      sortedAccounts.push(userAccountsMap.get(id)!);
+  for (const [id, account] of userAccountsMap) {
+    if (accountIdsSet.has(id)) {
+      sortedAccounts.push(account);
     }
   }
 
   return { ...userAccounts, accounts: sortedAccounts };
-}
+};
 
 export const sortAgentsById = (agents: any[], agentIds: string[]) => {
   const sortedObjects: User[] = [];
   const objectMap: { [key: string]: User } = {};
 
-  // Create a map of objects using their IDs
   for (const obj of agents) {
     objectMap[obj.id] = obj;
   }
 
-  // Push the objects in the order specified by idOrder
   for (const id of agentIds) {
     if (objectMap.hasOwnProperty(id)) {
       sortedObjects.push(objectMap[id]);
+      delete objectMap[id]; // Remove the object after it has been added to sortedObjects
     }
+  }
+
+  // Adding the remaining agents to the sorted list
+  for (const id in objectMap) {
+    sortedObjects.push(objectMap[id]);
   }
 
   return sortedObjects;

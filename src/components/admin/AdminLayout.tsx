@@ -64,7 +64,13 @@ const AdminLayout = () => {
 
   return (
     <div className="mb-6 px-1 md:px-5">
-      <NavBar baseUrl={baseUrl} isAdmin={isAdmin} tab={tab} setTab={setTab} />
+      <NavBar
+        baseUrl={baseUrl}
+        isAdmin={isAdmin}
+        agentsCount={agentList.length}
+        tab={tab}
+        setTab={setTab}
+      />
       {(tab === "accounts" || tab === "transactions" || tab === "runners") && (
         <WeekSelector
           selectedDate={selectedDate}

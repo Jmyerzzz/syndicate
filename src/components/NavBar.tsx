@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,27 +15,17 @@ import {
 const NavBar = (props: {
   baseUrl: string;
   isAdmin: boolean;
+  agentsCount?: number;
   tab: string;
   setTab: any;
 }) => {
   const router = useRouter();
-  const [agentsCount, setAgentsCount] = useState<number>(0);
 
   const logOut = useCallback(async () => {
     await fetch(props.baseUrl + "/api/logout", {
       method: "POST",
     }).then(() => router.refresh());
   }, [props.baseUrl, router]);
-
-  useEffect(() => {
-    fetch(props.baseUrl + "/api/agents/count", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setAgentsCount(data);
-      });
-  }, [props.baseUrl]);
 
   return (
     <nav className="mt-4 bg-[17, 23, 41]">
@@ -111,7 +101,7 @@ const NavBar = (props: {
                 onClick={() => props.setTab("agents")}
               >
                 <FontAwesomeIcon icon={faUser} width={20} className="mr-2" />
-                <div>Agents ({agentsCount})</div>
+                <div>Agents ({props.agentsCount})</div>
               </button>
             </>
           )}
