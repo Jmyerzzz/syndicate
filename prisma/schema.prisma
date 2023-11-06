@@ -34,6 +34,8 @@ model User {
   Session         Session[]
   Key             Key[]
   Account         Account[]
+
+  @@index([role])
 }
 
 model Account {
@@ -49,6 +51,8 @@ model Account {
   credit_line   Int
   max_win       Int
   weeklyFigures WeeklyFigure[]
+
+  @@index([username])
 }
 
 model WeeklyFigure {
