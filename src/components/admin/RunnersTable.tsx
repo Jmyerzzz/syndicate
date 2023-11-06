@@ -47,24 +47,24 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
             ? "bg-red-200"
             : weeklyFigureTotal !== adjustmentsTotal
             ? "bg-green-200"
-            : "even:bg-white odd:bg-slate-100"
+            : "even:bg-white odd:bg-zinc-100"
         }`}
       >
-        <td className="td-base text-slate-700">{index0 + 1}</td>
-        <td className="td-base text-slate-700">{user.accounts[0].user.name}</td>
-        <td className="td-base text-slate-700">
+        <td className="td-base text-zinc-700">{index0 + 1}</td>
+        <td className="td-base text-zinc-700">{user.accounts[0].user.name}</td>
+        <td className="td-base text-zinc-700">
           {user.accounts[0].user.username}
         </td>
-        <td className="td-base text-slate-700">
+        <td className="td-base text-zinc-700">
           {USDollar.format(weeklyFigureTotal)}
         </td>
-        <td className="td-base text-slate-700">
+        <td className="td-base text-zinc-700">
           {USDollar.format(adjustmentsTotal)}
         </td>
-        <td className="td-base text-slate-700 font-medium">
+        <td className="td-base text-zinc-700 font-medium">
           {USDollar.format((user.risk / 100) * weeklyFigureTotal)}
         </td>
-        <td className="td-base text-slate-700 font-medium">
+        <td className="td-base text-zinc-700 font-medium">
           {user.username !== "gabrieladzich"
             ? USDollar.format(
                 ((100 - user.risk + (user.gabe_way || 0)) / 100) *
@@ -72,7 +72,7 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
               )
             : USDollar.format(0)}
         </td>
-        <td className="td-base text-slate-700 font-medium">
+        <td className="td-base text-zinc-700 font-medium">
           {USDollar.format(
             ((100 - user.risk - (user.gabe_way || 0)) / 100) * weeklyFigureTotal
           )}
@@ -85,19 +85,19 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
       <td colSpan={3} className="px-3 py-2 text-right rounded-bl">
         Totals:
       </td>
-      <td className="td-base font-semibold text-slate-700">
+      <td className="td-base font-semibold text-zinc-700">
         {USDollar.format(weeklyTotal)}
       </td>
-      <td className="td-base font-semibold text-slate-700">
+      <td className="td-base font-semibold text-zinc-700">
         {USDollar.format(totalCollected)}
       </td>
-      <td className="td-base font-semibold text-slate-700">
+      <td className="td-base font-semibold text-zinc-700">
         {USDollar.format(agentsTotal)}
       </td>
-      <td className="td-base font-semibold text-slate-700">
+      <td className="td-base font-semibold text-zinc-700">
         {USDollar.format(gTotal)}
       </td>
-      <td className="td-base font-semibold text-slate-700 rounded-br">
+      <td className="td-base font-semibold text-zinc-700 rounded-br">
         {USDollar.format(tTotal)}
       </td>
     </tr>
@@ -118,35 +118,19 @@ const RunnersTable = (props: {
   return (
     <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <table className="table-auto min-w-full">
-        <thead className="text-slate-100">
+        <thead className="text-zinc-100">
           <tr>
-            <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider rounded-tl">
-              #
-            </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-              Name
-            </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-              Username
-            </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-              Weekly Figure Total
-            </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-              Adjustments Total
-            </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-              Agent Way
-            </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-              Gabe Way
-            </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider rounded-tr">
-              T Way
-            </th>
+            <th className="th-base rounded-tl">#</th>
+            <th className="th-base">Name</th>
+            <th className="th-base">Username</th>
+            <th className="th-base">Weekly Figure Total</th>
+            <th className="th-base">Adjustments Total</th>
+            <th className="th-base">Agent Way</th>
+            <th className="th-base">Gabe Way</th>
+            <th className="th-base rounded-tr">T Way</th>
           </tr>
         </thead>
-        <tbody className="text-slate-700">
+        <tbody className="text-zinc-700">
           {props.isLoading ? (
             <tr>
               <td

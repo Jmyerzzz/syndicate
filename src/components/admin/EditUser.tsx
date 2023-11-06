@@ -72,7 +72,7 @@ const EditUser = (props: {
             <div className="mb-4">
               <label
                 htmlFor="name"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Name
               </label>
@@ -82,14 +82,14 @@ const EditUser = (props: {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="username"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Username
               </label>
@@ -99,14 +99,14 @@ const EditUser = (props: {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="risk"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Risk
               </label>
@@ -116,14 +116,14 @@ const EditUser = (props: {
                 name="risk"
                 value={formData.risk}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="gabeWay"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Gabe Way
               </label>
@@ -133,14 +133,14 @@ const EditUser = (props: {
                 name="gabeWay"
                 value={formData.gabeWay}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-slate-100 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-zinc-100 rounded hover:bg-blue-600"
               >
                 Update User
               </button>

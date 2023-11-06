@@ -31,7 +31,7 @@ const TableRows = (props: { groupedByBookie: BookieData[] }) => {
       <tr key={bookie.name + index0} onClick={() => handleRowClick(index0)}>
         <td
           colSpan={12}
-          className="px-3 bg-slate-500 text-slate-100 text-lg hover:cursor-pointer"
+          className="px-3 bg-zinc-500 text-zinc-100 text-lg hover:cursor-pointer"
         >
           {!collapsedRows.includes(index0) ? (
             <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} />
@@ -52,7 +52,7 @@ const TableRows = (props: { groupedByBookie: BookieData[] }) => {
           <tr key={bookie.name + website.website + index1}>
             <td
               colSpan={12}
-              className="px-3 bg-blue-200 text-slate-700 text-lg hover:cursor-pointer"
+              className="px-3 bg-blue-200 text-zinc-700 text-lg hover:cursor-pointer"
             >
               {website.website}
             </td>
@@ -63,7 +63,7 @@ const TableRows = (props: { groupedByBookie: BookieData[] }) => {
           elements.push(
             <tr
               key={account.id + "accounts" + index2}
-              className="bg-white text-slate-700"
+              className="bg-white text-zinc-700"
             >
               <td
                 className={`td-base ${
@@ -116,37 +116,37 @@ const BookiesTable = (props: {
     <>
       <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
         <table className="table-auto min-w-full">
-          <thead className="text-slate-100">
+          <thead className="text-zinc-100">
             <tr>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
                 #
               </th>
-              <th className="px-3 py-3 w-1/12 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider"></th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 w-1/12 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider"></th>
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Agent
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Referral
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Username
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Password
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 IP Address
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Credit Line
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
                 Max Win
               </th>
             </tr>
           </thead>
           {/* <DraggableTableRows /> */}
-          <tbody className="text-slate-700">
+          <tbody className="text-zinc-700">
             {props.isLoading ? (
               <tr>
                 <td

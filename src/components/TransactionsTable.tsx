@@ -32,7 +32,7 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
           <tr key={"user" + index} onClick={() => handleRowClick(index)}>
             <td
               colSpan={6}
-              className="px-3 bg-slate-500 text-slate-100 text-lg hover:cursor-pointer"
+              className="px-3 bg-zinc-500 text-zinc-100 text-lg font-medium hover:cursor-pointer"
             >
               {!collapsedRows.includes(index) ? (
                 <FontAwesomeIcon
@@ -47,7 +47,7 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
                   width={20}
                 />
               )}
-              {user.username}
+              {user.name}
             </td>
           </tr>
         );
@@ -56,9 +56,9 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
             !collapsedRows.includes(index) &&
               figure.amount !== 0 &&
               elements.push(
-                <tr key={figure.id} className="bg-slate-200">
+                <tr key={figure.id} className="bg-zinc-200">
                   <td
-                    className={`td-base text-slate-500 ${
+                    className={`td-base text-zinc-500 ${
                       (index1 === account.weeklyFigures.length - 1 ||
                         figure.adjustments.length === 0) &&
                       index0 === user.accounts.length - 1 &&
@@ -79,13 +79,13 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
                         ? "text-green-500"
                         : figure.amount < 0
                         ? "text-red-500"
-                        : "text-slate-700"
+                        : "text-zinc-700"
                     }`}
                   >
                     {USDollar.format(figure.amount)}
                   </td>
                   <td
-                    className={`td-base text-slate-500 ${
+                    className={`td-base text-zinc-500 ${
                       (index1 === account.weeklyFigures.length - 1 ||
                         figure.adjustments.length === 0) &&
                       index0 === user.accounts.length - 1 &&
@@ -100,7 +100,7 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
                 elements.push(
                   <tr key={adjustment.id} className="bg-white">
                     <td
-                      className={`td-base text-slate-500 ${
+                      className={`td-base text-zinc-500 ${
                         index2 === figure.adjustments.length - 1 &&
                         index0 === user.accounts.length - 1 &&
                         "rounded-bl"
@@ -121,13 +121,13 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
                           ? "text-green-500"
                           : adjustment.amount < 0
                           ? "text-red-500"
-                          : "text-slate-700"
+                          : "text-zinc-700"
                       }`}
                     >
                       {USDollar.format(adjustment.amount)}
                     </td>
                     <td
-                      className={`td-base text-slate-500 ${
+                      className={`td-base text-zinc-500 ${
                         index2 === figure.adjustments.length - 1 &&
                         index0 === user.accounts.length - 1 &&
                         "rounded-br"
@@ -153,29 +153,29 @@ const TransactionsTable = (props: {
   return (
     <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <table className="table-auto min-w-full">
-        <thead className="text-slate-100">
+        <thead className="text-zinc-100">
           <tr>
-            <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+            <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
               Type
             </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
               Username
             </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
               Website
             </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
               Date
             </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+            <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
               Amount
             </th>
-            <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+            <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
               Details
             </th>
           </tr>
         </thead>
-        <tbody className="text-slate-700">
+        <tbody className="text-zinc-700">
           {props.isLoading ? (
             <tr>
               <td

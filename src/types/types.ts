@@ -31,25 +31,26 @@ export type Account = {
       amount: number;
       operation: string;
       date: string;
-    }>
+    }>;
   }>;
-}
+};
 
 export type UserAccounts = {
   username: string;
+  name: string;
   risk: number;
   gabe_way: number | null;
   order: string[];
   accounts: Account[];
-}
+};
 
 export type formValues = {
-  name: string,
-  risk: number,
-  username: string,
-  password: string,
-  gabeWay: number
-}
+  name: string;
+  risk: number;
+  username: string;
+  password: string;
+  gabeWay: number;
+};
 
 export type BookieData = {
   name: string;
@@ -57,14 +58,16 @@ export type BookieData = {
     website: string;
     accounts: Account[];
   }[];
-}
+};
 
-export const USDollar = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  signDisplay: 'always',
+export const USDollar = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  signDisplay: "always",
 });
 
-export const dateTimeFormat = new Intl.DateTimeFormat('en-US', {
-  dateStyle: 'short', timeStyle: 'short', timeZone: 'America/Los_Angeles'
-})
+export const dateTimeFormat = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "short",
+  timeStyle: "short",
+  timeZone: "America/Los_Angeles",
+});

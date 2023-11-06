@@ -3,31 +3,32 @@
 @import "tailwindcss/utilities";
 
 :root {
-  --foreground-rgb: 17, 23, 41;
-  --background-start-rgb: 17, 23, 41;
-  --background-end-rgb: 17, 23, 41;
+  --background-start-rgb: 24, 24, 27;
+  --background-end-rgb: 24, 24, 27;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 17, 23, 41;
-    --background-start-rgb: 17, 23, 41;
-    --background-end-rgb: 17, 23, 41;
+    --background-start-rgb: 24, 24, 27;
+    --background-end-rgb: 24, 24, 27;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  user-select: none;
 }
 
 @layer components {
   .td-base {
     @apply px-3 py-2;
+  }
+  .th-base {
+    @apply px-3 py-3 bg-zinc-600 text-left text-xs font-bold uppercase tracking-wider;
   }
 }

@@ -9,10 +9,10 @@ const SummarySection = (props: {
     <div
       className={`${
         props.isLoading && "animate-pulse"
-      } flex flex-col sm:flex-row 2xl:items-start 2xl:justify-center min-w-full mt-3 text-slate-100 bg-slate-700 rounded`}
+      } flex flex-col sm:flex-row 2xl:items-start 2xl:justify-center min-w-full mt-3 text-zinc-100 bg-zinc-700/30 backdrop-blur-md rounded`}
     >
       <div className="flex flex-row flex-grow">
-        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-slate-700 rounded-tl sm:rounded-l">
+        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-zinc-700/30 backdrop-blur-md rounded-tl sm:rounded-l">
           <div className="text-sm md:text-md">Weekly Total</div>
           <div
             className={`text-lg md:text-xl ${
@@ -22,7 +22,7 @@ const SummarySection = (props: {
             {USDollar.format(props.weeklyTotal)}
           </div>
         </div>
-        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-slate-700 rounded-tr">
+        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-zinc-700/30 backdrop-blur-md rounded-tr">
           <div className="text-sm md:text-md">Total Adjustments</div>
           <div className="text-lg md:text-xl font-semibold">
             {USDollar.format(props.totalCollected)}
@@ -30,7 +30,7 @@ const SummarySection = (props: {
         </div>
       </div>
       <div className="flex flex-row flex-grow">
-        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-slate-700 rounded-bl">
+        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-zinc-700/30 backdrop-blur-md rounded-bl">
           <div className="text-sm md:text-md">Total Settled</div>
           <div className="text-lg md:text-xl font-semibold">
             {isNaN((props.totalCollected / props.weeklyTotal) * 100)
@@ -39,7 +39,7 @@ const SummarySection = (props: {
             %
           </div>
         </div>
-        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-slate-700 rounded-br sm:rounded-r">
+        <div className="flex flex-col flex-grow items-center justify-center px-4 py-2 bg-zinc-700/30 backdrop-blur-md rounded-br sm:rounded-r">
           <div className="text-sm md:text-md">Total Unsettled</div>
           <div className="text-xl font-semibold">
             {USDollar.format(props.weeklyTotal - props.totalCollected)} /{" "}

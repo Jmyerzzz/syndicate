@@ -70,7 +70,7 @@ const AddAccount = (props: {
 
   return (
     <div className="flex items-center justify-center w-full">
-      <button className="w-full py-1 text-slate-100" onClick={openModal}>
+      <button className="w-full py-1 text-zinc-100" onClick={openModal}>
         <FontAwesomeIcon icon={faPlus} size={"lg"} />
       </button>
 
@@ -80,7 +80,7 @@ const AddAccount = (props: {
             <div className="mb-4">
               <label
                 htmlFor="website"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Website
               </label>
@@ -90,14 +90,14 @@ const AddAccount = (props: {
                 name="website"
                 value={formData.website}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="bookie"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Bookie
               </label>
@@ -107,14 +107,14 @@ const AddAccount = (props: {
                 name="bookie"
                 value={formData.bookie}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="referral"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Referral
               </label>
@@ -124,14 +124,14 @@ const AddAccount = (props: {
                 name="referral"
                 value={formData.referral}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="website"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 UserName
               </label>
@@ -141,14 +141,14 @@ const AddAccount = (props: {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="website"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Password
               </label>
@@ -158,14 +158,14 @@ const AddAccount = (props: {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="website"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 IP Address
               </label>
@@ -175,14 +175,14 @@ const AddAccount = (props: {
                 name="ipLocation"
                 value={formData.ipLocation}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="website"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Credit Line
               </label>
@@ -192,14 +192,14 @@ const AddAccount = (props: {
                 name="creditLine"
                 value={formData.creditLine}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="website"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Max Win
               </label>
@@ -209,14 +209,14 @@ const AddAccount = (props: {
                 name="maxWin"
                 value={formData.maxWin}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-slate-100 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-zinc-100 rounded hover:bg-blue-600"
               >
                 Add Account
               </button>

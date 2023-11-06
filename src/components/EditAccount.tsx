@@ -82,7 +82,7 @@ const EditAccount = (props: {
             <div className="mb-4">
               <label
                 htmlFor="website"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Website
               </label>
@@ -92,14 +92,14 @@ const EditAccount = (props: {
                 name="website"
                 value={formData.website}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="bookie"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Bookie
               </label>
@@ -109,14 +109,14 @@ const EditAccount = (props: {
                 name="bookie"
                 value={formData.bookie}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="referral"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Referral
               </label>
@@ -126,14 +126,14 @@ const EditAccount = (props: {
                 name="referral"
                 value={formData.referral}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="username"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Username
               </label>
@@ -143,14 +143,14 @@ const EditAccount = (props: {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Password
               </label>
@@ -160,14 +160,14 @@ const EditAccount = (props: {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="ipLocation"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 IP Address
               </label>
@@ -177,14 +177,14 @@ const EditAccount = (props: {
                 name="ipLocation"
                 value={formData.ipLocation}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="creditLine"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Credit Line
               </label>
@@ -194,14 +194,14 @@ const EditAccount = (props: {
                 name="creditLine"
                 value={formData.creditLine}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="maxWin"
-                className="block text-slate-700 font-semibold"
+                className="block text-zinc-700 font-semibold"
               >
                 Max Win
               </label>
@@ -211,14 +211,14 @@ const EditAccount = (props: {
                 name="maxWin"
                 value={formData.maxWin}
                 onChange={handleChange}
-                className="w-full text-slate-500 border border-slate-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+                className="w-full text-zinc-500 border border-zinc-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                 required
               />
             </div>
             <div className="mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-slate-100 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-blue-500 text-zinc-100 rounded hover:bg-blue-600"
               >
                 Update Account
               </button>

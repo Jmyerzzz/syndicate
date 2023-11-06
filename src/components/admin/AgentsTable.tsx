@@ -28,7 +28,7 @@ const DraggableTableRows = (props: {
         <tbody
           ref={provided.innerRef}
           {...provided.droppableProps}
-          className="text-slate-700"
+          className="text-zinc-700"
         >
           {agentList.map((agent, index) => {
             return (
@@ -43,14 +43,14 @@ const DraggableTableRows = (props: {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     key={agent.id}
-                    className="even:bg-white odd:bg-slate-100"
+                    className="even:bg-white odd:bg-zinc-100"
                     style={getItemStyle(
                       snapshot.isDragging,
                       provided.draggableProps.style
                     )}
                   >
-                    <td className="td-base text-slate-500">{index + 1}</td>
-                    <td className="td-base text-slate-500">
+                    <td className="td-base text-zinc-500">{index + 1}</td>
+                    <td className="td-base text-zinc-500">
                       <div className="flex flex-row items-center">
                         <EditUser
                           baseUrl={props.baseUrl}
@@ -60,15 +60,13 @@ const DraggableTableRows = (props: {
                         {agent.name}
                       </div>
                     </td>
-                    <td className="td-base text-slate-500">{agent.username}</td>
-                    <td className="td-base text-slate-500">{agent.role}</td>
-                    <td className="td-base text-slate-500">
+                    <td className="td-base text-zinc-500">{agent.username}</td>
+                    <td className="td-base text-zinc-500">{agent.role}</td>
+                    <td className="td-base text-zinc-500">
                       {agent.risk_percentage}%
                     </td>
-                    <td className="td-base text-slate-500">
-                      {agent.gabe_way}%
-                    </td>
-                    <td className="td-base text-slate-500">
+                    <td className="td-base text-zinc-500">{agent.gabe_way}%</td>
+                    <td className="td-base text-zinc-500">
                       {100 - (agent.risk_percentage + (agent.gabe_way || 0))}%
                     </td>
                   </tr>
@@ -80,7 +78,7 @@ const DraggableTableRows = (props: {
           <tr key={"addUser"}>
             <td
               colSpan={7}
-              className="bg-slate-400 hover:bg-slate-500 text-slate-100 rounded-b"
+              className="bg-zinc-400 hover:bg-zinc-500 text-zinc-100 rounded-b"
             >
               <AddUser setRefreshKey={props.setRefreshKey} />
             </td>
@@ -134,27 +132,27 @@ const AgentsTable = (props: {
     <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <DragDropContext onDragEnd={handleDrop}>
         <table className="table-auto min-w-full">
-          <thead className="text-slate-100">
+          <thead className="text-zinc-100">
             <tr>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider rounded-tl">
                 #
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Name
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Username
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Role
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 Risk
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider">
                 G Way
               </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
+              <th className="px-3 py-3 bg-zinc-700 text-left text-sm font-bold uppercase tracking-wider rounded-tr">
                 T Way
               </th>
             </tr>

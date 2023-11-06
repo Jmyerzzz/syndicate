@@ -41,7 +41,7 @@ const DraggableTableRows = (props: {
           <tbody
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className="text-slate-700"
+            className="text-zinc-700"
           >
             {user.accounts.map((account, index1) => {
               let weeklyFigureAmount: number = 0,
@@ -71,15 +71,17 @@ const DraggableTableRows = (props: {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       key={account.id}
-                      className={`${
+                      className={`
+                        hover:bg-blue-200
+                      ${
                         stiffed
                           ? "bg-red-200"
                           : account.weeklyFigures[0] &&
                             account.weeklyFigures[0].amount !== 0 &&
                             weeklyFigureAmount === adjustmentsSum
                           ? "bg-green-200"
-                          : "even:bg-white odd:bg-slate-100"
-                      } text-slate-700`}
+                          : "even:bg-white odd:bg-zinc-100"
+                      } text-zinc-700`}
                       style={getItemStyle(
                         snapshot.isDragging,
                         provided.draggableProps.style
@@ -107,7 +109,7 @@ const DraggableTableRows = (props: {
                       <td className="td-base w-1/24">
                         ${account.max_win.toLocaleString()}
                       </td>
-                      <td className="td-base w-1/12 font-medium border-l-2 border-slate-200">
+                      <td className="td-base w-1/12 font-medium border-l-2 border-zinc-200">
                         <div className="flex flex-row justify-between items-center">
                           {USDollar.format(weeklyFigureAmount)}
                           {account.weeklyFigures[0] ? (
@@ -128,7 +130,7 @@ const DraggableTableRows = (props: {
                           )}
                         </div>
                       </td>
-                      <td className="td-base w-1/12 font-medium border-l-2 border-slate-200">
+                      <td className="td-base w-1/12 font-medium border-l-2 border-zinc-200">
                         <div className="flex flex-row justify-between items-center">
                           <div
                             className={`${
@@ -136,7 +138,7 @@ const DraggableTableRows = (props: {
                                 ? "text-green-500"
                                 : adjustmentsSum < 0
                                 ? "text-red-500"
-                                : "text-slate-700"
+                                : "text-zinc-700"
                             }`}
                           >
                             {USDollar.format(adjustmentsSum)}
@@ -150,7 +152,7 @@ const DraggableTableRows = (props: {
                           />
                         </div>
                       </td>
-                      <td className="td-base w-1/24 font-medium border-l-2 border-slate-200">
+                      <td className="td-base w-1/24 font-medium border-l-2 border-zinc-200">
                         {USDollar.format(weeklyFigureAmount - adjustmentsSum)}
                       </td>
                     </tr>
@@ -170,13 +172,13 @@ const DraggableTableRows = (props: {
             <td colSpan={9} className="px-3 py-2 text-right">
               Totals:
             </td>
-            <td className="td-base font-semibold text-slate-700">
+            <td className="td-base font-semibold text-zinc-700">
               {USDollar.format(weeklyFigureTotal)}
             </td>
-            <td className="td-base font-semibold text-slate-700">
+            <td className="td-base font-semibold text-zinc-700">
               {USDollar.format(adjustmentsTotal)}
             </td>
-            <td className="td-base font-semibold text-slate-700">
+            <td className="td-base font-semibold text-zinc-700">
               {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
             </td>
           </tr>
@@ -188,7 +190,7 @@ const DraggableTableRows = (props: {
     <tr>
       <td
         colSpan={12}
-        className="bg-slate-400 hover:bg-slate-500 text-slate-100 rounded-b"
+        className="bg-zinc-400 hover:bg-zinc-500 text-zinc-100 rounded-b"
       >
         <AddAccount
           baseUrl={props.baseUrl}
@@ -258,62 +260,44 @@ const AgentsAccountsTable = (props: {
     <div className="flex 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <DragDropContext onDragEnd={handleDrop}>
         <table className="table-auto min-w-full">
-          <thead className="text-slate-100">
+          <thead className="text-zinc-100">
             <tr>
               <th
                 colSpan={9}
-                className="mx-auto px-3 py-3 bg-slate-700 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-slate-500 rounded-tl"
+                className="mx-auto px-3 py-3 bg-zinc-700 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-zinc-500 rounded-tl"
               >
-                Accounts ({props.currentUser?.username} -{" "}
+                Accounts ({props.currentUser?.name} -{" "}
                 {props.currentUser?.risk_percentage}%)
               </th>
               <th
                 rowSpan={2}
-                className="mx-auto px-3 py-3 bg-slate-800 text-md font-bold uppercase tracking-wider text-center"
+                className="mx-auto px-3 py-3 bg-zinc-800 text-md font-bold uppercase tracking-wider text-center"
               >
                 Weekly Figure
               </th>
               <th
                 rowSpan={2}
-                className="px-3 py-3 bg-slate-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-slate-700"
+                className="px-3 py-3 bg-zinc-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-zinc-600"
               >
                 Adjustments
               </th>
               <th
                 rowSpan={2}
-                className="px-3 py-3 bg-slate-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-slate-700 rounded-tr"
+                className="px-3 py-3 bg-zinc-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-zinc-600 rounded-tr"
               >
                 Balance
               </th>
             </tr>
             <tr>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                #
-              </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                Website
-              </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                Bookie
-              </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                Referral
-              </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                Username
-              </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                Password
-              </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                IP Address
-              </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                Credit Line
-              </th>
-              <th className="px-3 py-3 bg-slate-700 text-left text-xs font-bold uppercase tracking-wider">
-                Max Win
-              </th>
+              <th className="th-base">#</th>
+              <th className="th-base">Website</th>
+              <th className="th-base">Bookie</th>
+              <th className="th-base">Referral</th>
+              <th className="th-base">Username</th>
+              <th className="th-base">Password</th>
+              <th className="th-base">IP Address</th>
+              <th className="th-base">Credit Line</th>
+              <th className="th-base">Max Win</th>
             </tr>
           </thead>
           {props.isLoading ? (

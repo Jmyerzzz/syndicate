@@ -33,19 +33,19 @@ const WeekSelector = (props: {
   const endOfWeekDate = addDays(startOfWeekDate, 6);
 
   return (
-    <div className="flex justify-center items-center mt-3 text-slate-500">
+    <div className="flex justify-center items-center mt-3 text-zinc-500">
       <button
-        className="px-3 mr-1 rounded text-slate-100 hover:text-blue-400"
+        className="px-3 mr-1 rounded text-zinc-100 hover:text-blue-400"
         onClick={goToPreviousWeek}
       >
         <FontAwesomeIcon icon={faChevronLeft} size={"lg"} />
       </button>
-      <div className="text-xs sm:text-xl font-bold text-slate-100 rounded">
+      <div className="text-xs sm:text-xl font-bold text-zinc-100 rounded">
         Week of {format(startOfWeekDate, "MMMM d, yyyy")} -{" "}
         {format(endOfWeekDate, "MMMM d, yyyy")}
       </div>
       <button
-        className="px-3 ml-1 rounded text-slate-100 hover:text-blue-400"
+        className="px-3 ml-1 rounded text-zinc-100 hover:text-blue-400"
         onClick={goToNextWeek}
       >
         <FontAwesomeIcon icon={faChevronRight} size={"lg"} />
