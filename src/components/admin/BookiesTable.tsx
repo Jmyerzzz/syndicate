@@ -31,7 +31,7 @@ const TableRows = (props: { groupedByBookie: BookieData[] }) => {
       <tr key={bookie.name + index0} onClick={() => handleRowClick(index0)}>
         <td
           colSpan={12}
-          className="px-3 bg-zinc-500 text-zinc-100 text-lg hover:cursor-pointer"
+          className="px-3 bg-zinc-400 text-zinc-100 text-lg font-medium hover:cursor-pointer"
         >
           {!collapsedRows.includes(index0) ? (
             <FontAwesomeIcon icon={faChevronDown} className="mr-3" width={20} />

@@ -32,7 +32,7 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
           <tr key={"user" + index} onClick={() => handleRowClick(index)}>
             <td
               colSpan={6}
-              className="px-3 bg-zinc-500 text-zinc-100 text-lg font-medium hover:cursor-pointer"
+              className="px-3 bg-zinc-400 text-zinc-100 text-lg font-medium hover:cursor-pointer"
             >
               {!collapsedRows.includes(index) ? (
                 <FontAwesomeIcon
