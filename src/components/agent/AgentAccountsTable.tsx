@@ -88,8 +88,8 @@ const DraggableTableRows = (props: {
                       )}
                     >
                       <td className="td-base w-1/24">{index1 + 1}</td>
-                      <td className="td-base w-3/24">
-                        <div className="group flex flex-row items-center">
+                      <td className="td-base group w-3/24">
+                        <div className="flex flex-row items-center">
                           {account.website}
                           <EditAccount
                             baseUrl={props.baseUrl}

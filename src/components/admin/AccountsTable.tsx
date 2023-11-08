@@ -170,8 +170,8 @@ const DraggableTableRows = (props: {
                         )}
                       >
                         <td className="td-base w-1/24">{index1 + 1}</td>
-                        <td className="td-base w-3/24">
-                          <div className="group flex flex-row items-center">
+                        <td className="td-base group w-3/24">
+                          <div className="flex flex-row items-center">
                             {account.website}
                             <EditAccount
                               baseUrl={props.baseUrl}
@@ -214,11 +214,11 @@ const DraggableTableRows = (props: {
                             )}
                           </div>
                         </td>
-                        <td className="td-base w-1/12 font-medium border-l-2 border-zinc-200">
+                        <td className="td-base group w-1/12 font-medium border-l-2 border-zinc-200">
                           <div
-                            className={`group flex flex-row justify-left items-center ${
+                            className={`flex flex-row justify-left items-center ${
                               account.weeklyFigures[0] &&
-                              "hover:justify-between"
+                              "group-hover:justify-between"
                             } ${
                               adjustmentsSum > 0
                                 ? "text-green-500"
