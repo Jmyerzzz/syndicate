@@ -216,7 +216,7 @@ const DraggableTableRows = (props: {
                         </td>
                         <td className="td-base w-1/12 font-medium border-l-2 border-zinc-200">
                           <div
-                            className={`group flex flex-row justify-center items-center ${
+                            className={`group flex flex-row justify-left items-center ${
                               account.weeklyFigures[0] &&
                               "hover:justify-between"
                             } ${
