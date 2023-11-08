@@ -26,9 +26,9 @@ body {
 
 @layer components {
   .td-base {
-    @apply px-3 py-2;
+    @apply px-2 py-2;
   }
   .th-base {
-    @apply px-3 py-3 bg-zinc-600 text-left text-xs font-bold uppercase tracking-wider;
+    @apply px-2 py-3 bg-zinc-600 text-left text-xs font-bold uppercase tracking-wider;
   }
 }
