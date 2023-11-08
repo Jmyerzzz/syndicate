@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import WeekSelector from "../WeekSelector";
 import AccountsTable from "./AccountsTable";
 import AgentsTable from "./AgentsTable";
@@ -21,6 +21,7 @@ const AdminLayout = () => {
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(
     startOfWeek(addDays(new Date(), -7), { weekStartsOn: 1 })
   );
+  const prevSelectedStartOfWeek = useRef(selectedStartOfWeek);
   const [selectedDate, setSelectedDate] = useState(
     selectedStartOfWeek || addDays(new Date(), -7)
   );
@@ -30,10 +31,13 @@ const AdminLayout = () => {
   const [weeklyTotal, setWeeklyTotal] = useState<number>(0);
   const [totalCollected, setTotalCollected] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [refreshKey, setRefreshKey] = useState<number>(0);
+  const [accountRefreshKey, setAccountRefreshKey] = useState<number>(0);
+  const [agentRefreshKey, setAgentRefreshKey] = useState<number>(0);
 
   useEffect(() => {
-    setIsLoading(true);
+    if (prevSelectedStartOfWeek.current !== selectedStartOfWeek) {
+      setIsLoading(true);
+    }
     fetch(baseUrl + "/api/accounts/all", {
       method: "POST",
       body: JSON.stringify(selectedStartOfWeek),
@@ -47,11 +51,11 @@ const AdminLayout = () => {
           })
         );
         setIsLoading(false);
+        prevSelectedStartOfWeek.current = selectedStartOfWeek;
       });
-  }, [selectedStartOfWeek, refreshKey, baseUrl]);
+  }, [selectedStartOfWeek, accountRefreshKey, baseUrl]);
 
   useEffect(() => {
-    setIsLoading(true);
     fetch(baseUrl + "/api/agents/all", {
       method: "GET",
     })
@@ -60,7 +64,7 @@ const AdminLayout = () => {
         setAgentList(sortAgentsById(data, user.agent_order));
         setIsLoading(false);
       });
-  }, [baseUrl, refreshKey, user.agent_order]);
+  }, [baseUrl, agentRefreshKey, user.agent_order]);
 
   return (
     <div className="mb-6 px-1 md:px-5">
@@ -93,7 +97,7 @@ const AdminLayout = () => {
             setWeeklyTotal={setWeeklyTotal}
             setTotalCollected={setTotalCollected}
             isLoading={isLoading}
-            setRefreshKey={setRefreshKey}
+            setRefreshKey={setAccountRefreshKey}
           />
         </>
       )}
@@ -114,7 +118,7 @@ const AdminLayout = () => {
           baseUrl={baseUrl}
           agentList={agentList}
           isLoading={isLoading}
-          setRefreshKey={setRefreshKey}
+          setRefreshKey={setAgentRefreshKey}
         />
       )}
     </div>

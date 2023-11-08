@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import WeekSelector from "../WeekSelector";
 import { addDays, startOfWeek } from "date-fns";
 import TransactionsTable from "../TransactionsTable";
@@ -13,6 +13,7 @@ const AgentLayout = () => {
   const [selectedStartOfWeek, setSelectedStartOfWeek] = useState<Date>(
     startOfWeek(addDays(new Date(), -7), { weekStartsOn: 1 })
   );
+  const prevSelectedStartOfWeek = useRef(selectedStartOfWeek);
   const [selectedDate, setSelectedDate] = useState(
     selectedStartOfWeek || addDays(new Date(), -7)
   );
@@ -22,7 +23,9 @@ const AgentLayout = () => {
   const [refreshKey, setRefreshKey] = useState<number>(0);
 
   useEffect(() => {
-    setIsLoading(true);
+    if (prevSelectedStartOfWeek.current !== selectedStartOfWeek) {
+      setIsLoading(true);
+    }
     fetch(baseUrl + "/api/accounts/user", {
       method: "POST",
       body: JSON.stringify({
@@ -36,6 +39,7 @@ const AgentLayout = () => {
           sortUserAccountsByIds(groupAccountsByUser(data), user.order)
         );
         setIsLoading(false);
+        prevSelectedStartOfWeek.current = selectedStartOfWeek;
       });
   }, [selectedStartOfWeek, refreshKey, baseUrl, user]);
 

@@ -216,7 +216,10 @@ const DraggableTableRows = (props: {
                         </td>
                         <td className="td-base w-1/12 font-medium border-l-2 border-zinc-200">
                           <div
-                            className={`group flex flex-row justify-center hover:justify-between items-center ${
+                            className={`group flex flex-row justify-center items-center ${
+                              account.weeklyFigures[0] &&
+                              "hover:justify-between"
+                            } ${
                               adjustmentsSum > 0
                                 ? "text-green-500"
                                 : adjustmentsSum < 0
@@ -225,32 +228,36 @@ const DraggableTableRows = (props: {
                             }`}
                           >
                             {USDollar.format(adjustmentsSum)}
-                            <button
-                              type="button"
-                              id={`tooltip-${account.id}`}
-                              disabled={account.weeklyFigures.length === 0}
-                              onClick={() =>
-                                markStiffed(
-                                  account.weeklyFigures[0].id,
-                                  !account.weeklyFigures[0].stiffed
-                                )
-                              }
-                              className="invisible group-hover:visible transition ease-in-out opacity-0 group-hover:opacity-100 duration-400 text-zinc-500 rounded"
-                            >
-                              <Tooltip
-                                placement="right"
-                                content={stiffed ? "UNSTIFF" : "STIFF"}
-                                className={`text-gray-700 font-medium ${
-                                  stiffed ? "bg-green-400/40" : "bg-red-400/40"
-                                } backdrop-blur-md shadow-xl shadow-black/30`}
+                            {account.weeklyFigures[0] && (
+                              <button
+                                type="button"
+                                id={`tooltip-${account.id}`}
+                                disabled={account.weeklyFigures.length === 0}
+                                onClick={() =>
+                                  markStiffed(
+                                    account.weeklyFigures[0].id,
+                                    !account.weeklyFigures[0].stiffed
+                                  )
+                                }
+                                className="invisible group-hover:visible transition ease-in-out opacity-0 group-hover:opacity-100 duration-400 text-zinc-500 rounded"
                               >
-                                {stiffed ? (
-                                  <FontAwesomeIcon icon={faCheck} />
-                                ) : (
-                                  <FontAwesomeIcon icon={faX} />
-                                )}
-                              </Tooltip>
-                            </button>
+                                <Tooltip
+                                  placement="right"
+                                  content={stiffed ? "UNSTIFF" : "STIFF"}
+                                  className={`text-gray-700 font-medium ${
+                                    stiffed
+                                      ? "bg-green-400/40"
+                                      : "bg-red-400/40"
+                                  } backdrop-blur-md shadow-xl shadow-black/30`}
+                                >
+                                  {stiffed ? (
+                                    <FontAwesomeIcon icon={faCheck} />
+                                  ) : (
+                                    <FontAwesomeIcon icon={faX} />
+                                  )}
+                                </Tooltip>
+                              </button>
+                            )}
                           </div>
                         </td>
                         <td className="td-base w-1/24 font-medium border-l-2 border-zinc-200">
