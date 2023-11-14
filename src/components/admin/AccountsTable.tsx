@@ -27,6 +27,7 @@ const DraggableTableRows = (props: {
   const elements: JSX.Element[] = [];
   let groupedAccounts = props.groupedAccounts;
   const [collapsedRows, setCollapsedRows] = useState<number[]>([]);
+  const [cellUpdating, setCellUpdating] = useState<boolean>(false);
 
   const handleRowClick = (index: number) => {
     const currentIndex = collapsedRows.indexOf(index);
@@ -41,13 +42,18 @@ const DraggableTableRows = (props: {
 
   const markStiffed = useCallback(
     (weeklyFigureId: string, stiffed: boolean) => {
+      setCellUpdating(true);
       fetch("/api/figure/stiff", {
         method: "POST",
         body: JSON.stringify({
           weeklyFigureId: weeklyFigureId,
           stiffed: stiffed,
         }),
-      });
+      }).then(() =>
+        setTimeout(() => {
+          setCellUpdating(false);
+        }, 1200)
+      );
 
       setTimeout(() => {
         props.setRefreshKey((oldKey: number) => oldKey + 1);
@@ -154,16 +160,19 @@ const DraggableTableRows = (props: {
                         {...provided.dragHandleProps}
                         key={account.id}
                         className={`
-                          hover:bg-purple-200
-                        ${
-                          stiffed
-                            ? "bg-red-200"
-                            : account.weeklyFigures[0] &&
-                              account.weeklyFigures[0].amount !== 0 &&
-                              weeklyFigureAmount === adjustmentsSum
-                            ? "bg-green-200"
-                            : "even:bg-white odd:bg-zinc-100"
-                        } text-zinc-700`}
+                        text-zinc-700
+                        hover:bg-purple-200
+                          ${cellUpdating && "cursor-progress"}
+                          ${
+                            stiffed
+                              ? "bg-red-200"
+                              : account.weeklyFigures[0] &&
+                                account.weeklyFigures[0].amount !== 0 &&
+                                weeklyFigureAmount === adjustmentsSum
+                              ? "bg-green-200"
+                              : "even:bg-white odd:bg-zinc-100"
+                          }
+                        `}
                         style={getItemStyle(
                           snapshot.isDragging,
                           provided.draggableProps.style
@@ -203,6 +212,7 @@ const DraggableTableRows = (props: {
                                 weeklyFigure={account.weeklyFigures[0]}
                                 selectedStartOfWeek={props.selectedStartOfWeek}
                                 setRefreshKey={props.setRefreshKey}
+                                setCellUpdating={setCellUpdating}
                               />
                             ) : (
                               <AddWeeklyFigure
@@ -210,6 +220,7 @@ const DraggableTableRows = (props: {
                                 account={account}
                                 selectedStartOfWeek={props.selectedStartOfWeek}
                                 setRefreshKey={props.setRefreshKey}
+                                setCellUpdating={setCellUpdating}
                               />
                             )}
                           </div>

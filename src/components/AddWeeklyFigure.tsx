@@ -6,6 +6,7 @@ const AddWeeklyFigure = (props: {
   account?: any;
   selectedStartOfWeek: Date;
   setRefreshKey: any;
+  setCellUpdating: any;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -32,6 +33,7 @@ const AddWeeklyFigure = (props: {
 
   const handleAddAccount = (e: any) => {
     e.preventDefault();
+    props.setCellUpdating(true);
 
     fetch(props.baseUrl + "/api/figure/add", {
       method: "POST",
@@ -40,7 +42,11 @@ const AddWeeklyFigure = (props: {
         figureData: formData,
         date: props.selectedStartOfWeek,
       }),
-    });
+    }).then(() =>
+      setTimeout(() => {
+        props.setCellUpdating(false);
+      }, 1200)
+    );
 
     setTimeout(() => {
       props.setRefreshKey((oldKey: number) => oldKey + 1);

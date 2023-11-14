@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AddAccount from "./AddAccount";
 import { User } from "@prisma/client";
 import { Oval } from "react-loader-spinner";
@@ -18,6 +18,7 @@ const DraggableTableRows = (props: {
 }) => {
   const elements: JSX.Element[] = [];
   let groupedAccounts = props.groupedAccounts;
+  const [cellUpdating, setCellUpdating] = useState<boolean>(false);
 
   const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
     userSelect: "none",
@@ -73,15 +74,18 @@ const DraggableTableRows = (props: {
                       key={account.id}
                       className={`
                         hover:bg-blue-200
-                      ${
-                        stiffed
-                          ? "bg-red-200"
-                          : account.weeklyFigures[0] &&
-                            account.weeklyFigures[0].amount !== 0 &&
-                            weeklyFigureAmount === adjustmentsSum
-                          ? "bg-green-200"
-                          : "even:bg-white odd:bg-zinc-100"
-                      } text-zinc-700`}
+                        text-zinc-700
+                        ${cellUpdating && "cursor-progress"}
+                        ${
+                          stiffed
+                            ? "bg-red-200"
+                            : account.weeklyFigures[0] &&
+                              account.weeklyFigures[0].amount !== 0 &&
+                              weeklyFigureAmount === adjustmentsSum
+                            ? "bg-green-200"
+                            : "even:bg-white odd:bg-zinc-100"
+                        }
+                      `}
                       style={getItemStyle(
                         snapshot.isDragging,
                         provided.draggableProps.style
@@ -119,6 +123,7 @@ const DraggableTableRows = (props: {
                               weeklyFigure={account.weeklyFigures[0]}
                               selectedStartOfWeek={props.selectedStartOfWeek}
                               setRefreshKey={props.setRefreshKey}
+                              setCellUpdating={setCellUpdating}
                             />
                           ) : (
                             <AddWeeklyFigure
@@ -126,6 +131,7 @@ const DraggableTableRows = (props: {
                               account={account}
                               selectedStartOfWeek={props.selectedStartOfWeek}
                               setRefreshKey={props.setRefreshKey}
+                              setCellUpdating={setCellUpdating}
                             />
                           )}
                         </div>
