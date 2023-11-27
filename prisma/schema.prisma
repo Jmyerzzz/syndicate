@@ -12,14 +12,14 @@ model Session {
   user_id        String @unique
   active_expires BigInt
   idle_expires   BigInt
-  user           User   @relation(fields: [user_id], references: [id])
+  user           User?  @relation(fields: [user_id], references: [id])
 }
 
 model Key {
   id              String  @id @map("_id")
   hashed_password String?
-  user_id         String  @unique
-  user            User    @relation(fields: [user_id], references: [id])
+  user_id         String? @unique
+  user            User?   @relation(fields: [user_id], references: [id])
 }
 
 model User {
@@ -40,8 +40,8 @@ model User {
 
 model Account {
   id            String         @id @map("_id")
-  user          User           @relation(fields: [user_id], references: [id])
-  user_id       String         @unique
+  user          User?          @relation(fields: [user_id], references: [id])
+  user_id       String?        @unique
   website       String
   bookie        String?
   referral      String?

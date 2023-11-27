@@ -9,6 +9,7 @@ const EditAccount = (props: {
   setRefreshKey: any;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteConfirmed, setDeleteConfirmed] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -65,6 +66,26 @@ const EditAccount = (props: {
     });
 
     closeModal();
+  };
+
+  const deleteAccount = async () => {
+    if (deleteConfirmed) {
+      fetch(props.baseUrl + "/api/accounts/delete", {
+        method: "POST",
+        body: JSON.stringify({
+          accountId: props.account.id,
+        }),
+      });
+
+      setTimeout(() => {
+        props.setRefreshKey((oldKey: number) => oldKey + 1);
+      }, 1000);
+
+      closeModal();
+    } else {
+      alert("Click 'Delete Account' again to confirm delete");
+      setDeleteConfirmed(true);
+    }
   };
 
   return (
@@ -224,6 +245,14 @@ const EditAccount = (props: {
               </button>
             </div>
           </form>
+          <div className="p-4">
+            <button
+              onClick={() => deleteAccount()}
+              className="px-4 py-2 bg-red-500 text-zinc-100 rounded hover:bg-red-600"
+            >
+              Delete Account
+            </button>
+          </div>
         </div>
       </Modal>
     </div>

@@ -73,8 +73,8 @@ const DraggableTableRows = (props: {
                       {...provided.dragHandleProps}
                       key={account.id}
                       className={`
-                        hover:bg-blue-200
-                        text-zinc-700
+                      text-zinc-700
+                      hover:bg-purple-200
                         ${cellUpdating && "cursor-progress"}
                         ${
                           stiffed
@@ -270,26 +270,26 @@ const AgentsAccountsTable = (props: {
             <tr>
               <th
                 colSpan={9}
-                className="mx-auto px-3 py-3 bg-zinc-700 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-zinc-500 rounded-tl"
+                className="px-2 py-3 bg-zinc-600 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-zinc-500 rounded-tl"
               >
                 Accounts ({props.currentUser?.name} -{" "}
                 {props.currentUser?.risk_percentage}%)
               </th>
               <th
                 rowSpan={2}
-                className="mx-auto px-3 py-3 bg-zinc-800 text-md font-bold uppercase tracking-wider text-center"
+                className="px-2 py-3 bg-zinc-700 text-xs font-bold uppercase tracking-wider text-center"
               >
                 Weekly Figure
               </th>
               <th
                 rowSpan={2}
-                className="px-3 py-3 bg-zinc-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-zinc-600"
+                className="px-2 py-3 bg-zinc-700 text-xs font-bold uppercase tracking-wider text-center border-l-2 border-zinc-600"
               >
                 Adjustments
               </th>
               <th
                 rowSpan={2}
-                className="px-3 py-3 bg-zinc-800 text-md font-bold uppercase tracking-wider text-center border-l-2 border-zinc-600 rounded-tr"
+                className="px-2 py-3 bg-zinc-700 text-xs font-bold uppercase tracking-wider text-center border-l-2 border-zinc-600 rounded-tr"
               >
                 Balance
               </th>

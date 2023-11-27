@@ -385,14 +385,14 @@ const AccountsTable = (props: {
   };
 
   return (
-    <div className="flex flex-col 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
+    <div className="flex 2xl:justify-items-center 2xl:items-center mt-4 overflow-x-auto">
       <DragDropContext onDragEnd={handleDrop}>
         <table className="table-auto min-w-full">
           <thead className="text-zinc-100">
             <tr>
               <th
                 colSpan={9}
-                className="py-3 bg-zinc-600 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-zinc-500 rounded-tl"
+                className="px-2 py-3 bg-zinc-600 text-md font-bold uppercase tracking-wider text-left md:text-center border-b-2 border-zinc-500 rounded-tl"
               >
                 Accounts
               </th>
