@@ -72,6 +72,9 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
         <td className="td-base text-zinc-700">
           {USDollar.format(adjustmentsTotal)}
         </td>
+        <td className="td-base text-zinc-700">
+          {USDollar.format(weeklyFigureTotal - adjustmentsTotal)}
+        </td>
         <td className="td-base text-zinc-700 font-medium">
           {USDollar.format(agentWay)}
         </td>
@@ -94,6 +97,9 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
       </td>
       <td className="td-base font-semibold text-zinc-700">
         {USDollar.format(totalCollected)}
+      </td>
+      <td className="td-base font-semibold text-zinc-700">
+        {USDollar.format(weeklyTotal - totalCollected)}
       </td>
       <td className="td-base font-semibold text-zinc-700">
         {USDollar.format(agentsTotal)}
@@ -129,6 +135,7 @@ const RunnersTable = (props: {
             <th className="th-base">Username</th>
             <th className="th-base">Weekly Figure Total</th>
             <th className="th-base">Adjustments Total</th>
+            <th className="th-base">Balance</th>
             <th className="th-base">Agent Way</th>
             <th className="th-base">Gabe Way</th>
             <th className="th-base rounded-tr">T Way</th>
