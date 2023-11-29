@@ -56,7 +56,7 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
         className={`${
           weeklyFigureTotal !== adjustmentsTotal
             ? "bg-red-200"
-            : weeklyFigureTotal !== adjustmentsTotal
+            : weeklyFigureTotal !== 0 && weeklyFigureTotal === adjustmentsTotal
             ? "bg-green-200"
             : "even:bg-white odd:bg-zinc-100"
         }`}
