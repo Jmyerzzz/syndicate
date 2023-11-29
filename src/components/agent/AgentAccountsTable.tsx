@@ -77,6 +77,8 @@ const DraggableTableRows = (props: {
               }
               const stiffed =
                 account.weeklyFigures[0] && account.weeklyFigures[0].stiffed;
+              const action =
+                account.weeklyFigures[0] && account.weeklyFigures[0].action;
               return (
                 <Draggable
                   key={account.id + "draggable"}
@@ -96,9 +98,12 @@ const DraggableTableRows = (props: {
                         ${
                           stiffed
                             ? "bg-red-200"
-                            : account.weeklyFigures[0] &&
-                              account.weeklyFigures[0].amount !== 0 &&
-                              weeklyFigureAmount === adjustmentsSum
+                            : (account.weeklyFigures[0] &&
+                                account.weeklyFigures[0].amount !== 0 &&
+                                weeklyFigureAmount === adjustmentsSum) ||
+                              (account.weeklyFigures[0] &&
+                                account.weeklyFigures[0].amount === 0 &&
+                                !action)
                             ? "bg-green-200"
                             : "even:bg-white odd:bg-zinc-100"
                         }

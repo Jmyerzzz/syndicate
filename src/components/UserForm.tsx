@@ -9,6 +9,7 @@ const UserForm = (props: {
   title: string;
   action: string;
   setRefreshKey?: any;
+  closeModal?: any;
 }) => {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -46,6 +47,7 @@ const UserForm = (props: {
           setTimeout(() => {
             props.setRefreshKey((oldKey: number) => oldKey + 1);
           }, 1000);
+          props.closeModal();
         } else {
           return router.refresh();
         }

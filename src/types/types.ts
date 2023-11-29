@@ -25,6 +25,7 @@ export type Account = {
     transaction_date: string;
     week_start: string;
     stiffed: boolean;
+    action: boolean;
     adjustments: Array<{
       id: string;
       figure_id: string;

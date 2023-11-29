@@ -21,11 +21,12 @@ const AddUser = (props: { setRefreshKey: any }) => {
         <FontAwesomeIcon icon={faPlus} size={"lg"} />
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="Add Account">
+      <Modal isOpen={isModalOpen} onClose={closeModal} title="Add Agent">
         <UserForm
           title={"Sign Up"}
           action={"/api/signup"}
           setRefreshKey={props.setRefreshKey}
+          closeModal={closeModal}
         />
       </Modal>
     </div>

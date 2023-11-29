@@ -61,6 +61,33 @@ const AddWeeklyFigure = (props: {
     closeModal();
   };
 
+  const setNoAction = () => {
+    props.setCellUpdating(true);
+
+    fetch(props.baseUrl + "/api/figure/add", {
+      method: "POST",
+      body: JSON.stringify({
+        account: props.account,
+        figureData: {
+          amount: 0,
+          operation: "",
+        },
+        action: false,
+        date: props.selectedStartOfWeek,
+      }),
+    }).then(() =>
+      setTimeout(() => {
+        props.setCellUpdating(false);
+      }, 1200)
+    );
+
+    setTimeout(() => {
+      props.setRefreshKey((oldKey: number) => oldKey + 1);
+    }, 1000);
+
+    closeModal();
+  };
+
   return (
     <div>
       <button
@@ -152,6 +179,14 @@ const AddWeeklyFigure = (props: {
               </button>
             </div>
           </form>
+          <div className="p-4">
+            <button
+              onClick={() => setNoAction()}
+              className="px-4 py-2 bg-red-500 text-zinc-100 rounded hover:bg-red-600"
+            >
+              No Action
+            </button>
+          </div>
         </div>
       </Modal>
     </div>

@@ -1,14 +1,32 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { PrismaClient } from '@prisma/client'
-import ObjectID from 'bson-objectid';
+import { PrismaClient } from "@prisma/client";
+import ObjectID from "bson-objectid";
 import { getPageSession } from "auth/lucia";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-async function main(account: any, figureData: any, date: Date) {
+async function main(
+  account: any,
+  figureData: any,
+  action: boolean | undefined,
+  date: Date
+) {
   let newAmount: number;
   const amount = figureData.amount;
+
+  if (action !== undefined) {
+    return await prisma.weeklyFigure.create({
+      data: {
+        id: new ObjectID().toString(),
+        account_id: account.id,
+        amount: parseFloat(amount),
+        action: action,
+        transaction_date: new Date(),
+        week_start: date,
+      },
+    });
+  }
 
   if (figureData.operation === "debit") {
     newAmount = 0 - parseFloat(amount);
@@ -21,11 +39,11 @@ async function main(account: any, figureData: any, date: Date) {
       id: new ObjectID().toString(),
       account_id: account.id,
       amount: newAmount!,
+      action: true,
       transaction_date: new Date(),
       week_start: date,
     },
-  })
-  
+  });
 }
 
 export const POST = async (request: NextRequest) => {
@@ -39,24 +57,25 @@ export const POST = async (request: NextRequest) => {
   const data = await request.json();
   const account = data.account;
   const figureData = data.figureData;
+  const action = data.action;
   const date = data.date;
 
   try {
-    await main(account, figureData, date)
+    await main(account, figureData, action, date);
     return new Response(null, {
       status: 200,
     });
   } catch (e) {
-    console.error(e)
-      return NextResponse.json(
-        {
-          error: "Error creating weekly figure"
-        },
-        {
-          status: 400
-        }
-      );
+    console.error(e);
+    return NextResponse.json(
+      {
+        error: "Error creating weekly figure",
+      },
+      {
+        status: 400,
+      }
+    );
   } finally {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   }
-}
+};

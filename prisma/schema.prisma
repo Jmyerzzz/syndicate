@@ -63,6 +63,7 @@ model WeeklyFigure {
   transaction_date DateTime
   week_start       DateTime
   stiffed          Boolean      @default(false)
+  action           Boolean      @default(true)
   adjustments      Adjustment[]
 
   @@index([week_start])
