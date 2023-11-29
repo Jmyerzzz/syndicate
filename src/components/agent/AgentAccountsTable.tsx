@@ -33,6 +33,23 @@ const DraggableTableRows = (props: {
   groupedAccounts.forEach((user) => {
     let weeklyFigureTotal = 0,
       adjustmentsTotal = 0;
+    user.accounts.map((account) => {
+      let weeklyFigureAmount: number = 0,
+        adjustmentsSum: number = 0;
+      if (account.weeklyFigures.length > 0) {
+        weeklyFigureAmount = account.weeklyFigures[0].amount;
+        weeklyFigureTotal += weeklyFigureAmount;
+      }
+      if (
+        account.weeklyFigures[0] &&
+        account.weeklyFigures[0].adjustments.length > 0
+      ) {
+        account.weeklyFigures[0].adjustments.map((adjustment) => {
+          adjustmentsSum += adjustment.amount;
+        });
+        adjustmentsTotal += adjustmentsSum;
+      }
+    });
     elements.push(
       <Droppable
         key={user.username + "droppable"}

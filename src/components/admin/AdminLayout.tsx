@@ -11,6 +11,7 @@ import {
   groupAccountsByUser,
   sortAccountsByIds,
   sortAgentsById,
+  sortUserAccountsByAgentOrder,
 } from "@/util/util";
 import BookiesTable from "./BookiesTable";
 import SummarySection from "./SummarySection";
@@ -45,15 +46,18 @@ const AdminLayout = () => {
       .then((response) => response.json())
       .then((data) => {
         setGroupedAccounts(
-          groupAccountsByUser(data).map((user) => {
-            user = sortAccountsByIds(user, user.order);
-            return user;
-          })
+          sortUserAccountsByAgentOrder(
+            groupAccountsByUser(data).map((user) => {
+              user = sortAccountsByIds(user, user.order);
+              return user;
+            }),
+            user.agent_order
+          )
         );
         setIsLoading(false);
         prevSelectedStartOfWeek.current = selectedStartOfWeek;
       });
-  }, [selectedStartOfWeek, accountRefreshKey, baseUrl]);
+  }, [selectedStartOfWeek, accountRefreshKey, baseUrl, user.agent_order]);
 
   useEffect(() => {
     fetch(baseUrl + "/api/agents/all", {

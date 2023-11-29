@@ -152,3 +152,33 @@ export const sortAgentsById = (agents: any[], agentIds: string[]) => {
 
   return sortedObjects;
 };
+
+export function sortUserAccountsByAgentOrder(
+  userAccounts: UserAccounts[],
+  orderList: string[]
+): UserAccounts[] {
+  // Create a map to quickly look up the index of each user ID in the order list
+  const orderMap: Record<string, number> = {};
+  orderList.forEach((id, index) => {
+    orderMap[id] = index;
+  });
+
+  // Sort the user accounts based on the order list
+  const sortedUserAccounts = [...userAccounts].sort((a, b) => {
+    const indexA = orderMap[a.accounts[0].user.id];
+    const indexB = orderMap[b.accounts[0].user.id];
+
+    // Handle cases where the user ID is not in the order list
+    if (indexA === undefined && indexB === undefined) {
+      return 0; // Maintain the relative order for users not in the order list
+    } else if (indexA === undefined) {
+      return 1; // Put users not in the order list at the end
+    } else if (indexB === undefined) {
+      return -1; // Put users not in the order list at the end
+    }
+
+    return indexA - indexB;
+  });
+
+  return sortedUserAccounts;
+}
