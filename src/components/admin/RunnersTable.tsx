@@ -33,11 +33,15 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
       }
     });
 
+    const gWay =
+      user.username !== "gabrieladzich"
+        ? (user.gabe_way! / 100) * weeklyFigureTotal
+        : (user.risk / 100) * weeklyFigureTotal;
+    const tWay = ((100 - user.risk - user.gabe_way!) / 100) * weeklyFigureTotal;
+
     agentsTotal += (user.risk / 100) * weeklyFigureTotal;
-    gTotal +=
-      ((100 - user.risk + (user.gabe_way || 0)) / 100) * weeklyFigureTotal;
-    tTotal +=
-      ((100 - user.risk - (user.gabe_way || 0)) / 100) * weeklyFigureTotal;
+    gTotal += gWay;
+    tTotal += tWay;
 
     elements.push(
       <tr
@@ -65,17 +69,10 @@ const TableRows = (props: { groupedAccounts: UserAccounts[] }) => {
           {USDollar.format((user.risk / 100) * weeklyFigureTotal)}
         </td>
         <td className="td-base text-zinc-700 font-medium">
-          {user.username !== "gabrieladzich"
-            ? USDollar.format(
-                ((100 - user.risk + (user.gabe_way || 0)) / 100) *
-                  weeklyFigureTotal
-              )
-            : USDollar.format(0)}
+          {USDollar.format(gWay)}
         </td>
         <td className="td-base text-zinc-700 font-medium">
-          {USDollar.format(
-            ((100 - user.risk - (user.gabe_way || 0)) / 100) * weeklyFigureTotal
-          )}
+          {USDollar.format(tWay)}
         </td>
       </tr>
     );
