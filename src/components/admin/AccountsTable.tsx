@@ -78,9 +78,9 @@ const DraggableTableRows = (props: {
         <tr key={user.username} onClick={() => handleRowClick(index0)}>
           <td
             colSpan={12}
-            className="px-3 bg-zinc-400 text-white text-lg font-medium hover:cursor-pointer"
+            className="px-3 bg-zinc-400 text-white text-lg font-medium hover:cursor-pointer border-b-[1px] border-zinc-300"
           >
-            {!collapsedRows.includes(index0) ? (
+            {collapsedRows.includes(index0) ? (
               <FontAwesomeIcon
                 icon={faChevronDown}
                 className="mr-3"
@@ -119,7 +119,7 @@ const DraggableTableRows = (props: {
       totalCollected += adjustmentsSum;
     });
 
-    !collapsedRows.includes(index0) &&
+    collapsedRows.includes(index0) &&
       elements.push(
         <Droppable
           key={user.username + "droppable"}
@@ -289,7 +289,7 @@ const DraggableTableRows = (props: {
           )}
         </Droppable>
       );
-    !collapsedRows.includes(index0) && (
+    collapsedRows.includes(index0) && (
       <React.Fragment key={user.username + "totals-frag"}>
         {elements.push(
           <tbody>
